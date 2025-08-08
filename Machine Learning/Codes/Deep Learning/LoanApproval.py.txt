@@ -1,0 +1,322 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.optimizers import Adam
+import seaborn as sns
+
+# Set random seeds for reproducibility
+np.random.seed(42)
+tf.random.set_seed(42)
+
+# Generate synthetic loan approval dataset
+def generate_loan_data(n_samples=10000):
+    np.random.seed(42)
+    
+    # Generate features
+    age = np.random.normal(35, 10, n_samples).clip(18, 70)
+    income = np.random.lognormal(10.5, 0.8, n_samples).clip(20000, 200000)
+    credit_score = np.random.normal(650, 100, n_samples).clip(300, 850)
+    loan_amount = np.random.normal(150000, 50000, n_samples).clip(10000, 500000)
+    employment_years = np.random.exponential(5, n_samples).clip(0, 40)
+    debt_to_income = np.random.beta(2, 5, n_samples) * 0.6  # DTI ratio
+    existing_loans = np.random.poisson(1.5, n_samples).clip(0, 10)
+    
+    # Create approval logic with complex interactions
+    approval_score = (
+        0.3 * (credit_score - 300) / 550 +  # Credit score normalized
+        0.25 * np.log(income / 20000) / np.log(10) +  # Log income
+        0.2 * (1 - debt_to_income / 0.6) +  # Lower DTI is better
+        0.15 * np.minimum(employment_years / 10, 1) +  # Employment stability
+        0.1 * (1 - loan_amount / 500000) -  # Lower loan amount is better
+        0.1 * existing_loans / 10  # Fewer existing loans is better
+    )
+    
+    # Add non-linear interactions
+    approval_score += 0.1 * np.sin(age / 10) * (credit_score > 700)
+    approval_score += 0.05 * (income > 80000) * (employment_years > 3)
+    
+    # Add noise and create binary approval
+    approval_score += np.random.normal(0, 0.1, n_samples)
+    approved = (approval_score > 0.5).astype(int)
+    
+    # Create DataFrame
+    data = pd.DataFrame({
+        'age': age,
+        'income': income,
+        'credit_score': credit_score,
+        'loan_amount': loan_amount,
+        'employment_years': employment_years,
+        'debt_to_income_ratio': debt_to_income,
+        'existing_loans': existing_loans,
+        'approved': approved
+    })
+    
+    return data
+
+# Generate the dataset
+print("Generating loan approval dataset...")
+loan_data = generate_loan_data(10000)
+print(f"Dataset shape: {loan_data.shape}")
+print(f"Approval rate: {loan_data['approved'].mean():.2%}")
+
+# Prepare the data
+X = loan_data.drop('approved', axis=1)
+y = loan_data['approved']
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+# Scale the features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+print(f"Training set size: {X_train_scaled.shape[0]}")
+print(f"Test set size: {X_test_scaled.shape[0]}")
+
+# Define different network architectures to compare
+architectures = {
+    'Shallow (1 hidden layer)': [32],
+    'Medium (2 hidden layers)': [64, 32],
+    'Deep (3 hidden layers)': [128, 64, 32],
+    'Very Deep (4 hidden layers)': [256, 128, 64, 32],
+    'Narrow Deep (4 layers, few neurons)': [16, 16, 16, 16],
+    'Wide Shallow (1 layer, many neurons)': [256]
+}
+
+# Function to create and train models
+def create_model(hidden_layers, input_dim):
+    model = Sequential()
+    
+    # Add first hidden layer
+    model.add(Dense(hidden_layers[0], activation='relu', input_dim=input_dim))
+    model.add(Dropout(0.3))
+    
+    # Add additional hidden layers
+    for neurons in hidden_layers[1:]:
+        model.add(Dense(neurons, activation='relu'))
+        model.add(Dropout(0.3))
+    
+    # Output layer
+    model.add(Dense(1, activation='sigmoid'))
+    
+    # Compile model
+    model.compile(optimizer=Adam(learning_rate=0.001),
+                  loss='binary_crossentropy',
+                  metrics=['accuracy'])
+    
+    return model
+
+# Train and evaluate different architectures
+results = {}
+histories = {}
+
+print("\nTraining different architectures...")
+for name, layers in architectures.items():
+    print(f"\nTraining {name}: {layers}")
+    
+    # Create model
+    model = create_model(layers, X_train_scaled.shape[1])
+    
+    # Train model
+    history = model.fit(X_train_scaled, y_train,
+                       validation_split=0.2,
+                       epochs=50,
+                       batch_size=32,
+                       verbose=0)
+    
+    # Evaluate model
+    train_acc = model.evaluate(X_train_scaled, y_train, verbose=0)[1]
+    test_acc = model.evaluate(X_test_scaled, y_test, verbose=0)[1]
+    
+    # Get predictions
+    y_pred = (model.predict(X_test_scaled) > 0.5).astype(int)
+    
+    # Store results
+    results[name] = {
+        'train_accuracy': train_acc,
+        'test_accuracy': test_acc,
+        'layers': len(layers),
+        'total_params': model.count_params(),
+        'predictions': y_pred.flatten()
+    }
+    histories[name] = history.history
+    
+    print(f"Train Accuracy: {train_acc:.4f}")
+    print(f"Test Accuracy: {test_acc:.4f}")
+    print(f"Parameters: {model.count_params():,}")
+
+# Create comprehensive visualization
+fig, axes = plt.subplots(2, 3, figsize=(18, 12))
+fig.suptitle('Impact of Hidden Layers and Neurons on Loan Approval Model Performance', fontsize=16)
+
+# 1. Accuracy comparison
+ax1 = axes[0, 0]
+names = list(results.keys())
+train_accs = [results[name]['train_accuracy'] for name in names]
+test_accs = [results[name]['test_accuracy'] for name in names]
+
+x = np.arange(len(names))
+width = 0.35
+
+bars1 = ax1.bar(x - width/2, train_accs, width, label='Train Accuracy', alpha=0.8)
+bars2 = ax1.bar(x + width/2, test_accs, width, label='Test Accuracy', alpha=0.8)
+
+ax1.set_xlabel('Architecture')
+ax1.set_ylabel('Accuracy')
+ax1.set_title('Training vs Test Accuracy')
+ax1.set_xticks(x)
+ax1.set_xticklabels(names, rotation=45, ha='right')
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+
+# Add value labels on bars
+for bar in bars1:
+    height = bar.get_height()
+    ax1.text(bar.get_x() + bar.get_width()/2., height + 0.002,
+             f'{height:.3f}', ha='center', va='bottom', fontsize=8)
+for bar in bars2:
+    height = bar.get_height()
+    ax1.text(bar.get_x() + bar.get_width()/2., height + 0.002,
+             f'{height:.3f}', ha='center', va='bottom', fontsize=8)
+
+# 2. Overfitting analysis
+ax2 = axes[0, 1]
+overfitting = [results[name]['train_accuracy'] - results[name]['test_accuracy'] for name in names]
+colors = ['red' if x > 0.02 else 'green' for x in overfitting]
+bars = ax2.bar(names, overfitting, color=colors, alpha=0.7)
+ax2.set_xlabel('Architecture')
+ax2.set_ylabel('Overfitting (Train Acc - Test Acc)')
+ax2.set_title('Overfitting Analysis')
+ax2.set_xticklabels(names, rotation=45, ha='right')
+ax2.axhline(y=0.02, color='red', linestyle='--', alpha=0.5, label='Overfitting Threshold')
+ax2.grid(True, alpha=0.3)
+ax2.legend()
+
+# 3. Model complexity vs performance
+ax3 = axes[0, 2]
+total_params = [results[name]['total_params'] for name in names]
+scatter = ax3.scatter(total_params, test_accs, c=range(len(names)), 
+                     cmap='viridis', s=100, alpha=0.7)
+for i, name in enumerate(names):
+    ax3.annotate(name.split('(')[0], (total_params[i], test_accs[i]), 
+                xytext=(5, 5), textcoords='offset points', fontsize=8)
+ax3.set_xlabel('Number of Parameters')
+ax3.set_ylabel('Test Accuracy')
+ax3.set_title('Model Complexity vs Performance')
+ax3.grid(True, alpha=0.3)
+
+# 4. Training history for selected models
+ax4 = axes[1, 0]
+selected_models = ['Shallow (1 hidden layer)', 'Deep (3 hidden layers)', 'Very Deep (4 hidden layers)']
+for model_name in selected_models:
+    if model_name in histories:
+        ax4.plot(histories[model_name]['val_accuracy'], label=f'{model_name} (Val)', alpha=0.8)
+ax4.set_xlabel('Epoch')
+ax4.set_ylabel('Validation Accuracy')
+ax4.set_title('Training Progress Comparison')
+ax4.legend()
+ax4.grid(True, alpha=0.3)
+
+# 5. Layers vs Performance
+ax5 = axes[1, 1]
+layers_count = [results[name]['layers'] for name in names]
+ax5.scatter(layers_count, test_accs, s=100, alpha=0.7)
+for i, name in enumerate(names):
+    ax5.annotate(name.split('(')[0], (layers_count[i], test_accs[i]), 
+                xytext=(5, 5), textcoords='offset points', fontsize=8)
+ax5.set_xlabel('Number of Hidden Layers')
+ax5.set_ylabel('Test Accuracy')
+ax5.set_title('Hidden Layers vs Performance')
+ax5.grid(True, alpha=0.3)
+
+# 6. Feature importance analysis using the best model
+ax6 = axes[1, 2]
+# Find best model
+best_model_name = max(results.keys(), key=lambda x: results[x]['test_accuracy'])
+print(f"\nBest performing model: {best_model_name}")
+
+# Create a simple feature importance plot using correlation
+feature_importance = abs(loan_data.corr()['approved'].drop('approved'))
+ax6.barh(range(len(feature_importance)), feature_importance.values)
+ax6.set_yticks(range(len(feature_importance)))
+ax6.set_yticklabels(feature_importance.index)
+ax6.set_xlabel('Absolute Correlation with Approval')
+ax6.set_title('Feature Importance (Correlation)')
+ax6.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+# Print detailed analysis
+print("\n" + "="*80)
+print("DETAILED ANALYSIS: Impact of Hidden Layers and Neurons")
+print("="*80)
+
+print("\n1. ARCHITECTURE COMPARISON:")
+for name, result in results.items():
+    print(f"\n{name}:")
+    print(f"   - Test Accuracy: {result['test_accuracy']:.4f}")
+    print(f"   - Parameters: {result['total_params']:,}")
+    print(f"   - Overfitting: {result['train_accuracy'] - result['test_accuracy']:.4f}")
+
+print("\n2. KEY INSIGHTS:")
+
+# Find best and worst models
+best_model = max(results.keys(), key=lambda x: results[x]['test_accuracy'])
+worst_model = min(results.keys(), key=lambda x: results[x]['test_accuracy'])
+
+print(f"\n   Best Model: {best_model}")
+print(f"   - Accuracy: {results[best_model]['test_accuracy']:.4f}")
+print(f"   - Parameters: {results[best_model]['total_params']:,}")
+
+print(f"\n   Worst Model: {worst_model}")
+print(f"   - Accuracy: {results[worst_model]['test_accuracy']:.4f}")
+print(f"   - Parameters: {results[worst_model]['total_params']:,}")
+
+# Analyze overfitting
+overfitting_models = [name for name in results.keys() 
+                     if results[name]['train_accuracy'] - results[name]['test_accuracy'] > 0.02]
+print(f"\n   Models with Significant Overfitting (>2%): {overfitting_models}")
+
+print("\n3. DEPTH vs WIDTH ANALYSIS:")
+shallow_wide = results['Wide Shallow (1 layer, many neurons)']
+deep_narrow = results['Narrow Deep (4 layers, few neurons)']
+print(f"\n   Wide & Shallow (256 neurons, 1 layer):")
+print(f"   - Accuracy: {shallow_wide['test_accuracy']:.4f}")
+print(f"   - Parameters: {shallow_wide['total_params']:,}")
+
+print(f"\n   Narrow & Deep (16 neurons each, 4 layers):")
+print(f"   - Accuracy: {deep_narrow['test_accuracy']:.4f}")
+print(f"   - Parameters: {deep_narrow['total_params']:,}")
+
+print("\n4. RECOMMENDATIONS:")
+print("\n   For Loan Approval Applications:")
+print("   - Start with 2-3 hidden layers (64, 32 neurons)")
+print("   - Monitor overfitting with validation data")
+print("   - Use dropout for regularization")
+print("   - Balance model complexity with interpretability")
+print("   - Consider ensemble methods for production")
+
+# Create confusion matrix for best model
+best_predictions = results[best_model]['predictions']
+cm = confusion_matrix(y_test, best_predictions)
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=['Rejected', 'Approved'],
+            yticklabels=['Rejected', 'Approved'])
+plt.title(f'Confusion Matrix - {best_model}')
+plt.ylabel('True Label')
+plt.xlabel('Predicted Label')
+plt.show()
+
+print(f"\nClassification Report for {best_model}:")
+print(classification_report(y_test, best_predictions, 
+                          target_names=['Rejected', 'Approved']))

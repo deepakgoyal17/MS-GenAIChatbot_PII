@@ -1,0 +1,15 @@
+python -m streamlit run .\testLLM.py
+
+ollama --version
+ollama list
+ollama run llama3.1
+
+ollama run llama3.1 "Write a short poem about the internet." 
+
+
+URL
+https://platform.openai.com/account/organization
+https://aistudio.google.com/apikey
+https://aistudio.google.com/usage?project=gen-lang-client-0818023745
+https://www.youtube.com/watch?v=swCPic00c30
+https://github.com/krishnaik06/Updated-Langchain/blob/main/chatbot/app.py

@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0" version="28.0.7">
+  <diagram name="Page-1" id="rkydW07V58XMsQPYZkNW">
+    <mxGraphModel dx="1034" dy="540" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_tVTMNVYnX6nFbaCLk8z-1" target="_tVTMNVYnX6nFbaCLk8z-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="_tVTMNVYnX6nFbaCLk8z-1" target="_tVTMNVYnX6nFbaCLk8z-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-1" value="Research Objective:&lt;div&gt;Evaluate existing PII Preserving methods&lt;/div&gt;&lt;div&gt;Propose Architecture to protect PII data&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="330" y="70" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-2" value="Qualitatively Method&lt;div&gt;(Exploratory)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="70" y="170" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-3" value="Quantitative Method&lt;div&gt;(Empirical)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="590" y="170" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-4" value="Literature Review&lt;div&gt;-PII Architectures&lt;/div&gt;&lt;div&gt;-Various designs&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="70" y="260" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-5" value="Prototype Design&lt;div&gt;-NER modules&lt;/div&gt;&lt;div&gt;-LLM selections&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="590" y="250" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_tVTMNVYnX6nFbaCLk8z-6" target="_tVTMNVYnX6nFbaCLk8z-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-6" value="Understand Various Trade-offs and impact on performance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="70" y="350" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-8" value="Develop and Evaluate Various Metrics&lt;div&gt;Calculating response accuracy&lt;/div&gt;&lt;div&gt;Measuring PII Removal Effectiveness&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;Cosine Similarity-Based Comparison&lt;/span&gt;&amp;nbsp;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="590" y="340" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_tVTMNVYnX6nFbaCLk8z-9" target="_tVTMNVYnX6nFbaCLk8z-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-9" value="Statical Analysis&lt;div&gt;-Charts, Metrics&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="590" y="430" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_tVTMNVYnX6nFbaCLk8z-10" value="Integrated Evaluation&lt;div&gt;-Interpret Results&lt;/div&gt;&lt;div&gt;-Refine Architecture&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="345" y="520" width="230" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

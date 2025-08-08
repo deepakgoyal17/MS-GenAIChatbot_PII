@@ -1,0 +1,10 @@
+@ARTICLE{5223520,
+  author={Chen, Tingting and Zhong, Sheng},
+  journal={IEEE Transactions on Neural Networks}, 
+  title={Privacy-Preserving Backpropagation Neural Network Learning}, 
+  year={2009},
+  volume={20},
+  number={10},
+  pages={1554-1564},
+  keywords={Neural networks;Multi-layer neural network;Biological neural networks;Backpropagation algorithms;Data privacy;Distributed computing;Distributed algorithms;Data security;Machine learning;Protection;Backpropagation;learning;neural network;privacy},
+  doi={10.1109/TNN.2009.2026902}}
