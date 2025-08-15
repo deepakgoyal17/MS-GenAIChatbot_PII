@@ -1,0 +1,176 @@
+import json
+import requests
+from typing import Dict, List, Any
+import re
+
+class LocalLLMNER:
+    def __init__(self, model_name="llama3.1", ollama_url="http://localhost:11434"):
+        self.model_name = model_name
+        self.ollama_url = ollama_url
+        
+    def extract_entities(self, text: str, entity_types: List[str] = None) -> Dict[str, Any]:
+        """
+        Extract entities using local LLM
+        """
+        if entity_types is None:
+            entity_types = ["PERSON", "LOCATION", "ORGANIZATION", "DATE", "MONEY", "PRODUCT"]
+        
+        entity_list = ", ".join(entity_types)
+        
+        prompt = f"""
+Extract named entities from the following text. Return ONLY a valid JSON object with the entities found.
+Also replace the entities identified with the Fake Entities.
+
+Entity types to look for: {entity_list}
+
+Text: "{text}"
+
+Return format:
+{{
+    "entities": [
+        {{"text": "entity_text", "label": "ENTITY_TYPE", "start": start_position, "end": end_position}},
+    ],
+    "intent": "detected_intent_if_any",
+    "replaced_text": "return the original text but replace the entities identified with the Fake Entities"
+}}
+
+JSON Response:"""
+
+        try:
+            response = requests.post(
+                f"{self.ollama_url}/api/generate",
+                json={
+                    "model": self.model_name,
+                    "prompt": prompt,
+                    "stream": False,
+                    "options": {
+                        "temperature": 0.1,  # Lower temperature for consistent output
+                        "top_p": 0.9
+                    }
+                }
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(result)
+                return self._parse_llm_response(result["response"], text)
+            else:
+                print(f"Error: {response.status_code}")
+                return {"entities": [], "intent": None}
+                
+        except Exception as e:
+            print(f"Error calling LLM: {e}")
+            return {"entities": [], "intent": None}
+    
+    def _parse_llm_response(self, llm_response: str, original_text: str) -> Dict[str, Any]:
+        """
+        Parse and validate LLM response
+        """
+        try:
+            # Extract JSON from response
+            json_match = re.search(r'\{.*\}', llm_response, re.DOTALL)
+            if json_match:
+                json_str = json_match.group()
+                parsed = json.loads(json_str)
+                
+                # Validate and enrich entities with positions
+                validated_entities = []
+                for entity in parsed.get("entities", []):
+                    if "text" in entity and "label" in entity:
+                        # Find position in original text if not provided
+                        if "start" not in entity or "end" not in entity:
+                            start = original_text.lower().find(entity["text"].lower())
+                            if start != -1:
+                                entity["start"] = start
+                                entity["end"] = start + len(entity["text"])
+                        
+                        validated_entities.append(entity)
+                
+                return {
+                    "entities": validated_entities,
+                    "intent": parsed.get("intent")
+                }
+            
+        except json.JSONDecodeError:
+            print("Failed to parse JSON from LLM response")
+        
+        return {"entities": [], "intent": None}
+
+# Chatbot integration class
+class LLMChatbot:
+    def __init__(self, ner_extractor: LocalLLMNER):
+        self.ner = ner_extractor
+        self.context = {}
+        
+    def process_message(self, message: str) -> Dict[str, Any]:
+        """
+        Process user message with NER extraction
+        """
+        # Extract entities
+        ner_result = self.ner.extract_entities(message)
+        
+        # Store entities in context
+        self.context.update({
+            "last_entities": ner_result["entities"],
+            "last_intent": ner_result["intent"],
+            "last_message": message
+        })
+        
+        # Process based on entities
+        response = self._generate_response(message, ner_result)
+        
+        return {
+            "response": response,
+            "entities": ner_result["entities"],
+            "intent": ner_result["intent"],
+            "context": self.context
+        }
+    
+    def _generate_response(self, message: str, ner_result: Dict) -> str:
+        """
+        Generate response based on extracted entities
+        """
+        entities = ner_result["entities"]
+        intent = ner_result["intent"]
+        
+        # Simple rule-based responses based on entities
+        if any(e["label"] == "PERSON" for e in entities):
+            person_entities = [e["text"] for e in entities if e["label"] == "PERSON"]
+            return f"I see you mentioned {', '.join(person_entities)}. How can I help you with that?"
+        
+        elif any(e["label"] == "LOCATION" for e in entities):
+            location_entities = [e["text"] for e in entities if e["label"] == "LOCATION"]
+            return f"You're asking about {', '.join(location_entities)}. What would you like to know?"
+        
+        elif any(e["label"] == "DATE" for e in entities):
+            return "I noticed you mentioned a date. Let me help you with that timing."
+        
+        else:
+            return "I understand. How can I assist you further?"
+
+# Usage example
+def main():
+    # Initialize NER extractor
+    ner = LocalLLMNER(model_name="llama3.1")
+    
+    # Initialize chatbot
+    chatbot = LLMChatbot(ner)
+    
+    # Test messages
+    test_messages = [
+        "My name is Aaliyah Popova, and I am a jeweler with 13 years of experience. I remember a very unique and challenging project I had to work on last year.",
+        "I want to book a flight to New York for next Friday",
+        "Can you help me find John Smith's contact information?",
+        "What's the weather like in San Francisco today?",
+        "I need to transfer $500 to my savings account"
+    ]
+    
+    for message in test_messages:
+        print(f"\nUser: {message}")
+        result = chatbot.process_message(message)
+        print(f"Bot: {result['response']}")
+        print(f"Entities: {result['entities']}")
+        print(f"Intent: {result['intent']}")
+
+if __name__ == "__main__":
+    main()

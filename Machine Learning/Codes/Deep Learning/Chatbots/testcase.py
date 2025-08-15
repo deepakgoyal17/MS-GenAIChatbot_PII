@@ -1,4 +1,9 @@
-from app import setup_name_patterns, smart_capitalize
+from app import setup_name_patterns, smart_capitalize,fake_ner_replace
+from base_logger import BaseLogger
+import logging
+
+logger = BaseLogger(log_name='testcases_chatbot_app', log_level=logging.INFO, log_dir='logs').get_logger()
+logger.info("Chatbot application started")
 
 # Test case for smart_capitalize function
 
@@ -16,21 +21,23 @@ def test_smart_capitalize():
 import spacy
 nlp = spacy.load("en_core_web_sm")
 
-def find_ent_type(text):
+def test_find_ent_type(text):
     # Use spaCy to detect NER objects, then replace with Faker-generated values
     print(f"Original text: {text}")
-    text = smart_capitalize(text)  # Apply smart capitalization
-    doc = nlp(text)
+    text = fake_ner_replace(text)  # Apply smart capitalization
     print(f"Processed text: {text}")
-    print("Detected entities:") 
-    print(doc) 
-    print(doc.ents)
-    for ent in doc.ents:
-        print(ent.text, ent.label_)
+   
+
+def test_fake_ner_replace(text):
+    # Use spaCy to detect NER objects, then replace with Faker-generated values
+    print(f"Original text: {text}")
+    text = fake_ner_replace(text)  # Apply smart capitalization
+    print(f"Processed text: {text}")
 
 # Run the test
 #find_ent_type("Generative AI")
-find_ent_type("My name is asif, I am from microsoft, I want to learn generative ai, please help me")
+#test_find_ent_type("My name is asif, I am from microsoft, I want to learn generative ai, please help me")
+test_fake_ner_replace("My name is Aaliyah Popova, and I am a jeweler with 13 years of experience. I remember a very unique and challenging project I had to work on last year.")
 
 #test_smart_capitalize()
 print("Test passed!")

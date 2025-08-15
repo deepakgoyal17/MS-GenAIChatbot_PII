@@ -1,0 +1,52 @@
+2025-08-10 10:02:05,110 - chatbot_app - INFO - Chatbot application started
+2025-08-10 10:02:06,161 - chatbot_app - INFO - This is input text: My name is Aaliyah Popova, and I am a jeweler with 13 years of experience. I remember a very unique and challenging project I had to work on last year. 
+2025-08-10 10:02:06,536 - chatbot_app - INFO - This is Capitalized text: My name is Aaliyah Popova, and I am a jeweler with 13 years of experience. I remember a very unique and challenging project I had to work on last year. 
+2025-08-10 10:02:07,109 - chatbot_app - INFO - This is Real text: Aaliyah Popova
+2025-08-10 10:02:07,109 - chatbot_app - INFO - This is fake text: None
+2025-08-10 10:06:55,398 - chatbot_app - INFO - [<module>]- Chatbot application started
+2025-08-10 10:08:50,484 - chatbot_app - INFO - Chatbot application started
+2025-08-10 10:08:59,784 - chatbot_app - INFO - Chatbot application started
+2025-08-10 10:09:00,746 - chatbot_app - INFO - This is input text: My name is Aaliyah Popova, and I am a jeweler with 13 years of experience. I remember a very unique and challenging project I had to work on last year. 
+2025-08-10 10:09:01,766 - chatbot_app - INFO - This is Capitalized text: My name is Aaliyah Popova, and I am a jeweler with 13 years of experience. I remember a very unique and challenging project I had to work on last year. 
+2025-08-10 10:09:01,793 - chatbot_app - INFO - This is NER text: My name is Aaliyah Popova, and I am a jeweler with 13 years of experience. I remember a very unique and challenging project I had to work on last year. 
+2025-08-10 10:09:01,794 - chatbot_app - INFO - faker Object: <faker.proxy.Faker object at 0x000001E010603CB0>
+2025-08-10 10:09:02,345 - chatbot_app - INFO - This is Real text: Aaliyah Popova
+2025-08-10 10:09:02,345 - chatbot_app - INFO - This is fake text: None
+2025-08-10 10:15:52,378 - chatbot_app - INFO - Chatbot application started
+2025-08-10 10:17:24,575 - chatbot_app - INFO - Chatbot application started
+2025-08-10 10:17:26,253 - chatbot_app - INFO - This is input text: My name is John, and I'm a jeweler with thirteen years of experience. Last year, I had a truly unique and challenging project. It involved...
+2025-08-10 10:17:26,798 - chatbot_app - INFO - This is Capitalized text: My name is John, and I'm a jeweler with thirteen years of experience. Last year, I had a truly unique and challenging project. It involved...
+2025-08-10 10:17:26,814 - chatbot_app - INFO - This is NER text: My name is John, and I'm a jeweler with thirteen years of experience. Last year, I had a truly unique and challenging project. It involved...
+2025-08-10 10:17:26,815 - chatbot_app - INFO - faker Object: <faker.proxy.Faker object at 0x000001E00B1E5B20>
+2025-08-10 10:17:26,815 - chatbot_app - INFO - This is Real text: John
+2025-08-10 10:17:26,816 - chatbot_app - INFO - This is fake text: Jessica Barnes
+2025-08-10 10:17:26,816 - chatbot_app - INFO - This is Real text: thirteen years
+2025-08-10 10:17:26,816 - chatbot_app - INFO - This is fake text: 2018-09-28
+2025-08-10 10:17:26,816 - chatbot_app - INFO - This is Real text: Last year
+2025-08-10 10:17:26,816 - chatbot_app - INFO - This is fake text: 1988-05-30
+2025-08-13 22:15:23,267 - chatbot_app - INFO - [<module>]- Chatbot application started
+2025-08-13 22:15:51,188 - chatbot_app - INFO - [<module>]- Chatbot application started
+2025-08-13 22:15:59,857 - chatbot_app - INFO - [fake_ner_replace]- This is input text: i am Asif from microsoft, i want to learn generative AI, please help me
+2025-08-13 22:16:00,669 - chatbot_app - INFO - [fake_ner_replace]- This is Capitalized text: i am Asif from Microsoft, i want to learn generative AI, please help me
+2025-08-13 22:16:00,683 - chatbot_app - INFO - [fake_ner_replace]- This is NER text: i am Asif from Microsoft, i want to learn generative AI, please help me
+2025-08-13 22:16:00,684 - chatbot_app - INFO - [fake_ner_replace]- faker Object: <faker.proxy.Faker object at 0x0000017BED8E74D0>
+2025-08-13 22:16:00,684 - chatbot_app - INFO - [SmartOrgReplacement]- This is input text: Microsoft
+2025-08-13 22:16:00,685 - chatbot_app - INFO - [SmartOrgReplacement]- This is before calling get_replacement_suggestion
+2025-08-13 22:16:52,768 - chatbot_app - INFO - [SmartOrgReplacement]- This is after calling get_replacement_suggestion
+2025-08-13 22:16:53,046 - chatbot_app - INFO - [SmartOrgReplacement]- This is before calling replace_organizations_hybrid
+2025-08-13 22:16:53,050 - chatbot_app - INFO - [SmartOrgReplacement]- This is after calling replace_organizations_hybrid
+2025-08-13 22:28:46,855 - chatbot_app - INFO - [<module>]- Chatbot application started
+2025-08-13 22:29:00,404 - chatbot_app - INFO - [<module>]- Chatbot application started
+2025-08-13 22:29:11,248 - chatbot_app - INFO - [fake_ner_replace]- This is input text: i am Asif from microsoft, i want to learn generative AI, please help me
+2025-08-13 22:29:11,921 - chatbot_app - INFO - [fake_ner_replace]- This is Capitalized text: i am Asif from Microsoft, i want to learn generative AI, please help me
+2025-08-13 22:29:11,937 - chatbot_app - INFO - [fake_ner_replace]- This is NER text: i am Asif from Microsoft, i want to learn generative AI, please help me
+2025-08-13 22:29:11,938 - chatbot_app - INFO - [fake_ner_replace]- faker Object: <faker.proxy.Faker object at 0x0000017BEDBDCE90>
+2025-08-13 22:29:11,938 - chatbot_app - INFO - [SmartOrgReplacement]- This is input text: Microsoft
+2025-08-13 22:29:11,938 - chatbot_app - INFO - [SmartOrgReplacement]- This is before calling get_replacement_suggestion
+2025-08-13 22:30:00,150 - chatbot_app - INFO - [SmartOrgReplacement]- This is after calling get_replacement_suggestion
+2025-08-13 22:30:00,780 - chatbot_app - INFO - [SmartOrgReplacement]- This is before calling replace_organizations_hybrid
+2025-08-13 22:30:00,790 - chatbot_app - INFO - [SmartOrgReplacement]- This is after calling replace_organizations_hybrid
+2025-08-13 22:30:00,790 - chatbot_app - INFO - [fake_ner_replace]- This is Real text: Microsoft
+2025-08-13 22:30:00,790 - chatbot_app - INFO - [fake_ner_replace]- This is fake text: Apple
+2025-08-13 22:30:00,791 - chatbot_app - INFO - [fake_ner_replace]- This is Real text: AI
+2025-08-13 22:30:00,791 - chatbot_app - INFO - [fake_ner_replace]- This is fake text: Patriciashire

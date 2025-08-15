@@ -1,7 +1,12 @@
 from sentence_transformers import SentenceTransformer, util
 from SimilarOrgReplacement import KnowledgeGraphReplacer #  SimilarOrgReplacement is a custom module for organization name replacement
+from SimilarOrgReplacement_BetterPerformance import HybridOrganizationReplacer
 from capitalizeNameAndOrg import  NameOrganizationCapitalizer # CapitalizeNameAndOrg is a custom module for name and organization capitalization
-from base_logger import logger
+from base_logger import BaseLogger
+import logging
+
+logger = BaseLogger(log_name='chatbot_app', log_level=logging.INFO, log_dir='logs').get_logger()
+logger.info("Chatbot application started")
 
 import streamlit as st
 @st.cache_resource(show_spinner=False)
@@ -28,14 +33,29 @@ nlp = get_spacy_model()
 
 
 
-
 def SmartOrgReplacement(text):
     # Initialize the replacer
+    '''
     replacer = KnowledgeGraphReplacer()
 
 # Get a single replacement
+
+    logger.info("This is input text: %s", text)
+    logger.info("This is before calling get_replacement_suggestion")
     replacement = replacer.get_replacement_suggestion(text)
+    logger.info("This is after calling get_replacement_suggestion")
     print(f"Replace Microsoft with: {replacement}")  # Output: Google (or similar tech company)
+    '''
+
+    replacer = HybridOrganizationReplacer(
+            enable_web_fallback=True,
+            web_timeout=2.0,
+            max_web_requests=10
+        )
+    logger.info("This is before calling replace_organizations_hybrid")
+    replacement = replacer.replace_organizations_hybrid(st.text)[0]
+    logger.info("This is after calling replace_organizations_hybrid")
+
     return replacement
 
 def smart_Capitalize_UsingSpacy(text):
@@ -68,7 +88,8 @@ def fake_ner_replace(text):
     text = smart_Capitalize_UsingSpacy(text)
     logger.info("This is Capitalized text: %s", text)
     doc = nlp(text)
-   
+    logger.info("This is NER text: %s", doc)
+    logger.info("faker Object: %s", faker)
     #st.chat_message("user").markdown(doc)
     ner_map = {}
     fake_text = text
@@ -89,8 +110,10 @@ def fake_ner_replace(text):
      #   else:
        #     fake_value = faker.word()
         ner_map[fake_value] = ent.text
+        logger.info("This is Real text: %s", ent.text)
+        logger.info("This is fake text: %s", fake_value)
         fake_text = fake_text.replace(ent.text, fake_value)
-        logger.info("This is fake text: %s", fake_text)
+        
     return fake_text, ner_map
 
 def mask_ner_with_xxxx(text):
@@ -189,3 +212,4 @@ if user_prompt:
     sim_real_mask = float(util.cos_sim(emb_real, emb_mask))
     sim_fake_mask = float(util.cos_sim(emb_fake, emb_mask))
     st.markdown(f"**Semantic Similarity:**<br>Real vs Fake: {sim_real_fake:.3f}<br>Real vs Masked: {sim_real_mask:.3f}<br>Fake vs Masked: {sim_fake_mask:.3f}", unsafe_allow_html=True)
+
