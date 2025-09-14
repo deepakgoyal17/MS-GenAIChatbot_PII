@@ -3,6 +3,7 @@ from SimilarOrgReplacement import KnowledgeGraphReplacer #  SimilarOrgReplacemen
 from SimilarOrgReplacement_BetterPerformance import HybridOrganizationReplacer
 from capitalizeNameAndOrg import  NameOrganizationCapitalizer # CapitalizeNameAndOrg is a custom module for name and organization capitalization
 from base_logger import BaseLogger
+from local_llm_pii_removal import remove_pii_with_llm
 import logging
 
 logger = BaseLogger(log_name='chatbot_app', log_level=logging.INFO, log_dir='logs').get_logger()
@@ -53,7 +54,7 @@ def SmartOrgReplacement(text):
             max_web_requests=10
         )
     logger.info("This is before calling replace_organizations_hybrid")
-    replacement = replacer.replace_organizations_hybrid(st.text)[0]
+    replacement = replacer.replace_organizations_hybrid(text)[0]
     logger.info("This is after calling replace_organizations_hybrid")
 
     return replacement
@@ -74,6 +75,9 @@ def smart_Capitalize_UsingSpacy(text):
 from faker import Faker
 faker = Faker()
 
+import re
+import time
+
 import google.generativeai as genai
 
 # Initialize memory
@@ -82,39 +86,69 @@ if "chat_history" not in st.session_state:
 
  # --- Fake NER replacement setup ---
 def fake_ner_replace(text):
-    # Use spaCy to detect NER objects, then replace with Faker-generated values
-    #text = smart_capitalize(text)  # Apply smart capitalization
-    logger.info("This is input text: %s", text)
-    text = smart_Capitalize_UsingSpacy(text)
-    logger.info("This is Capitalized text: %s", text)
-    doc = nlp(text)
-    logger.info("This is NER text: %s", doc)
-    logger.info("faker Object: %s", faker)
-    #st.chat_message("user").markdown(doc)
-    ner_map = {}
-    fake_text = text
-    for ent in doc.ents:
-        if ent.label_ == "PERSON":
-            fake_value = faker.name()
-        elif ent.label_ == "ORG":
-            #fake_value = faker.company()
-             fake_value = SmartOrgReplacement(ent.text)  # Use the custom org replacement
-        elif ent.label_ == "GPE":
-            fake_value = faker.city()
-        elif ent.label_ == "DATE":
-            fake_value = faker.date()
-        elif ent.label_ == "EMAIL":
-            fake_value = faker.email()
-        elif ent.label_ == "PHONE":
-            fake_value = faker.phone_number()
-     #   else:
-       #     fake_value = faker.word()
-        ner_map[fake_value] = ent.text
-        logger.info("This is Real text: %s", ent.text)
-        logger.info("This is fake text: %s", fake_value)
-        fake_text = fake_text.replace(ent.text, fake_value)
-        
-    return fake_text, ner_map
+   # Use spaCy to detect NER objects, then replace with Faker-generated values
+   #text = smart_capitalize(text)  # Apply smart capitalization
+   logger.info("This is input text: %s", text)
+   text = smart_Capitalize_UsingSpacy(text)
+   logger.info("This is Capitalized text: %s", text)
+   doc = nlp(text)
+   logger.info("This is NER text: %s", doc)
+   logger.info("faker Object: %s", faker)
+   #st.chat_message("user").markdown(doc)
+   ner_map = {}
+   real_to_fake = {}
+   fake_text = text
+   for ent in doc.ents:
+       if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]:
+           if ent.text not in real_to_fake:
+               if ent.label_ == "PERSON":
+                   real_to_fake[ent.text] = faker.name()
+               elif ent.label_ == "ORG":
+                   #fake_value = faker.company()
+                   real_to_fake[ent.text] = SmartOrgReplacement(ent.text)  # Use the custom org replacement
+               elif ent.label_ == "GPE":
+                   real_to_fake[ent.text] = faker.city()
+               elif ent.label_ == "DATE":
+                   real_to_fake[ent.text] = faker.date()
+               elif ent.label_ == "EMAIL":
+                   real_to_fake[ent.text] = faker.email()
+               elif ent.label_ == "PHONE":
+                   real_to_fake[ent.text] = faker.phone_number()
+           fake_value = real_to_fake[ent.text]
+           ner_map[fake_value] = ent.text
+           logger.info("This is Real text: %s", ent.text)
+           logger.info("This is fake text: %s", fake_value)
+           fake_text = fake_text.replace(ent.text, fake_value)
+
+   # Additional regex-based replacements for entities not covered by spaCy
+   email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+   emails = re.findall(email_pattern, fake_text)
+   email_to_fake = {}
+   for email in emails:
+       if email not in email_to_fake:
+           email_to_fake[email] = faker.email()
+       fake_email = email_to_fake[email]
+       if fake_email not in ner_map:
+           ner_map[fake_email] = email
+       logger.info("This is Real text: %s", email)
+       logger.info("This is fake text: %s", fake_email)
+       fake_text = fake_text.replace(email, fake_email)
+
+   # Phone numbers
+   phone_pattern = r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b'
+   phones = re.findall(phone_pattern, fake_text)
+   phone_to_fake = {}
+   for phone in phones:
+       if phone not in phone_to_fake:
+           phone_to_fake[phone] = faker.phone_number()
+       fake_phone = phone_to_fake[phone]
+       if fake_phone not in ner_map:
+           ner_map[fake_phone] = phone
+       logger.info("This is Real text: %s", phone)
+       logger.info("This is fake text: %s", fake_phone)
+       fake_text = fake_text.replace(phone, fake_phone)
+
+   return fake_text, ner_map
 
 def mask_ner_with_xxxx(text):
     #text = smart_capitalize(text)  # Apply smart capitalization
@@ -125,6 +159,22 @@ def mask_ner_with_xxxx(text):
     for ent in doc.ents:
         mask_map["XXXX"] = ent.text
         masked_text = masked_text.replace(ent.text, "XXXX")
+
+    # Additional regex-based masking for entities not covered by spaCy
+    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    emails = re.findall(email_pattern, masked_text)
+    for email in emails:
+        if email not in mask_map.values():  # Avoid double masking
+            masked_text = masked_text.replace(email, "XXXX")
+            mask_map["XXXX"] = email
+
+    phone_pattern = r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b'
+    phones = re.findall(phone_pattern, masked_text)
+    for phone in phones:
+        if phone not in mask_map.values():  # Avoid double masking
+            masked_text = masked_text.replace(phone, "XXXX")
+            mask_map["XXXX"] = phone
+
     return masked_text, mask_map
 
 def restore_fake_ner(text, ner_map):
@@ -146,12 +196,15 @@ if user_prompt:
         }
         for msg in st.session_state.chat_history
     ]
+    start = time.time()
     response_real = model.generate_content(gemini_compatible_history_real)
+    real_time = time.time() - start
     st.chat_message("assistant").markdown(response_real.text)
     st.session_state.chat_history.append({"role": "assistant", "content": response_real.text})
 
     # 2. Fake names
     st.subheader("LLM Response with Fake Names")
+    start = time.time()
     fake_prompt, ner_map = fake_ner_replace(user_prompt)
     st.session_state.ner_map = ner_map
     st.chat_message("user").markdown(fake_prompt)
@@ -167,11 +220,13 @@ if user_prompt:
     ]
     response_fake = model.generate_content(gemini_compatible_history_fake)
     bot_reply_fake = restore_fake_ner(response_fake.text, st.session_state.ner_map)
+    fake_time = time.time() - start
     st.chat_message("assistant").markdown(bot_reply_fake)
     st.session_state.chat_history.append({"role": "assistant", "content": bot_reply_fake})
 
     # 3. Masked with XXXX
     st.subheader("LLM Response with XXXX Masking")
+    start = time.time()
     masked_prompt, mask_map = mask_ner_with_xxxx(user_prompt)
     st.session_state.mask_map = mask_map
     st.chat_message("user").markdown(masked_prompt)
@@ -187,8 +242,27 @@ if user_prompt:
     ]
     response_mask = model.generate_content(gemini_compatible_history_mask)
     bot_reply_mask = response_mask.text.replace("XXXX", ", ".join(mask_map.values()))
+    mask_time = time.time() - start
     st.chat_message("assistant").markdown(bot_reply_mask)
     st.session_state.chat_history.append({"role": "assistant", "content": bot_reply_mask})
+
+    # 4. LLM-based PII removal
+    st.subheader("LLM Response with LLM-based PII Removal")
+    start = time.time()
+    llm_anonymized_prompt = remove_pii_with_llm(user_prompt)
+    st.chat_message("user").markdown(llm_anonymized_prompt)
+    st.session_state.chat_history.append({"role": "user", "content": llm_anonymized_prompt})
+    gemini_compatible_history_llm = [
+        {
+            "role": msg["role"],
+            "parts": [{"text": msg["content"]}]
+        }
+        for msg in st.session_state.chat_history
+    ]
+    response_llm = model.generate_content(gemini_compatible_history_llm)
+    llm_time = time.time() - start
+    st.chat_message("assistant").markdown(response_llm.text)
+    st.session_state.chat_history.append({"role": "assistant", "content": response_llm.text})
 
     # --- Metrics ---
     # For demo: compare if LLM response contains any of the real names (or fake names)
@@ -199,17 +273,30 @@ if user_prompt:
     real_score = sum(name in response_real.text for name in real_names)
     fake_score = sum(fake in response_fake.text for fake in fake_names)
     mask_score = sum(mask in response_mask.text for mask in mask_names)
-    st.markdown(f"**Metrics:**<br>Real name match: {real_score}, Fake name match: {fake_score}, Masked name match: {mask_score}", unsafe_allow_html=True)
+    llm_score = sum(name in response_llm.text for name in real_names)
+    # F1 score: 1 if no real PII leaked, else 0 (simplified)
+    real_f1 = 1 if real_score == 0 else 0
+    fake_f1 = 1 if fake_score == 0 else 0
+    mask_f1 = 1 if mask_score == 0 else 0
+    llm_f1 = 1 if llm_score == 0 else 0
+    st.markdown(f"**Metrics:**<br>Real name match: {real_score}, Fake name match: {fake_score}, Masked name match: {mask_score}, LLM name match: {llm_score}<br>**F1 Score (PII Leakage):**<br>Real: {real_f1}, Fake: {fake_f1}, Masked: {mask_f1}, LLM: {llm_f1}", unsafe_allow_html=True)
 
     # --- Semantic Similarity ---
     real_resp = response_real.text
     fake_resp = bot_reply_fake
     mask_resp = bot_reply_mask
+    llm_resp = response_llm.text
     emb_real = st_model.encode(real_resp, convert_to_tensor=True)
     emb_fake = st_model.encode(fake_resp, convert_to_tensor=True)
     emb_mask = st_model.encode(mask_resp, convert_to_tensor=True)
+    emb_llm = st_model.encode(llm_resp, convert_to_tensor=True)
     sim_real_fake = float(util.cos_sim(emb_real, emb_fake))
     sim_real_mask = float(util.cos_sim(emb_real, emb_mask))
     sim_fake_mask = float(util.cos_sim(emb_fake, emb_mask))
-    st.markdown(f"**Semantic Similarity:**<br>Real vs Fake: {sim_real_fake:.3f}<br>Real vs Masked: {sim_real_mask:.3f}<br>Fake vs Masked: {sim_fake_mask:.3f}", unsafe_allow_html=True)
+    sim_real_llm = float(util.cos_sim(emb_real, emb_llm))
+    sim_fake_llm = float(util.cos_sim(emb_fake, emb_llm))
+    sim_mask_llm = float(util.cos_sim(emb_mask, emb_llm))
+    st.markdown(f"**Semantic Similarity:**<br>Real vs Fake: {sim_real_fake:.3f}<br>Real vs Masked: {sim_real_mask:.3f}<br>Fake vs Masked: {sim_fake_mask:.3f}<br>Real vs LLM: {sim_real_llm:.3f}<br>Fake vs LLM: {sim_fake_llm:.3f}<br>Masked vs LLM: {sim_mask_llm:.3f}", unsafe_allow_html=True)
+
+    st.markdown(f"**Time Taken:**<br>Real: {real_time:.3f}s<br>Fake: {fake_time:.3f}s<br>Masked: {mask_time:.3f}s<br>LLM: {llm_time:.3f}s", unsafe_allow_html=True)
 
