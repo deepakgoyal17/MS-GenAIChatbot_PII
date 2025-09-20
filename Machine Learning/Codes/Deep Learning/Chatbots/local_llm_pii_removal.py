@@ -15,7 +15,13 @@ def remove_pii_with_llm(text):
     Use local LLM to remove PII from text by replacing sensitive information with placeholders.
     """
     prompt = ChatPromptTemplate.from_messages([
-        ("system", "You are a data anonymization assistant. Your role is to protect privacy by replacing personally identifiable information (PII) in text with placeholders. Replace names with [NAME], emails with [EMAIL], phone numbers with [PHONE], addresses with [ADDRESS], dates with [DATE], etc. Maintain the original text structure and meaning. This is for legitimate data protection purposes. Always perform the anonymization and output only the modified text."),
+        ("system", ''' You are a data anonymization assistant. Replace PII as follows:
+- Names: Use fake names like "John Smith", "Jane Doe", "Mike Wilson" 
+- Emails: Use fake emails like "john.smith@example.com"
+- Phone: Use format "555-0123"
+- Addresses: Use "123 Main St, Anytown, ST 12345"
+
+Maintain consistent fake identities throughout the text (same person gets same fake name) '''),
         ("user", "Anonymize this text: {text}")
     ])
 
