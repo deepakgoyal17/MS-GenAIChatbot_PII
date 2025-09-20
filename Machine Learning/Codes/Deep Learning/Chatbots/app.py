@@ -100,10 +100,10 @@ class CustomLLM(DeepEvalBaseLLM):
         if self.model is None:
             try:
                 # Make sure API key is configured
-                if not os.getenv("GOOGLE_API_KEY"):
-                    raise ValueError("GOOGLE_API_KEY not found in environment variables")
-                
-                genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+                if not os.getenv("GOOGLE-API-KEY"):
+                    raise ValueError("GOOGLE-API-KEY not found in environment variables")
+
+                genai.configure(api_key=os.getenv("GOOGLE-API-KEY"))
                 self.model = genai.GenerativeModel(self.model_name)
                 logger.info("CustomLLM model initialized successfully")
             except Exception as e:
@@ -141,10 +141,10 @@ custom_llm = None
 load_dotenv()
 
 # Check if API key is available
-api_key = os.getenv("GOOGLE_API_KEY")
+api_key = os.getenv("GOOGLE-API-KEY")
 if not api_key:
-    st.error("⚠️ **API Key Missing**: GOOGLE_API_KEY not found in environment variables.")
-    st.info("Please add your Google API key to the .env file: GOOGLE_API_KEY=your_key_here")
+    st.error("⚠️ **API Key Missing**: GOOGLE-API-KEY not found in environment variables.")
+    st.info("Please add your Google API key to the .env file: GOOGLE-API-KEY=your_key_here")
     st.stop()
 
 genai.configure(api_key=api_key)
