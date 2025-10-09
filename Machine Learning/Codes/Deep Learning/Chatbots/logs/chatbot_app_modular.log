@@ -49,3 +49,1592 @@
 2025-09-21 00:38:32,887 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
 2025-09-21 00:38:32,887 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
 2025-09-21 00:38:32,890 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-21 11:23:59,407 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-21 11:23:59,444 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-21 11:23:59,444 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-21 11:23:59,445 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-21 11:23:59,449 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-21 11:24:23,173 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-21 11:24:23,210 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-21 11:24:23,211 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-21 11:24:23,211 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-21 11:24:23,213 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-21 11:24:26,752 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-21 11:24:26,788 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-21 11:24:26,788 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-21 11:24:26,789 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-21 11:24:26,793 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:34:54,724 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:34:58,326 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:35:16,957 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:35:22,365 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:35:22,368 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-09-29 21:35:24,282 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-09-29 21:35:24,284 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:36:57,723 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:36:57,761 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:36:57,761 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:36:57,761 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:36:57,767 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:38:11,812 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:38:11,834 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:38:11,835 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:38:11,835 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:38:11,837 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:40:27,265 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:40:27,283 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:40:27,284 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:40:27,284 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:40:27,285 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:42:24,061 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:42:24,096 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:42:24,096 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:42:24,097 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:42:24,100 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:42:49,991 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:42:50,017 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:42:50,018 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:42:50,018 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:42:50,022 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:47:30,729 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:47:32,122 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:47:32,123 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:47:32,123 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:47:32,126 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:47:41,868 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:47:41,897 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:47:41,897 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:47:41,897 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:47:41,899 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:50:50,433 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:50:50,443 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:50:50,444 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:50:50,445 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:50:52,125 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:50:52,136 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:50:52,136 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:50:52,137 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:50:58,401 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:50:58,410 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:50:58,410 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:50:58,414 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:52:24,056 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:53:03,772 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:55:09,838 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:55:10,376 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:55:10,376 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:55:10,376 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:55:10,377 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:55:13,332 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:55:13,356 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:55:13,356 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:55:13,356 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:55:13,358 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:55:14,381 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:55:14,408 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:55:14,408 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:55:14,411 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:55:21,512 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:55:21,538 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:55:21,539 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:55:21,540 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:58:46,510 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:58:47,049 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:58:47,049 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:58:47,050 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:58:47,051 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:58:54,720 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:58:54,751 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:58:54,752 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:58:54,752 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:58:54,754 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 21:58:59,349 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 21:58:59,373 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 21:58:59,374 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 21:58:59,374 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 21:58:59,377 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:00:33,203 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:00:33,228 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:00:33,229 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:00:33,229 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:00:33,232 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:00:34,177 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:00:34,199 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:00:34,200 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:00:34,203 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:00:39,316 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:00:39,343 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:00:39,343 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:00:39,347 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:00:52,464 - chatbot_app_modular - ERROR - [generate]- Error generating content: 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-09-29 22:00:52,492 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for real: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 22:00:52,500 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-09-29 22:01:10,513 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:01:10,534 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:01:10,535 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:01:10,539 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:01:23,587 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:01:23,611 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:01:23,611 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:01:23,613 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:01:34,423 - chatbot_app_modular - ERROR - [generate]- Error generating content: 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-09-29 22:01:34,436 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for real: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 22:01:34,442 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-09-29 22:01:37,659 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:01:37,683 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:01:37,684 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:01:37,685 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:07:37,653 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:07:37,653 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:07:38,230 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:07:38,230 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:07:38,230 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:07:38,232 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:07:43,834 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:07:43,839 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:07:43,861 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:07:43,862 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:07:43,862 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:07:43,865 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:07:46,595 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:07:46,597 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:07:46,621 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:07:46,622 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:07:46,622 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:07:46,626 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:07:56,849 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:07:56,851 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:07:56,866 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:07:56,866 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:07:56,867 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:07:56,868 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:07:57,781 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:07:57,784 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:07:57,799 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:07:57,799 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:07:57,801 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:08:00,176 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:08:00,180 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:08:00,191 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:08:00,191 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:08:00,193 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:08:01,996 - chatbot_app_modular - ERROR - [main]- Real names processing failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-09-29 22:08:02,508 - chatbot_app_modular - ERROR - [generate]- Error generating content: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-09-29 22:08:02,520 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for real: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 22:08:02,523 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-09-29 22:08:11,338 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:08:11,340 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:08:11,359 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:08:11,359 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:08:11,363 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:09:03,425 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:09:03,428 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:09:03,453 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:09:03,454 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:09:03,457 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:09:05,181 - chatbot_app_modular - ERROR - [main]- Real names processing failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-09-29 22:09:05,691 - chatbot_app_modular - ERROR - [generate]- Error generating content: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-09-29 22:09:05,702 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for real: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 22:09:05,705 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-09-29 22:09:20,518 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:09:20,521 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:09:20,542 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:09:20,542 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:09:20,545 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:10:19,594 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:10:19,594 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:10:20,214 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:10:20,214 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:10:20,214 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:10:20,217 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:10:27,737 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:10:27,740 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:10:27,764 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:10:27,764 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:10:27,764 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:10:27,767 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:10:29,096 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:10:29,100 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:10:29,117 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:10:29,117 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:10:29,120 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:10:30,666 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:10:30,672 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:10:30,691 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:10:30,691 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:10:30,694 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:12:42,577 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for real: 0.75
+2025-09-29 22:12:42,581 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-09-29 22:42:41,797 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:42:41,798 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:42:41,807 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:42:41,807 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:42:41,808 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:43:12,347 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:43:12,348 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:43:12,618 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:43:12,619 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:43:12,630 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:43:12,631 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:43:12,631 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:43:12,632 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:49:54,674 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 22:49:54,675 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 22:49:55,688 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 22:49:58,611 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 22:50:01,181 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 22:50:01,182 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-09-29 22:50:02,197 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-09-29 22:50:02,197 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 22:50:02,198 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-09-29 22:50:02,211 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-09-29 22:50:02,212 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-09-29 22:51:59,575 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.8
+2025-09-29 22:52:13,174 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-09-29 22:53:25,115 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-09-29 22:53:25,123 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-09-29 22:54:43,539 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-09-29 22:55:19,200 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.75
+2025-09-29 22:56:40,072 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-09-29 22:56:40,448 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-09-29 23:10:57,313 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 23:10:57,314 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 23:10:58,246 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 23:11:00,717 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 23:11:02,843 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 23:11:02,844 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-09-29 23:11:03,636 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-09-29 23:11:03,636 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 23:11:03,636 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-09-29 23:11:03,639 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-09-29 23:11:04,565 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-09-29 23:11:04,566 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-09-29 23:11:36,909 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-09-29 23:11:36,912 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-09-29 23:11:39,755 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-09-29 23:11:46,739 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-09-29 23:11:51,841 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-09-29 23:11:51,842 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-09-29 23:11:53,976 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-09-29 23:11:53,977 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-09-29 23:11:53,979 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-09-29 23:11:53,994 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-09-29 23:11:56,143 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-09-29 23:11:56,144 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-09-29 23:12:51,239 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.6666666666666666
+2025-09-29 23:13:00,557 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 59.302690424s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 59
+}
+]
+2025-09-29 23:13:00,598 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-09-29 23:13:00,659 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 23:13:01,164 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 58.684989456s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 58
+}
+]
+2025-09-29 23:13:01,173 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 23:13:01,320 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-09-29 23:13:20,580 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-09-29 23:13:49,863 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-09-29 23:13:49,901 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-09-29 23:14:13,359 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-09-29 23:14:25,222 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-09-29 23:14:42,895 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.5
+2025-09-29 23:14:43,132 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 16.715155745s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 16
+}
+]
+2025-09-29 23:14:43,156 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 23:14:43,508 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 16.340125846s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 16
+}
+]
+2025-09-29 23:14:43,517 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-09-29 23:14:44,022 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-09-29 23:15:04,551 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.9411764705882353
+2025-09-29 23:15:05,321 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 00:09:59,517 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:09:59,518 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:10:00,536 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:10:03,271 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:10:05,541 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:10:05,542 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 00:10:06,534 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 00:10:06,535 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:10:06,536 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 00:10:06,538 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 00:10:07,525 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 00:10:07,525 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 00:10:14,533 - chatbot_app_modular - ERROR - [process_batch_texts]- LLM PII removal processing failed for row 1: model requires more system memory (5.6 GiB) than is available (3.7 GiB) (status code: 500)
+2025-10-05 00:10:27,554 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.8333333333333334
+2025-10-05 00:10:43,319 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.6666666666666666
+2025-10-05 00:10:58,467 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.0
+2025-10-05 00:10:58,491 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 00:10:58,663 - chatbot_app_modular - ERROR - [process_batch_texts]- Fake names processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 1.189701234s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 1
+}
+]
+2025-10-05 00:10:59,274 - chatbot_app_modular - ERROR - [process_batch_texts]- XXXX masking processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 575.872118ms. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+}
+]
+2025-10-05 00:11:02,531 - chatbot_app_modular - ERROR - [process_batch_texts]- LLM PII removal processing failed for row 2: model requires more system memory (5.6 GiB) than is available (3.7 GiB) (status code: 500)
+2025-10-05 00:11:02,884 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 56.962526659s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 56
+}
+]
+2025-10-05 00:11:02,895 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for fake: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 00:11:03,509 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 56.344924166s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 56
+}
+]
+2025-10-05 00:11:03,518 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 00:11:05,926 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 53.921265128s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 53
+}
+]
+2025-10-05 00:11:05,938 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 00:11:06,147 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 00:48:03,404 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:48:03,404 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:48:03,404 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:48:03,405 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:48:03,405 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:48:03,407 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:48:03,407 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:48:05,709 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:48:05,710 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:48:05,709 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:48:05,710 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:48:10,197 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:48:10,197 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:48:10,197 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:48:10,197 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:48:14,153 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:48:14,153 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:48:14,153 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:48:14,153 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:48:14,156 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 00:48:14,156 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 00:48:15,872 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 00:48:15,872 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 00:48:15,873 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:48:15,873 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:48:15,875 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:48:15,875 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:49:28,154 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:49:28,154 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:49:28,161 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:49:28,161 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:49:28,183 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:49:28,183 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:49:28,183 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:49:28,183 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:49:28,184 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:49:28,184 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:49:28,186 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:49:28,186 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:49:31,461 - chatbot_app_modular - ERROR - [main]- LLM PII removal processing failed: model requires more system memory (5.6 GiB) than is available (2.9 GiB) (status code: 500)
+2025-10-05 00:49:31,461 - chatbot_app_modular - ERROR - [main]- LLM PII removal processing failed: model requires more system memory (5.6 GiB) than is available (2.9 GiB) (status code: 500)
+2025-10-05 00:49:55,240 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.0
+2025-10-05 00:49:55,240 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.0
+2025-10-05 00:49:55,244 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-05 00:49:55,244 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-05 00:54:38,575 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:54:38,575 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:54:38,578 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:54:38,578 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:54:38,598 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:54:38,598 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:54:38,598 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:54:38,598 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:54:38,598 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:54:38,598 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:54:38,600 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:54:38,600 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:57:21,866 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:57:21,869 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:57:24,206 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:57:29,236 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:57:33,441 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:57:33,444 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 00:57:35,184 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 00:57:35,185 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:57:46,774 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 00:57:46,779 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 00:57:46,804 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 00:57:46,804 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 00:57:46,805 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 00:57:46,807 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 00:58:41,614 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 00:58:41,625 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-05 01:02:14,491 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:02:14,495 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:02:15,435 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:02:15,438 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:02:16,547 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:02:16,547 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:02:16,549 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:02:16,549 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:02:19,112 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:02:19,114 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:02:19,141 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:02:19,141 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:02:19,401 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:02:19,401 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:02:19,402 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:02:19,402 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:02:19,402 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:02:19,402 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:02:19,402 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:02:19,405 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:02:19,405 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:02:19,405 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:02:19,405 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:02:19,402 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:02:19,407 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:02:19,408 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:02:19,720 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:03:04,126 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:03:04,128 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:03:04,143 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:03:04,143 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:03:04,143 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:03:04,143 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:03:04,144 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:03:04,144 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:03:04,145 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:03:49,895 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:03:49,895 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:03:50,933 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:03:53,735 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:03:56,091 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:03:56,093 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:03:57,089 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:03:57,089 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:03:57,090 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 01:03:57,111 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 01:03:57,872 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 01:03:57,872 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 01:04:03,553 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for real: 1.0
+2025-10-05 01:04:27,918 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.6666666666666666
+2025-10-05 01:04:44,120 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.8333333333333334
+2025-10-05 01:05:18,137 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:05:18,140 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-05 01:06:33,895 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-10-05 01:07:42,624 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-10-05 01:07:53,540 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:07:53,628 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 01:08:37,381 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-10-05 01:08:43,969 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.0
+2025-10-05 01:09:00,216 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:09:00,216 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:09:01,225 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:09:03,056 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:09:04,857 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:09:04,857 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:09:05,552 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:09:05,553 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:09:05,553 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 01:09:05,555 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 01:09:06,296 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 01:09:06,296 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 01:09:16,412 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:09:16,535 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 01:10:48,888 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:10:48,889 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:10:49,905 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:10:52,056 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:10:54,379 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:10:54,380 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:10:55,183 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:10:55,183 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:10:55,184 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 01:10:55,743 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:10:55,744 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:10:56,120 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:10:56,120 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:10:56,120 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:10:56,120 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:10:56,122 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 01:10:56,501 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 01:10:56,501 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 01:11:12,410 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-10-05 01:11:22,400 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:11:22,401 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:11:23,738 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:11:26,205 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:11:28,306 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:11:28,308 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:11:29,598 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:11:29,599 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:11:29,600 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 01:11:31,401 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:11:31,405 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:11:32,094 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:11:32,094 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:11:32,094 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:11:32,094 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:11:32,094 - chatbot_app_modular - INFO - [process_batch_texts]- Batch imports loaded: ['spacy', 'faker', 'org_replacer', 'capitalizer', 'llm_pii_remover', 'sentence_transformers', 'deepeval']
+2025-10-05 01:11:32,100 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 01:11:33,164 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 01:11:33,165 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 01:12:03,993 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:12:03,994 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:12:05,025 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:12:08,090 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:12:10,920 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:12:10,921 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:12:12,291 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:12:12,291 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:12:12,292 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 01:12:12,892 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:12:12,894 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:12:13,130 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:12:13,130 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:12:13,130 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:12:13,130 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:12:13,130 - chatbot_app_modular - INFO - [process_batch_texts]- Batch imports loaded: ['spacy', 'faker', 'org_replacer', 'capitalizer', 'llm_pii_remover', 'sentence_transformers', 'deepeval']
+2025-10-05 01:12:13,133 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 01:12:13,598 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 01:12:13,599 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 01:12:33,498 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.9885057471264368
+2025-10-05 01:12:37,826 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:12:37,826 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:12:38,777 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.8867924528301887
+2025-10-05 01:12:39,032 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:12:41,577 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:12:43,645 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:12:43,645 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:12:44,389 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:12:44,389 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:12:44,925 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:12:44,926 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:12:45,152 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:12:45,152 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:12:45,152 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:12:45,152 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:12:50,772 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:12:50,821 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 01:12:50,991 - chatbot_app_modular - ERROR - [process_batch_texts]- Fake names processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 8.899018911s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 8
+}
+]
+2025-10-05 01:12:56,040 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 3.843868845s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 3
+}
+]
+2025-10-05 01:12:56,056 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for fake: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:12:56,634 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 3.247388477s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 3
+}
+]
+2025-10-05 01:12:56,641 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:12:56,879 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 3.001748808s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 3
+}
+]
+2025-10-05 01:12:56,885 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:12:56,910 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 01:12:57,445 - chatbot_app_modular - ERROR - [process_batch_texts]- Fake names processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 2.435085402s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 2
+}
+]
+2025-10-05 01:12:57,684 - chatbot_app_modular - ERROR - [process_batch_texts]- XXXX masking processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 2.193729231s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 2
+}
+]
+2025-10-05 01:13:24,193 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-10-05 01:13:37,955 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:13:37,980 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 01:13:53,237 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:13:53,239 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:13:54,493 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 5.384778107s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 5
+}
+]
+2025-10-05 01:13:54,530 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for fake: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:13:55,095 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 4.785113531s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 4
+}
+]
+2025-10-05 01:13:55,106 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:13:55,378 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 4.501339827s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 4
+}
+]
+2025-10-05 01:13:55,388 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:13:56,130 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 01:13:56,162 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:14:01,722 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:14:05,501 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:14:05,502 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:14:07,792 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:14:07,793 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:14:07,794 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 01:14:09,161 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:14:09,164 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:14:09,715 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:14:09,715 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:14:09,715 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:14:09,716 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:14:09,716 - chatbot_app_modular - INFO - [process_batch_texts]- Batch imports loaded: ['spacy', 'faker', 'org_replacer', 'capitalizer', 'llm_pii_remover', 'sentence_transformers', 'deepeval']
+2025-10-05 01:14:09,722 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 01:14:10,687 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 01:14:10,688 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 01:14:26,394 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.0
+2025-10-05 01:14:45,943 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:14:45,944 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:14:46,842 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:14:46,857 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:14:48,939 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:14:48,941 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:14:48,944 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:14:48,979 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:14:49,520 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:14:51,464 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 8.426388042s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 8
+}
+]
+2025-10-05 01:14:51,519 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for fake: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:14:59,086 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:15:00,636 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 59.250033039s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 59
+}
+]
+2025-10-05 01:15:00,651 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:15:01,226 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 58.666242943s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 58
+}
+]
+2025-10-05 01:15:01,255 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:15:01,704 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 58.177649041s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 58
+}
+]
+2025-10-05 01:15:01,831 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for fake: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:15:02,540 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 57.339286902s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 57
+}
+]
+2025-10-05 01:15:02,560 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:15:02,790 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 01:15:03,185 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 56.698792218s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 56
+}
+]
+2025-10-05 01:15:03,200 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:15:03,262 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 01:15:03,480 - chatbot_app_modular - ERROR - [process_batch_texts]- Fake names processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 56.398808473s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 56
+}
+]
+2025-10-05 01:15:03,804 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 56.097158637s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 56
+}
+]
+2025-10-05 01:15:03,816 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:15:04,037 - chatbot_app_modular - ERROR - [process_batch_texts]- XXXX masking processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 55.846768247s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 55
+}
+]
+2025-10-05 01:15:04,086 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 55.805320689s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 55
+}
+]
+2025-10-05 01:15:04,092 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:15:04,827 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 01:15:06,518 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:15:06,520 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-05 01:15:09,601 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-05 01:15:09,602 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:15:09,604 - chatbot_app_modular - INFO - [process_batch_texts]- Starting batch processing from test_batch_input.csv
+2025-10-05 01:15:11,308 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:15:11,311 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:15:12,013 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:15:12,014 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:15:12,014 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:15:12,014 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:15:12,014 - chatbot_app_modular - INFO - [process_batch_texts]- Batch imports loaded: ['spacy', 'faker', 'org_replacer', 'capitalizer', 'llm_pii_remover', 'sentence_transformers', 'deepeval']
+2025-10-05 01:15:12,019 - chatbot_app_modular - INFO - [process_batch_texts]- Processing 2 rows from CSV
+2025-10-05 01:15:13,127 - chatbot_app_modular - INFO - [process_batch_texts]- Loaded spaCy model for batch processing
+2025-10-05 01:15:13,127 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 1/2
+2025-10-05 01:15:58,885 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:15:58,887 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:16:01,641 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:16:01,641 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:16:01,641 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:16:01,654 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:16:14,424 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:16:14,427 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:16:14,459 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:16:14,460 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:16:14,460 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:16:14,460 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:16:14,462 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:16:15,088 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:16:15,090 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:16:15,113 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:16:15,140 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:16:15,151 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:16:15,151 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:16:15,152 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:16:15,152 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:16:15,154 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:16:28,156 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:16:28,160 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:16:28,188 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:16:28,188 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:16:28,188 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:16:28,189 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:16:28,189 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:16:28,189 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:16:28,192 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:16:36,229 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.0
+2025-10-05 01:16:43,137 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.9420289855072463
+2025-10-05 01:16:55,836 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:16:55,838 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:16:55,863 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:16:55,863 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:16:55,864 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:16:55,871 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:17:08,345 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:17:08,347 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:17:08,358 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:17:08,359 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:17:08,359 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:17:08,361 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:17:08,878 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:17:08,879 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:17:08,889 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:17:08,889 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:17:08,889 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:17:08,889 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:17:08,889 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:17:08,889 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:17:08,890 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:17:09,662 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:17:09,664 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:17:09,678 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:17:09,679 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:17:09,679 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:17:09,679 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:17:09,679 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:17:09,679 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:17:09,682 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:17:12,316 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.0
+2025-10-05 01:17:15,675 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.9818181818181818
+2025-10-05 01:17:23,957 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-05 01:17:23,963 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-05 01:17:24,004 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-05 01:17:24,004 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-05 01:17:24,004 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-05 01:17:24,005 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-05 01:17:24,005 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-05 01:17:24,006 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-05 01:17:24,011 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-05 01:17:36,005 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-10-05 01:17:41,378 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:17:42,186 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 01:17:46,312 - chatbot_app_modular - ERROR - [main]- LLM PII removal processing failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 13.570314506s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 13
+}
+]
+2025-10-05 01:17:46,710 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 13.174981431s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 13
+}
+]
+2025-10-05 01:17:46,731 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:17:46,791 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 01:17:46,967 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 12.91019622s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 12
+}
+]
+2025-10-05 01:17:46,995 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for real: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:17:47,537 - chatbot_app_modular - ERROR - [process_batch_texts]- Fake names processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 12.583670206s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 12
+}
+]
+2025-10-05 01:17:47,580 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 12.298931604s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 12
+}
+]
+2025-10-05 01:17:47,593 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for fake: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:17:47,711 - chatbot_app_modular - ERROR - [process_batch_texts]- XXXX masking processing failed for row 2: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 12.174198103s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 12
+}
+]
+2025-10-05 01:17:47,853 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 12.031776867s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 12
+}
+]
+2025-10-05 01:17:47,865 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:17:48,435 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 11.446122667s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 11
+}
+]
+2025-10-05 01:17:48,450 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:17:48,459 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-05 01:18:46,690 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-10-05 01:19:04,700 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.0
+2025-10-05 01:19:10,462 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:19:10,477 - chatbot_app_modular - INFO - [process_batch_texts]- Processing row 2/2
+2025-10-05 01:19:25,268 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.0
+2025-10-05 01:19:46,777 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 1.0
+2025-10-05 01:19:46,913 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx
+2025-10-05 01:19:47,489 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 12.38776304s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 12
+}
+]
+2025-10-05 01:19:47,499 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for fake: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:19:48,098 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 11.77666209s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 11
+}
+]
+2025-10-05 01:19:48,101 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for masked: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:19:48,315 - chatbot_app_modular - ERROR - [generate]- Error generating content: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10
+Please retry in 11.566914062s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 10
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 11
+}
+]
+2025-10-05 01:19:48,319 - chatbot_app_modular - ERROR - [calculate_deepeval_scores]- DeepEval failed for llm: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.
+2025-10-05 01:19:48,428 - chatbot_app_modular - INFO - [process_batch_texts]- Batch processing completed. Processed 2/2 rows. Output: analysis_results\test_batch_results.xlsx

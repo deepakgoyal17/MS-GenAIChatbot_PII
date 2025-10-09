@@ -42,6 +42,14 @@ class PIIProtectionConfig:
     # Performance Settings
     max_queries_in_memory: int = 100        # Maximum queries to keep in memory
     export_batch_size: int = 50             # Auto-export every N queries
+
+    # Batch Processing Settings
+    enable_batch_processing: bool = False   # Enable batch processing mode
+    batch_input_file: str = "../Dataset/pii_dataset.csv"  # Input CSV file path
+    batch_text_column: str = "text"         # Column name containing text to process
+    batch_max_rows: int = 10                # Maximum number of rows to process (0 = all)
+    batch_output_file: str = "batch_results.xlsx"  # Output Excel file name
+    batch_background_mode: bool = False     # Run in background without UI
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert config to dictionary"""
@@ -202,12 +210,54 @@ def create_config_sidebar() -> PIIProtectionConfig:
     st.sidebar.subheader("⚡ Performance Settings")
     
     config.max_queries_in_memory = st.sidebar.slider(
-        "Max Queries in Memory", 
-        min_value=10, 
-        max_value=500, 
+        "Max Queries in Memory",
+        min_value=10,
+        max_value=500,
         value=config.max_queries_in_memory,
         help="Maximum number of queries to keep in memory"
     )
+
+    # Batch Processing Settings
+    st.sidebar.subheader("🔄 Batch Processing")
+
+    config.enable_batch_processing = st.sidebar.checkbox(
+        "Enable Batch Processing",
+        value=config.enable_batch_processing,
+        help="Enable batch processing mode for processing multiple texts from CSV"
+    )
+
+    if config.enable_batch_processing:
+        config.batch_input_file = st.sidebar.text_input(
+            "Input CSV File",
+            value=config.batch_input_file,
+            help="Path to CSV file containing texts to process"
+        )
+
+        config.batch_text_column = st.sidebar.text_input(
+            "Text Column Name",
+            value=config.batch_text_column,
+            help="Name of the column containing text to process"
+        )
+
+        config.batch_max_rows = st.sidebar.slider(
+            "Max Rows to Process",
+            min_value=0,
+            max_value=1000,
+            value=config.batch_max_rows,
+            help="Maximum number of rows to process (0 = process all)"
+        )
+
+        config.batch_output_file = st.sidebar.text_input(
+            "Output Excel File",
+            value=config.batch_output_file,
+            help="Name of the output Excel file"
+        )
+
+        config.batch_background_mode = st.sidebar.checkbox(
+            "Background Mode",
+            value=config.batch_background_mode,
+            help="Run batch processing in background without UI"
+        )
     
     # Save configuration
     config.save_to_session_state()

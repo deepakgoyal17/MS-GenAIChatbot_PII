@@ -39,7 +39,7 @@ def get_st_model():
 ```python
 class CustomLLM(DeepEvalBaseLLM):
     def __init__(self):
-        self.model = genai.GenerativeModel("gemini-1.5-flash")
+        self.model = genai.GenerativeModel("models/gemini-2.5-flash")
     
     def generate(self, prompt: str) -> str:
         response = self.model.generate_content(prompt)

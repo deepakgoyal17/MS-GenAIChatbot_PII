@@ -22,6 +22,9 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 import streamlit as st
 from dotenv import load_dotenv
 import google.generativeai as genai
+from langchain_google_genai import ChatGoogleGenerativeAI
+import pandas as pd
+import os
 
 # Custom modules
 from config import PIIProtectionConfig, create_config_sidebar, create_preset_selector
@@ -97,15 +100,22 @@ def load_conditional_imports(config: PIIProtectionConfig):
 load_dotenv()
 
 # API key validation
-api_key = os.getenv("GOOGLE-API-KEY")
+api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
-    st.error("⚠️ **API Key Missing**: GOOGLE-API-KEY not found in environment variables.")
-    st.info("Please add your Google API key to the .env file: GOOGLE-API-KEY=your_key_here")
+    st.error("⚠️ **API Key Missing**: GEMINI_API_KEY not found in environment variables.")
+    st.info("Please add your Gemini API key to the .env file: GEMINI_API_KEY=your_key_here")
+    st.info("Get your key from: https://aistudio.google.com/app/apikey")
     st.stop()
 
 # Configure Gemini AI
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-1.5-flash")
+try:
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel("models/gemini-2.5-flash")
+    logger.info("Gemini AI configured successfully")
+except Exception as e:
+    st.error(f"❌ Failed to configure Gemini AI: {str(e)}")
+    st.info("Please check your GEMINI_API_KEY in the .env file")
+    st.stop()
 
 # Streamlit page configuration
 st.set_page_config(
@@ -191,8 +201,8 @@ if config.enable_deepeval and 'deepeval' in imports:
     
     class CustomLLM(DeepEvalBaseLLM):
         def __init__(self):
-            self.model = genai.GenerativeModel("gemini-1.5-flash")
-            self.model_name = "gemini-1.5-flash"
+            self.model = genai.GenerativeModel("models/gemini-2.5-flash")
+            self.model_name = "gemini-2.5-flash"
 
         def load_model(self):
             """Required abstract method for DeepEvalBaseLLM"""
@@ -254,18 +264,23 @@ def smart_capitalize(text: str) -> str:
         logger.error(f"Smart capitalization failed: {e}")
         return text
 
-def fake_ner_replace(text: str) -> Tuple[str, Dict[str, str]]:
+def fake_ner_replace(text: str, nlp_model=None, config_param=None, imports_param=None) -> Tuple[str, Dict[str, str]]:
     """Replace PII with fake data"""
-    if not config.enable_fake_names or nlp is None or 'faker' not in imports:
+    # Use passed config or global config
+    current_config = config_param if config_param is not None else config
+    # Use passed imports or global imports
+    current_imports = imports_param if imports_param is not None else imports
+
+    if not current_config.enable_fake_names or nlp_model is None or 'faker' not in current_imports:
         return text, {}
     
     try:
         # Apply smart capitalization if enabled
-        if config.enable_capitalization:
+        if current_config.enable_capitalization:
             text = smart_capitalize(text)
-        
-        doc = nlp(text)
-        faker = imports['faker']
+
+        doc = nlp_model(text)
+        faker = current_imports['faker']
         ner_map = {}
         real_to_fake = {}
         fake_text = text
@@ -292,7 +307,7 @@ def fake_ner_replace(text: str) -> Tuple[str, Dict[str, str]]:
                 fake_text = fake_text.replace(ent.text, fake_value)
         
         # Regex fallback if enabled
-        if config.enable_regex_fallback:
+        if current_config.enable_regex_fallback:
             # Email pattern
             email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
             emails = re.findall(email_pattern, fake_text)
@@ -301,7 +316,7 @@ def fake_ner_replace(text: str) -> Tuple[str, Dict[str, str]]:
                     fake_email = faker.email()
                     ner_map[fake_email] = email
                     fake_text = fake_text.replace(email, fake_email)
-            
+
             # Phone pattern
             phone_pattern = r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b'
             phones = re.findall(phone_pattern, fake_text)
@@ -317,17 +332,22 @@ def fake_ner_replace(text: str) -> Tuple[str, Dict[str, str]]:
         logger.error(f"Fake NER replacement failed: {e}")
         return text, {}
 
-def mask_ner_with_xxxx(text: str) -> Tuple[str, Dict[str, str]]:
+def mask_ner_with_xxxx(text: str, nlp_model=None, config_param=None, imports_param=None) -> Tuple[str, Dict[str, str]]:
     """Mask PII with XXXX"""
-    if not config.enable_xxxx_masking or nlp is None:
+    # Use passed config or global config
+    current_config = config_param if config_param is not None else config
+    # Use passed imports or global imports
+    current_imports = imports_param if imports_param is not None else imports
+
+    if not current_config.enable_xxxx_masking or nlp_model is None:
         return text, {}
     
     try:
         # Apply smart capitalization if enabled
-        if config.enable_capitalization:
+        if current_config.enable_capitalization:
             text = smart_capitalize(text)
-        
-        doc = nlp(text)
+
+        doc = nlp_model(text)
         mask_map = {}
         masked_text = text
         
@@ -338,7 +358,7 @@ def mask_ner_with_xxxx(text: str) -> Tuple[str, Dict[str, str]]:
                 masked_text = masked_text.replace(ent.text, "XXXX")
         
         # Regex fallback if enabled
-        if config.enable_regex_fallback:
+        if current_config.enable_regex_fallback:
             # Email pattern
             email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
             emails = re.findall(email_pattern, masked_text)
@@ -421,31 +441,266 @@ def calculate_deepeval_scores(prompts_responses: Dict[str, Tuple[str, str]]) -> 
         logger.error(f"DeepEval calculation failed: {e}")
         return {}
 
-def calculate_pii_leakage(original_prompt: str, responses: Dict[str, str]) -> Dict[str, int]:
+def calculate_pii_leakage(original_prompt: str, responses: Dict[str, str], nlp_model=None) -> Dict[str, int]:
     """Calculate PII leakage scores"""
-    if not config.enable_pii_leakage_detection or nlp is None:
+    if not config.enable_pii_leakage_detection or nlp_model is None:
         return {}
-    
+
     try:
-        doc = nlp(original_prompt)
+        doc = nlp_model(original_prompt)
         real_entities = [ent.text for ent in doc.ents if ent.label_ in ["PERSON", "ORG", "GPE", "EMAIL", "PHONE"]]
-        
+
         leakage_scores = {}
         for method, response in responses.items():
             leakage_count = sum(1 for entity in real_entities if entity in response)
             leakage_scores[f"pii_leakage_{method}"] = leakage_count
             leakage_scores[f"f1_{method}"] = 1 if leakage_count == 0 else 0
-        
+
         return leakage_scores
-        
+
     except Exception as e:
         logger.error(f"PII leakage calculation failed: {e}")
         return {}
 
+def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysisExporter) -> str:
+    """
+    Process multiple texts from CSV file in batch mode
+
+    Args:
+        config: Configuration object
+        excel_exporter: Excel exporter instance
+
+    Returns:
+        Path to the output Excel file
+    """
+    try:
+        logger.info(f"Starting batch processing from {config.batch_input_file}")
+
+        # Load conditional imports based on batch config
+        batch_imports = load_conditional_imports(config)
+        logger.info(f"Batch imports loaded: {list(batch_imports.keys())}")
+
+        # Read CSV file
+        if not os.path.exists(config.batch_input_file):
+            raise FileNotFoundError(f"Input file not found: {config.batch_input_file}")
+
+        df = pd.read_csv(config.batch_input_file)
+
+        if config.batch_text_column not in df.columns:
+            raise ValueError(f"Text column '{config.batch_text_column}' not found in CSV. Available columns: {list(df.columns)}")
+
+        # Limit rows if specified
+        if config.batch_max_rows > 0:
+            df = df.head(config.batch_max_rows)
+
+        total_rows = len(df)
+        logger.info(f"Processing {total_rows} rows from CSV")
+
+        # Initialize required models for batch processing
+        batch_nlp = None
+        if config.enable_fake_names or config.enable_xxxx_masking:
+            try:
+                import spacy
+                batch_nlp = spacy.load("en_core_web_sm")
+                logger.info("Loaded spaCy model for batch processing")
+            except OSError:
+                logger.error("spaCy model 'en_core_web_sm' not found. NER features will be disabled in batch mode.")
+                batch_nlp = None
+
+        processed_count = 0
+
+        for idx, row in df.iterrows():
+            try:
+                user_prompt = str(row[config.batch_text_column]).strip()
+                if not user_prompt:
+                    continue
+
+                logger.info(f"Processing row {idx + 1}/{total_rows}")
+
+                # Initialize data structures for this text
+                responses = {}
+                prompts = {}
+                processing_times = {}
+                mappings = {}
+
+                # Process real names (baseline) if enabled
+                if config.enable_real_names:
+                    try:
+                        start_time = time.time()
+                        response_real = model.generate_content(user_prompt)
+                        processing_times['real'] = time.time() - start_time
+                        responses['real'] = response_real.text
+                        prompts['real'] = user_prompt
+                    except Exception as e:
+                        logger.error(f"Real names processing failed for row {idx + 1}: {e}")
+                        responses['real'] = f"Error: {str(e)}"
+                        prompts['real'] = user_prompt
+
+                # Process fake names if enabled
+                if config.enable_fake_names:
+                    try:
+                        start_time = time.time()
+                        fake_prompt, ner_map = fake_ner_replace(user_prompt, batch_nlp, config, batch_imports)
+                        prompts['fake'] = fake_prompt
+                        mappings['ner_mapping'] = ner_map
+
+                        response_fake = model.generate_content(fake_prompt)
+                        bot_reply_fake = restore_fake_ner(response_fake.text, ner_map)
+                        processing_times['fake'] = time.time() - start_time
+                        responses['fake'] = bot_reply_fake
+                    except Exception as e:
+                        logger.error(f"Fake names processing failed for row {idx + 1}: {e}")
+                        responses['fake'] = f"Error: {str(e)}"
+                        prompts['fake'] = fake_prompt if 'fake_prompt' in locals() else user_prompt
+
+                # Process XXXX masking if enabled
+                if config.enable_xxxx_masking:
+                    try:
+                        start_time = time.time()
+                        masked_prompt, mask_map = mask_ner_with_xxxx(user_prompt, batch_nlp, config, batch_imports)
+                        prompts['masked'] = masked_prompt
+                        mappings['mask_mapping'] = mask_map
+
+                        response_mask = model.generate_content(masked_prompt)
+                        bot_reply_mask = response_mask.text.replace("XXXX", ", ".join(mask_map.values()))
+                        processing_times['masked'] = time.time() - start_time
+                        responses['masked'] = bot_reply_mask
+                    except Exception as e:
+                        logger.error(f"XXXX masking processing failed for row {idx + 1}: {e}")
+                        responses['masked'] = f"Error: {str(e)}"
+                        prompts['masked'] = masked_prompt if 'masked_prompt' in locals() else user_prompt
+
+                # Process LLM-based PII removal if enabled
+                if config.enable_llm_pii_removal and 'llm_pii_remover' in imports:
+                    try:
+                        start_time = time.time()
+                        llm_anonymized_prompt = imports['llm_pii_remover'](user_prompt)
+                        prompts['llm'] = llm_anonymized_prompt
+
+                        response_llm = model.generate_content(llm_anonymized_prompt)
+                        processing_times['llm'] = time.time() - start_time
+                        responses['llm'] = response_llm.text
+                    except Exception as e:
+                        logger.error(f"LLM PII removal processing failed for row {idx + 1}: {e}")
+                        responses['llm'] = f"Error: {str(e)}"
+                        prompts['llm'] = llm_anonymized_prompt if 'llm_anonymized_prompt' in locals() else user_prompt
+
+                # Calculate metrics if responses exist
+                similarities = {}
+                deepeval_scores = {}
+                pii_scores = {}
+
+                if responses:
+                    try:
+                        similarities = calculate_semantic_similarity(responses)
+                    except Exception as e:
+                        logger.error(f"Semantic similarity failed for row {idx + 1}: {e}")
+
+                    try:
+                        prompts_responses = {method: (prompts.get(method, user_prompt), response)
+                                           for method, response in responses.items()}
+                        deepeval_scores = calculate_deepeval_scores(prompts_responses)
+                    except Exception as e:
+                        logger.error(f"DeepEval failed for row {idx + 1}: {e}")
+
+                    if config.enable_real_names and config.enable_pii_leakage_detection:
+                        try:
+                            pii_scores = calculate_pii_leakage(user_prompt, responses, batch_nlp)
+                        except Exception as e:
+                            logger.error(f"PII leakage failed for row {idx + 1}: {e}")
+
+                # Prepare analysis data
+                analysis_data = {
+                    'batch_row_id': idx + 1,
+                    'original_prompt': user_prompt,
+                    **{f'{method}_prompt': prompts.get(method, user_prompt) for method in responses.keys()},
+                    **{f'{method}_response': response for method, response in responses.items()},
+                    **mappings,
+                    **deepeval_scores,
+                    **similarities,
+                    **pii_scores,
+                    **{f'processing_time_{method}': time_val for method, time_val in processing_times.items()},
+                    'entities_detected': len([ent for ent in batch_nlp(user_prompt).ents
+                                            if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]]) if batch_nlp else 0
+                }
+
+                # Add original CSV data for reference
+                for col in df.columns:
+                    if col != config.batch_text_column:
+                        analysis_data[f'original_{col}'] = row[col]
+
+                excel_exporter.add_analysis_record(analysis_data)
+                processed_count += 1
+
+                # Progress logging
+                if (idx + 1) % 10 == 0:
+                    logger.info(f"Processed {idx + 1}/{total_rows} rows")
+
+            except Exception as e:
+                logger.error(f"Failed to process row {idx + 1}: {e}")
+                continue
+
+        # Export final results
+        output_path = excel_exporter.export_to_excel(config.batch_output_file)
+        logger.info(f"Batch processing completed. Processed {processed_count}/{total_rows} rows. Output: {output_path}")
+
+        return output_path
+
+    except Exception as e:
+        logger.error(f"Batch processing failed: {e}")
+        raise
+
 # Main application logic
 def main():
     """Main application logic with modular processing"""
-    
+
+    # Check for batch processing mode
+    if config.enable_batch_processing:
+        if config.batch_background_mode:
+            # Run in background mode without UI
+            logger.info("Running in batch processing background mode")
+            try:
+                output_path = process_batch_texts(config, excel_exporter)
+                logger.info(f"Batch processing completed successfully. Output: {output_path}")
+                print(f"Batch processing completed. Results saved to: {output_path}")
+                return
+            except Exception as e:
+                logger.error(f"Batch processing failed: {e}")
+                print(f"Batch processing failed: {e}")
+                return
+        else:
+            # Show batch processing UI
+            st.title("🔄 Batch Processing Mode")
+            st.markdown("Process multiple texts from CSV file")
+
+            if st.button("🚀 Start Batch Processing"):
+                with st.spinner("Processing batch texts... This may take a while."):
+                    try:
+                        output_path = process_batch_texts(config, excel_exporter)
+                        st.success(f"✅ Batch processing completed! Results saved to: {output_path}")
+
+                        # Show summary
+                        stats = excel_exporter.get_current_stats()
+                        st.info(f"📊 Processed {stats['total_queries']} texts")
+
+                    except Exception as e:
+                        st.error(f"❌ Batch processing failed: {str(e)}")
+                        logger.error(f"Batch processing failed: {e}")
+
+            # Show current configuration
+            if config.show_debug_info:
+                with st.expander("🔧 Batch Configuration", expanded=False):
+                    batch_config = {
+                        'input_file': config.batch_input_file,
+                        'text_column': config.batch_text_column,
+                        'max_rows': config.batch_max_rows,
+                        'output_file': config.batch_output_file,
+                        'background_mode': config.batch_background_mode
+                    }
+                    st.json(batch_config)
+
+            return
+
     # Display current configuration
     if config.show_debug_info:
         with st.expander("🔧 Current Configuration", expanded=False):
@@ -469,87 +724,111 @@ def main():
             st.subheader("🔴 LLM Response with Real Names (Baseline)")
             st.chat_message("user").markdown(user_prompt)
 
-            if config.enable_performance_timing:
-                start_time = time.time()
+            try:
+                if config.enable_performance_timing:
+                    start_time = time.time()
 
-            response_real = model.generate_content(user_prompt)
+                response_real = model.generate_content(user_prompt)
 
-            if config.enable_performance_timing:
-                processing_times['real'] = time.time() - start_time
+                if config.enable_performance_timing:
+                    processing_times['real'] = time.time() - start_time
 
-            st.chat_message("assistant").markdown(response_real.text)
-            responses['real'] = response_real.text
-            prompts['real'] = user_prompt
+                st.chat_message("assistant").markdown(response_real.text)
+                responses['real'] = response_real.text
+                prompts['real'] = user_prompt
+            except Exception as e:
+                st.error(f"❌ Error generating real names response: {str(e)}")
+                logger.error(f"Real names processing failed: {e}")
+                responses['real'] = f"Error: {str(e)}"
+                prompts['real'] = user_prompt
         
         # Process fake names if enabled
         if config.enable_fake_names:
             st.subheader("🟡 LLM Response with Fake Names")
-            
-            if config.enable_performance_timing:
-                start_time = time.time()
-            
-            fake_prompt, ner_map = fake_ner_replace(user_prompt)
-            prompts['fake'] = fake_prompt
-            mappings['ner_mapping'] = ner_map
-            
-            st.chat_message("user").markdown(fake_prompt)
-            
-            if config.show_mappings and ner_map:
-                st.info(f"**Fake NER mapping:** {ner_map}")
-            
-            response_fake = model.generate_content(fake_prompt)
-            bot_reply_fake = restore_fake_ner(response_fake.text, ner_map)
-            
-            if config.enable_performance_timing:
-                processing_times['fake'] = time.time() - start_time
-            
-            st.chat_message("assistant").markdown(bot_reply_fake)
-            responses['fake'] = bot_reply_fake
+
+            try:
+                if config.enable_performance_timing:
+                    start_time = time.time()
+
+                fake_prompt, ner_map = fake_ner_replace(user_prompt)
+                prompts['fake'] = fake_prompt
+                mappings['ner_mapping'] = ner_map
+
+                st.chat_message("user").markdown(fake_prompt)
+
+                if config.show_mappings and ner_map:
+                    st.info(f"**Fake NER mapping:** {ner_map}")
+
+                response_fake = model.generate_content(fake_prompt)
+                bot_reply_fake = restore_fake_ner(response_fake.text, ner_map)
+
+                if config.enable_performance_timing:
+                    processing_times['fake'] = time.time() - start_time
+
+                st.chat_message("assistant").markdown(bot_reply_fake)
+                responses['fake'] = bot_reply_fake
+            except Exception as e:
+                st.error(f"❌ Error generating fake names response: {str(e)}")
+                logger.error(f"Fake names processing failed: {e}")
+                responses['fake'] = f"Error: {str(e)}"
+                prompts['fake'] = fake_prompt if 'fake_prompt' in locals() else user_prompt
         
         # Process XXXX masking if enabled
         if config.enable_xxxx_masking:
             st.subheader("🔵 LLM Response with XXXX Masking")
-            
-            if config.enable_performance_timing:
-                start_time = time.time()
-            
-            masked_prompt, mask_map = mask_ner_with_xxxx(user_prompt)
-            prompts['masked'] = masked_prompt
-            mappings['mask_mapping'] = mask_map
-            
-            st.chat_message("user").markdown(masked_prompt)
-            
-            if config.show_mappings and mask_map:
-                st.info(f"**XXXX Mask mapping:** {mask_map}")
-            
-            response_mask = model.generate_content(masked_prompt)
-            bot_reply_mask = response_mask.text.replace("XXXX", ", ".join(mask_map.values()))
-            
-            if config.enable_performance_timing:
-                processing_times['masked'] = time.time() - start_time
-            
-            st.chat_message("assistant").markdown(bot_reply_mask)
-            responses['masked'] = bot_reply_mask
+
+            try:
+                if config.enable_performance_timing:
+                    start_time = time.time()
+
+                masked_prompt, mask_map = mask_ner_with_xxxx(user_prompt)
+                prompts['masked'] = masked_prompt
+                mappings['mask_mapping'] = mask_map
+
+                st.chat_message("user").markdown(masked_prompt)
+
+                if config.show_mappings and mask_map:
+                    st.info(f"**XXXX Mask mapping:** {mask_map}")
+
+                response_mask = model.generate_content(masked_prompt)
+                bot_reply_mask = response_mask.text.replace("XXXX", ", ".join(mask_map.values()))
+
+                if config.enable_performance_timing:
+                    processing_times['masked'] = time.time() - start_time
+
+                st.chat_message("assistant").markdown(bot_reply_mask)
+                responses['masked'] = bot_reply_mask
+            except Exception as e:
+                st.error(f"❌ Error generating masked response: {str(e)}")
+                logger.error(f"Masked processing failed: {e}")
+                responses['masked'] = f"Error: {str(e)}"
+                prompts['masked'] = masked_prompt if 'masked_prompt' in locals() else user_prompt
         
         # Process LLM-based PII removal if enabled
         if config.enable_llm_pii_removal and 'llm_pii_remover' in imports:
             st.subheader("🟢 LLM Response with LLM-based PII Removal")
-            
-            if config.enable_performance_timing:
-                start_time = time.time()
-            
-            llm_anonymized_prompt = imports['llm_pii_remover'](user_prompt)
-            prompts['llm'] = llm_anonymized_prompt
-            
-            st.chat_message("user").markdown(llm_anonymized_prompt)
-            
-            response_llm = model.generate_content(llm_anonymized_prompt)
-            
-            if config.enable_performance_timing:
-                processing_times['llm'] = time.time() - start_time
-            
-            st.chat_message("assistant").markdown(response_llm.text)
-            responses['llm'] = response_llm.text
+
+            try:
+                if config.enable_performance_timing:
+                    start_time = time.time()
+
+                llm_anonymized_prompt = imports['llm_pii_remover'](user_prompt)
+                prompts['llm'] = llm_anonymized_prompt
+
+                st.chat_message("user").markdown(llm_anonymized_prompt)
+
+                response_llm = model.generate_content(llm_anonymized_prompt)
+
+                if config.enable_performance_timing:
+                    processing_times['llm'] = time.time() - start_time
+
+                st.chat_message("assistant").markdown(response_llm.text)
+                responses['llm'] = response_llm.text
+            except Exception as e:
+                st.error(f"❌ Error generating LLM-based PII removal response: {str(e)}")
+                logger.error(f"LLM PII removal processing failed: {e}")
+                responses['llm'] = f"Error: {str(e)}"
+                prompts['llm'] = llm_anonymized_prompt if 'llm_anonymized_prompt' in locals() else user_prompt
         
         # Calculate metrics only if there are responses to analyze
         if responses:
@@ -557,17 +836,32 @@ def main():
             st.subheader("📊 Analysis Results")
 
             # Semantic similarity
-            similarities = calculate_semantic_similarity(responses)
+            try:
+                similarities = calculate_semantic_similarity(responses)
+            except Exception as e:
+                st.warning(f"⚠️ Semantic similarity calculation failed: {str(e)}")
+                logger.error(f"Semantic similarity failed: {e}")
+                similarities = {}
 
             # DeepEval scores
-            prompts_responses = {method: (prompts.get(method, user_prompt), response)
-                               for method, response in responses.items()}
-            deepeval_scores = calculate_deepeval_scores(prompts_responses)
+            try:
+                prompts_responses = {method: (prompts.get(method, user_prompt), response)
+                                   for method, response in responses.items()}
+                deepeval_scores = calculate_deepeval_scores(prompts_responses)
+            except Exception as e:
+                st.warning(f"⚠️ DeepEval calculation failed: {str(e)}")
+                logger.error(f"DeepEval failed: {e}")
+                deepeval_scores = {}
 
             # PII leakage (only if real names are enabled for comparison)
             pii_scores = {}
             if config.enable_real_names and config.enable_pii_leakage_detection:
-                pii_scores = calculate_pii_leakage(user_prompt, responses)
+                try:
+                    pii_scores = calculate_pii_leakage(user_prompt, responses)
+                except Exception as e:
+                    st.warning(f"⚠️ PII leakage calculation failed: {str(e)}")
+                    logger.error(f"PII leakage failed: {e}")
+                    pii_scores = {}
 
             # Display metrics
             col1, col2 = st.columns(2)
@@ -602,51 +896,81 @@ def main():
         
         # Excel export
         if config.enable_excel_export and excel_exporter and responses:
-            # Prepare comprehensive data
-            analysis_data = {
-                'original_prompt': user_prompt,
-                **{f'{method}_prompt': prompts.get(method, user_prompt) for method in responses.keys()},
-                **{f'{method}_response': response for method, response in responses.items()},
-                **mappings,
-                **deepeval_scores,
-                **similarities,
-                **pii_scores,
-                **{f'processing_time_{method}': time_val for method, time_val in processing_times.items()},
-                'entities_detected': len([ent for ent in nlp(user_prompt).ents
-                                        if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]]) if nlp else 0
-            }
+            try:
+                # Prepare comprehensive data
+                analysis_data = {
+                    'original_prompt': user_prompt,
+                    **{f'{method}_prompt': prompts.get(method, user_prompt) for method in responses.keys()},
+                    **{f'{method}_response': response for method, response in responses.items()},
+                    **mappings,
+                    **deepeval_scores,
+                    **similarities,
+                    **pii_scores,
+                    **{f'processing_time_{method}': time_val for method, time_val in processing_times.items()},
+                    'entities_detected': len([ent for ent in nlp(user_prompt).ents
+                                            if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]]) if nlp else 0
+                }
 
-            excel_exporter.add_analysis_record(analysis_data)
+                excel_exporter.add_analysis_record(analysis_data)
 
-            # Auto export if enabled
-            if config.auto_export and st.session_state.query_count % config.export_batch_size == 0:
-                filepath = excel_exporter.export_to_excel()
-                if filepath:
-                    st.success(f"📊 Auto-exported data to: {filepath}")
-
-            # Export controls
-            st.markdown("---")
-            st.subheader("📊 Data Export")
-
-            col1, col2, col3 = st.columns(3)
-
-            with col1:
-                if st.button("📥 Export to Excel"):
+                # Auto export if enabled
+                if config.auto_export and st.session_state.query_count % config.export_batch_size == 0:
                     filepath = excel_exporter.export_to_excel()
                     if filepath:
-                        st.success(f"✅ Data exported to: {filepath}")
+                        st.success(f"📊 Auto-exported data to: {filepath}")
+
+                # Export controls
+                st.markdown("---")
+                st.subheader("📊 Data Export")
+
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    if st.button("📥 Export to Excel"):
+                        filepath = excel_exporter.export_to_excel()
+                        if filepath:
+                            st.success(f"✅ Data exported to: {filepath}")
+                            stats = excel_exporter.get_current_stats()
+                            st.info(f"📈 Total queries: {stats['total_queries']}")
+
+                with col2:
+                    if st.button("📈 Show Stats"):
                         stats = excel_exporter.get_current_stats()
-                        st.info(f"📈 Total queries: {stats['total_queries']}")
+                        if stats['total_queries'] > 0:
+                            st.success(f"📊 Statistics for {stats['total_queries']} processed queries:")
+                            col_stats1, col_stats2 = st.columns(2)
 
-            with col2:
-                if st.button("📈 Show Stats"):
-                    stats = excel_exporter.get_current_stats()
-                    st.json(stats)
+                            with col_stats1:
+                                st.markdown("**🎯 Average Relevancy Scores:**")
+                                st.write(f"• Real Names: {stats.get('avg_relevancy_real', 0):.3f}")
+                                st.write(f"• Fake Names: {stats.get('avg_relevancy_fake', 0):.3f}")
+                                st.write(f"• XXXX Masking: {stats.get('avg_relevancy_masked', 0):.3f}")
+                                st.write(f"• LLM-based PII Removal: {stats.get('avg_relevancy_llm', 0):.3f}")
 
-            with col3:
-                if st.button("🗑️ Clear Data"):
-                    excel_exporter.clear_data()
-                    st.success("✅ Data cleared!")
+                                st.markdown("**🧠 Average Semantic Similarity:**")
+                                st.write(f"• Real vs Fake: {stats.get('avg_similarity_real_fake', 0):.3f}")
+                                st.write(f"• Real vs Masked: {stats.get('avg_similarity_real_masked', 0):.3f}")
+                                st.write(f"• Real vs LLM: {stats.get('avg_similarity_real_llm', 0):.3f}")
+
+                            with col_stats2:
+                                st.markdown("**⏱️ Average Processing Times (seconds):**")
+                                st.write(f"• Real Names: {stats.get('avg_processing_time_real', 0):.3f}")
+                                st.write(f"• Fake Names: {stats.get('avg_processing_time_fake', 0):.3f}")
+                                st.write(f"• XXXX Masking: {stats.get('avg_processing_time_masked', 0):.3f}")
+                                st.write(f"• LLM-based PII Removal: {stats.get('avg_processing_time_llm', 0):.3f}")
+
+                                st.markdown("**📈 Session Summary:**")
+                                st.write(f"• Total Queries: {stats['total_queries']}")
+                        else:
+                            st.info("📊 No queries processed yet. Submit a query to see statistics.")
+
+                with col3:
+                    if st.button("🗑️ Clear Data"):
+                        excel_exporter.clear_data()
+                        st.success("✅ Data cleared!")
+            except Exception as e:
+                st.error(f"❌ Excel export failed: {str(e)}")
+                logger.error(f"Excel export failed: {e}")
 
 if __name__ == "__main__":
     main()

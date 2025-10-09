@@ -93,7 +93,7 @@ class CustomLLM(DeepEvalBaseLLM):
     def __init__(self):
         # Initialize after API key is configured
         self.model = None
-        self.model_name = "gemini-1.5-flash"
+        self.model_name = "models/gemini-2.5-flash"
 
     def _ensure_model(self):
         """Ensure model is initialized with API key"""
@@ -148,7 +148,7 @@ if not api_key:
     st.stop()
 
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("models/gemini-2.5-flash")
 
 # Initialize CustomLLM after API configuration
 custom_llm = CustomLLM()

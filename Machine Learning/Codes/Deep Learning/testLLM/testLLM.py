@@ -38,7 +38,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", organization="org-yufazwf446sWMZs6TvrSr7bu
 
 """Basic chat with Gemini using LangChain"""
 llm_Gemini = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",
+    model="models/gemini-2.5-flash",
     temperature=0.7,
     max_tokens=1000,
     google_api_key=os.getenv("GOOGLE_API_KEY")

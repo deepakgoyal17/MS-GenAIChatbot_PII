@@ -16,7 +16,7 @@ load_dotenv()
 
 class TestCustomLLM(DeepEvalBaseLLM):
     def __init__(self):
-        self.model_name = "gemini-1.5-flash"
+        self.model_name = "models/gemini-2.5-flash"
         self.model = None
         self._initialize_model()
 

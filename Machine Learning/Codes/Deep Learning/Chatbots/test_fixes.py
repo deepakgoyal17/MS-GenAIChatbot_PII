@@ -77,7 +77,7 @@ def test_deepeval_custom_llm():
         class CustomLLM(DeepEvalBaseLLM):
             def __init__(self):
                 # Mock initialization without actual API key
-                self.model_name = "gemini-1.5-flash"
+                self.model_name = "models/gemini-2.5-flash"
 
             def load_model(self):
                 return self

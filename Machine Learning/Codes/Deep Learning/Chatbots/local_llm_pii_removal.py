@@ -1,14 +1,14 @@
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_community.llms.ollama import Ollama
+from langchain_ollama import OllamaLLM
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Initialize Ollama LLM
-llm = Ollama(model="llama3.1", temperature=0.1)
+llm = OllamaLLM(model="llama3.1", temperature=0.1, base_url="http://localhost:11434")
 
 def remove_pii_with_llm(text):
     """
