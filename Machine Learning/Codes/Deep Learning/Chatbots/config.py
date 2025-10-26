@@ -14,9 +14,9 @@ class PIIProtectionConfig:
     """Configuration class for PII protection methods"""
     
     # Core Features
-    enable_real_names: bool = False          # Baseline - always enabled for comparison
-    enable_fake_names: bool = False          # Fake NER replacement
-    enable_xxxx_masking: bool = False        # XXXX masking
+    enable_real_names: bool = True          # Baseline - always enabled for comparison
+    enable_fake_names: bool = True          # Fake NER replacement
+    enable_xxxx_masking: bool = True        # XXXX masking
     enable_llm_pii_removal: bool = True     # LLM-based PII removal
     
     # Evaluation Features

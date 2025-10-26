@@ -8,6 +8,7 @@ import os
 import warnings
 import time
 import re
+import math
 from typing import Dict, Any, Optional, Tuple
 
 # Set offline mode for transformers to prevent network calls when models are cached
@@ -462,6 +463,105 @@ def calculate_pii_leakage(original_prompt: str, responses: Dict[str, str], nlp_m
         logger.error(f"PII leakage calculation failed: {e}")
         return {}
 
+def calculate_pii_leakage_rate(original_prompt: str, responses: Dict[str, str], nlp_model=None) -> Dict[str, float]:
+    """Calculate PII leakage rate as percentage"""
+    if not config.enable_pii_leakage_detection or nlp_model is None:
+        return {}
+
+    try:
+        doc = nlp_model(original_prompt)
+        real_entities = [ent.text for ent in doc.ents if ent.label_ in ["PERSON", "ORG", "GPE", "EMAIL", "PHONE"]]
+        total_entities = len(real_entities)
+
+        if total_entities == 0:
+            return {f"pii_leakage_rate_{method}": 0.0 for method in responses.keys()}
+
+        leakage_rates = {}
+        for method, response in responses.items():
+            leakage_count = sum(1 for entity in real_entities if entity in response)
+            leakage_rates[f"pii_leakage_rate_{method}"] = (leakage_count / total_entities) * 100.0
+
+        return leakage_rates
+
+    except Exception as e:
+        logger.error(f"PII leakage rate calculation failed: {e}")
+        return {}
+
+def calculate_reidentification_risk(original_prompt: str, responses: Dict[str, str], nlp_model=None) -> Dict[str, float]:
+    """Calculate re-identification risk based on unique entity combinations"""
+    if not config.enable_pii_leakage_detection or nlp_model is None:
+        return {}
+
+    try:
+        doc = nlp_model(original_prompt)
+        real_entities = [(ent.text, ent.label_) for ent in doc.ents if ent.label_ in ["PERSON", "ORG", "GPE", "EMAIL", "PHONE"]]
+
+        if len(real_entities) < 2:
+            return {f"reidentification_risk_{method}": 0.0 for method in responses.keys()}
+
+        reidentification_scores = {}
+        for method, response in responses.items():
+            response_doc = nlp_model(response)
+            response_entities = [(ent.text, ent.label_) for ent in response_doc.ents if ent.label_ in ["PERSON", "ORG", "GPE", "EMAIL", "PHONE"]]
+
+            # Calculate how many unique entity combinations are preserved
+            preserved_combinations = 0
+            total_combinations = len(real_entities) * (len(real_entities) - 1) // 2
+
+            if total_combinations > 0:
+                for i, (ent1, label1) in enumerate(real_entities):
+                    for j, (ent2, label2) in enumerate(real_entities[i+1:], i+1):
+                        # Check if both entities appear in response (simplified re-identification risk)
+                        ent1_present = any(ent1 in resp_ent[0] for resp_ent in response_entities)
+                        ent2_present = any(ent2 in resp_ent[0] for resp_ent in response_entities)
+                        if ent1_present and ent2_present:
+                            preserved_combinations += 1
+
+                reidentification_scores[f"reidentification_risk_{method}"] = (preserved_combinations / total_combinations) * 100.0
+            else:
+                reidentification_scores[f"reidentification_risk_{method}"] = 0.0
+
+        return reidentification_scores
+
+    except Exception as e:
+        logger.error(f"Re-identification risk calculation failed: {e}")
+        return {}
+
+def calculate_entropy_score(responses: Dict[str, str]) -> Dict[str, float]:
+    """Calculate entropy score based on text diversity"""
+    try:
+        entropy_scores = {}
+
+        for method, response in responses.items():
+            if not response or len(response.strip()) == 0:
+                entropy_scores[f"entropy_score_{method}"] = 0.0
+                continue
+
+            # Calculate character-level entropy
+            text = response.lower()
+            char_counts = {}
+            total_chars = len(text)
+
+            for char in text:
+                char_counts[char] = char_counts.get(char, 0) + 1
+
+            entropy = 0.0
+            for count in char_counts.values():
+                probability = count / total_chars
+                entropy -= probability * math.log2(probability)
+
+            # Normalize entropy (max entropy for ASCII is ~7 bits, but we'll scale to 0-100)
+            max_entropy = math.log2(256)  # Assuming 256 possible characters
+            normalized_entropy = (entropy / max_entropy) * 100.0
+
+            entropy_scores[f"entropy_score_{method}"] = normalized_entropy
+
+        return entropy_scores
+
+    except Exception as e:
+        logger.error(f"Entropy score calculation failed: {e}")
+        return {}
+
 def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysisExporter) -> str:
     """
     Process multiple texts from CSV file in batch mode
@@ -589,6 +689,9 @@ def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysis
                 similarities = {}
                 deepeval_scores = {}
                 pii_scores = {}
+                pii_leakage_rates = {}
+                reidentification_scores = {}
+                entropy_scores = {}
 
                 if responses:
                     try:
@@ -606,8 +709,15 @@ def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysis
                     if config.enable_real_names and config.enable_pii_leakage_detection:
                         try:
                             pii_scores = calculate_pii_leakage(user_prompt, responses, batch_nlp)
+                            pii_leakage_rates = calculate_pii_leakage_rate(user_prompt, responses, batch_nlp)
+                            reidentification_scores = calculate_reidentification_risk(user_prompt, responses, batch_nlp)
                         except Exception as e:
                             logger.error(f"PII leakage failed for row {idx + 1}: {e}")
+
+                    try:
+                        entropy_scores = calculate_entropy_score(responses)
+                    except Exception as e:
+                        logger.error(f"Entropy score calculation failed for row {idx + 1}: {e}")
 
                 # Prepare analysis data
                 analysis_data = {
@@ -619,6 +729,9 @@ def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysis
                     **deepeval_scores,
                     **similarities,
                     **pii_scores,
+                    **pii_leakage_rates,
+                    **reidentification_scores,
+                    **entropy_scores,
                     **{f'processing_time_{method}': time_val for method, time_val in processing_times.items()},
                     'entities_detected': len([ent for ent in batch_nlp(user_prompt).ents
                                             if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]]) if batch_nlp else 0
@@ -750,7 +863,7 @@ def main():
                 if config.enable_performance_timing:
                     start_time = time.time()
 
-                fake_prompt, ner_map = fake_ner_replace(user_prompt)
+                fake_prompt, ner_map = fake_ner_replace(user_prompt, nlp)
                 prompts['fake'] = fake_prompt
                 mappings['ner_mapping'] = ner_map
 
@@ -781,7 +894,7 @@ def main():
                 if config.enable_performance_timing:
                     start_time = time.time()
 
-                masked_prompt, mask_map = mask_ner_with_xxxx(user_prompt)
+                masked_prompt, mask_map = mask_ner_with_xxxx(user_prompt, nlp)
                 prompts['masked'] = masked_prompt
                 mappings['mask_mapping'] = mask_map
 
@@ -855,13 +968,27 @@ def main():
 
             # PII leakage (only if real names are enabled for comparison)
             pii_scores = {}
+            pii_leakage_rates = {}
+            reidentification_scores = {}
+            entropy_scores = {}
             if config.enable_real_names and config.enable_pii_leakage_detection:
                 try:
-                    pii_scores = calculate_pii_leakage(user_prompt, responses)
+                    pii_scores = calculate_pii_leakage(user_prompt, responses, nlp)
+                    pii_leakage_rates = calculate_pii_leakage_rate(user_prompt, responses, nlp)
+                    reidentification_scores = calculate_reidentification_risk(user_prompt, responses, nlp)
                 except Exception as e:
                     st.warning(f"⚠️ PII leakage calculation failed: {str(e)}")
                     logger.error(f"PII leakage failed: {e}")
                     pii_scores = {}
+                    pii_leakage_rates = {}
+                    reidentification_scores = {}
+
+            try:
+                entropy_scores = calculate_entropy_score(responses)
+            except Exception as e:
+                st.warning(f"⚠️ Entropy score calculation failed: {str(e)}")
+                logger.error(f"Entropy score failed: {e}")
+                entropy_scores = {}
 
             # Display metrics
             col1, col2 = st.columns(2)
@@ -887,6 +1014,24 @@ def main():
                         f1 = pii_scores.get(f"f1_{method}", 0)
                         st.write(f"• {method.title()}: {leakage} leaked, F1: {f1}")
 
+                if pii_leakage_rates:
+                    st.markdown("**📊 PII Leakage Rate (%):**")
+                    for method in responses.keys():
+                        rate = pii_leakage_rates.get(f"pii_leakage_rate_{method}", 0.0)
+                        st.write(f"• {method.title()}: {rate:.1f}%")
+
+                if reidentification_scores:
+                    st.markdown("**🎯 Re-identification Risk (%):**")
+                    for method in responses.keys():
+                        risk = reidentification_scores.get(f"reidentification_risk_{method}", 0.0)
+                        st.write(f"• {method.title()}: {risk:.1f}%")
+
+                if entropy_scores:
+                    st.markdown("**🧬 Entropy Score:**")
+                    for method in responses.keys():
+                        entropy = entropy_scores.get(f"entropy_score_{method}", 0.0)
+                        st.write(f"• {method.title()}: {entropy:.1f}")
+
                 if processing_times and config.show_processing_times:
                     st.markdown("**⏱️ Processing Times:**")
                     for method, time_taken in processing_times.items():
@@ -906,6 +1051,9 @@ def main():
                     **deepeval_scores,
                     **similarities,
                     **pii_scores,
+                    **pii_leakage_rates,
+                    **reidentification_scores,
+                    **entropy_scores,
                     **{f'processing_time_{method}': time_val for method, time_val in processing_times.items()},
                     'entities_detected': len([ent for ent in nlp(user_prompt).ents
                                             if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]]) if nlp else 0
@@ -938,7 +1086,7 @@ def main():
                         stats = excel_exporter.get_current_stats()
                         if stats['total_queries'] > 0:
                             st.success(f"📊 Statistics for {stats['total_queries']} processed queries:")
-                            col_stats1, col_stats2 = st.columns(2)
+                            col_stats1, col_stats2, col_stats3 = st.columns(3)
 
                             with col_stats1:
                                 st.markdown("**🎯 Average Relevancy Scores:**")
@@ -953,6 +1101,25 @@ def main():
                                 st.write(f"• Real vs LLM: {stats.get('avg_similarity_real_llm', 0):.3f}")
 
                             with col_stats2:
+                                st.markdown("**🔒 Average PII Leakage Rate (%):**")
+                                st.write(f"• Real Names: {stats.get('avg_pii_leakage_rate_real', 0):.1f}%")
+                                st.write(f"• Fake Names: {stats.get('avg_pii_leakage_rate_fake', 0):.1f}%")
+                                st.write(f"• XXXX Masking: {stats.get('avg_pii_leakage_rate_masked', 0):.1f}%")
+                                st.write(f"• LLM-based PII Removal: {stats.get('avg_pii_leakage_rate_llm', 0):.1f}%")
+
+                                st.markdown("**🎯 Average Re-identification Risk (%):**")
+                                st.write(f"• Real Names: {stats.get('avg_reidentification_risk_real', 0):.1f}%")
+                                st.write(f"• Fake Names: {stats.get('avg_reidentification_risk_fake', 0):.1f}%")
+                                st.write(f"• XXXX Masking: {stats.get('avg_reidentification_risk_masked', 0):.1f}%")
+                                st.write(f"• LLM-based PII Removal: {stats.get('avg_reidentification_risk_llm', 0):.1f}%")
+
+                            with col_stats3:
+                                st.markdown("**🧬 Average Entropy Score:**")
+                                st.write(f"• Real Names: {stats.get('avg_entropy_score_real', 0):.1f}")
+                                st.write(f"• Fake Names: {stats.get('avg_entropy_score_fake', 0):.1f}")
+                                st.write(f"• XXXX Masking: {stats.get('avg_entropy_score_masked', 0):.1f}")
+                                st.write(f"• LLM-based PII Removal: {stats.get('avg_entropy_score_llm', 0):.1f}")
+
                                 st.markdown("**⏱️ Average Processing Times (seconds):**")
                                 st.write(f"• Real Names: {stats.get('avg_processing_time_real', 0):.3f}")
                                 st.write(f"• Fake Names: {stats.get('avg_processing_time_fake', 0):.3f}")
