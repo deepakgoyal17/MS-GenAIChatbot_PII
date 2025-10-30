@@ -487,8 +487,143 @@ def calculate_pii_leakage_rate(original_prompt: str, responses: Dict[str, str], 
         logger.error(f"PII leakage rate calculation failed: {e}")
         return {}
 
-def calculate_reidentification_risk(original_prompt: str, responses: Dict[str, str], nlp_model=None) -> Dict[str, float]:
-    """Calculate re-identification risk based on unique entity combinations"""
+def calculate_detailed_pii_leakage_rate(original_prompt: str, responses: Dict[str, str], nlp_model=None) -> Dict[str, Any]:
+    """Calculate detailed PII leakage rate metrics including per-entity-type breakdown"""
+    if not config.enable_pii_leakage_detection or nlp_model is None:
+        return {}
+
+    try:
+        doc = nlp_model(original_prompt)
+        real_entities = [(ent.text, ent.label_) for ent in doc.ents if ent.label_ in ["PERSON", "ORG", "GPE", "EMAIL", "PHONE"]]
+
+        # Group entities by type
+        entity_types = {}
+        for entity_text, entity_label in real_entities:
+            if entity_label not in entity_types:
+                entity_types[entity_label] = []
+            entity_types[entity_label].append(entity_text)
+
+        total_entities = len(real_entities)
+        detailed_metrics = {}
+
+        if total_entities == 0:
+            # Return zero metrics for all methods
+            for method in responses.keys():
+                detailed_metrics.update({
+                    f"pii_leakage_rate_{method}": 0.0,
+                    f"pii_leakage_count_{method}": 0,
+                    f"pii_leakage_severity_{method}": "LOW",
+                    f"entities_detected_{method}": 0
+                })
+                for entity_type in ["PERSON", "ORG", "GPE", "EMAIL", "PHONE"]:
+                    detailed_metrics.update({
+                        f"{entity_type.lower()}_leakage_rate_{method}": 0.0,
+                        f"{entity_type.lower()}_leakage_count_{method}": 0
+                    })
+            return detailed_metrics
+
+        for method, response in responses.items():
+            # Overall leakage metrics
+            leakage_count = sum(1 for entity_text, _ in real_entities if entity_text in response)
+            leakage_rate = (leakage_count / total_entities) * 100.0
+
+            # Determine severity level
+            if leakage_rate == 0:
+                severity = "NONE"
+            elif leakage_rate <= 25:
+                severity = "LOW"
+            elif leakage_rate <= 50:
+                severity = "MEDIUM"
+            elif leakage_rate <= 75:
+                severity = "HIGH"
+            else:
+                severity = "CRITICAL"
+
+            detailed_metrics.update({
+                f"pii_leakage_rate_{method}": leakage_rate,
+                f"pii_leakage_count_{method}": leakage_count,
+                f"pii_leakage_severity_{method}": severity,
+                f"entities_detected_{method}": total_entities
+            })
+
+            # Per-entity-type leakage
+            for entity_type, entities in entity_types.items():
+                type_count = len(entities)
+                type_leaked = sum(1 for entity_text in entities if entity_text in response)
+                type_leakage_rate = (type_leaked / type_count) * 100.0 if type_count > 0 else 0.0
+
+                detailed_metrics.update({
+                    f"{entity_type.lower()}_leakage_rate_{method}": type_leakage_rate,
+                    f"{entity_type.lower()}_leakage_count_{method}": type_leaked
+                })
+
+            # Log PLR events for monitoring
+            if leakage_count > 0:
+                logger.warning(f"PLR ALERT - Method '{method}': {leakage_count}/{total_entities} entities leaked ({leakage_rate:.1f}%) - Severity: {severity}")
+                for entity_text, entity_label in real_entities:
+                    if entity_text in response:
+                        logger.warning(f"PLR DETECTED - {entity_label}: '{entity_text}' found in {method} response")
+
+        return detailed_metrics
+
+    except Exception as e:
+        logger.error(f"Detailed PII leakage rate calculation failed: {e}")
+        return {}
+
+def calculate_pii_leakage_trends(session_data: list) -> Dict[str, Any]:
+    """Calculate PII leakage trends across multiple queries"""
+    if not session_data:
+        return {}
+
+    try:
+        trends = {}
+        methods = set()
+
+        # Collect all methods from session data
+        for record in session_data:
+            for key in record.keys():
+                if key.startswith("pii_leakage_rate_"):
+                    method = key.replace("pii_leakage_rate_", "")
+                    methods.add(method)
+
+        methods = sorted(list(methods))
+
+        for method in methods:
+            leakage_rates = []
+            for record in session_data:
+                rate_key = f"pii_leakage_rate_{method}"
+                if rate_key in record and record[rate_key] is not None:
+                    leakage_rates.append(record[rate_key])
+
+            if leakage_rates:
+                trends.update({
+                    f"avg_plr_{method}": sum(leakage_rates) / len(leakage_rates),
+                    f"max_plr_{method}": max(leakage_rates),
+                    f"min_plr_{method}": min(leakage_rates),
+                    f"std_plr_{method}": (sum((x - sum(leakage_rates)/len(leakage_rates))**2 for x in leakage_rates) / len(leakage_rates))**0.5 if len(leakage_rates) > 1 else 0,
+                    f"queries_analyzed_{method}": len(leakage_rates)
+                })
+
+                # PLR trend analysis
+                if len(leakage_rates) >= 3:
+                    recent_avg = sum(leakage_rates[-3:]) / 3
+                    overall_avg = sum(leakage_rates) / len(leakage_rates)
+                    trend_direction = "STABLE"
+                    if recent_avg > overall_avg * 1.1:
+                        trend_direction = "INCREASING"
+                    elif recent_avg < overall_avg * 0.9:
+                        trend_direction = "DECREASING"
+
+                    trends[f"plr_trend_{method}"] = trend_direction
+
+        return trends
+
+    except Exception as e:
+        logger.error(f"PII leakage trends calculation failed: {e}")
+        return {}
+
+def calculate_reidentification_risk(original_prompt: str, responses: Dict[str, str], nlp_model=None) -> Dict[str, Any]:
+    """Calculate comprehensive re-identification risk metrics"""
     if not config.enable_pii_leakage_detection or nlp_model is None:
         return {}
 
@@ -499,45 +634,335 @@ def calculate_reidentification_risk(original_prompt: str, responses: Dict[str, s
         if len(real_entities) < 2:
             return {f"reidentification_risk_{method}": 0.0 for method in responses.keys()}
 
-        reidentification_scores = {}
+        reidentification_metrics = {}
+
+        # Group entities by type for more detailed analysis
+        entity_types = {}
+        for entity_text, entity_label in real_entities:
+            if entity_label not in entity_types:
+                entity_types[entity_label] = []
+            entity_types[entity_label].append(entity_text)
+
         for method, response in responses.items():
             response_doc = nlp_model(response)
             response_entities = [(ent.text, ent.label_) for ent in response_doc.ents if ent.label_ in ["PERSON", "ORG", "GPE", "EMAIL", "PHONE"]]
 
-            # Calculate how many unique entity combinations are preserved
+            # Calculate pairwise entity combination preservation
             preserved_combinations = 0
             total_combinations = len(real_entities) * (len(real_entities) - 1) // 2
 
+            # Track which specific combinations are preserved
+            preserved_pairs = []
             if total_combinations > 0:
                 for i, (ent1, label1) in enumerate(real_entities):
                     for j, (ent2, label2) in enumerate(real_entities[i+1:], i+1):
-                        # Check if both entities appear in response (simplified re-identification risk)
                         ent1_present = any(ent1 in resp_ent[0] for resp_ent in response_entities)
                         ent2_present = any(ent2 in resp_ent[0] for resp_ent in response_entities)
                         if ent1_present and ent2_present:
                             preserved_combinations += 1
+                            preserved_pairs.append(f"{ent1}({label1})-{ent2}({label2})")
 
-                reidentification_scores[f"reidentification_risk_{method}"] = (preserved_combinations / total_combinations) * 100.0
+            combination_risk = (preserved_combinations / total_combinations) * 100.0 if total_combinations > 0 else 0.0
+
+            # Calculate entity frequency risk (how many entities from original appear)
+            entity_frequency_risk = (len(set(ent[0] for ent in real_entities) & set(ent[0] for ent in response_entities)) / len(real_entities)) * 100.0
+
+            # Calculate uniqueness risk (how unique the entity combination is)
+            # Simplified: based on number of preserved pairs relative to total possible pairs
+            uniqueness_factor = min(1.0, preserved_combinations / max(1, total_combinations))
+            uniqueness_risk = uniqueness_factor * 100.0
+
+            # Overall re-identification risk (weighted combination)
+            overall_risk = (combination_risk * 0.5 + entity_frequency_risk * 0.3 + uniqueness_risk * 0.2)
+
+            # Determine risk level
+            if overall_risk == 0:
+                risk_level = "NONE"
+            elif overall_risk <= 25:
+                risk_level = "LOW"
+            elif overall_risk <= 50:
+                risk_level = "MEDIUM"
+            elif overall_risk <= 75:
+                risk_level = "HIGH"
             else:
-                reidentification_scores[f"reidentification_risk_{method}"] = 0.0
+                risk_level = "CRITICAL"
 
-        return reidentification_scores
+            reidentification_metrics.update({
+                f"reidentification_risk_{method}": overall_risk,
+                f"reidentification_risk_level_{method}": risk_level,
+                f"combination_preservation_{method}": combination_risk,
+                f"entity_frequency_risk_{method}": entity_frequency_risk,
+                f"uniqueness_risk_{method}": uniqueness_risk,
+                f"preserved_combinations_{method}": preserved_combinations,
+                f"total_combinations_{method}": total_combinations
+            })
+
+            # Log high-risk re-identification events
+            if overall_risk > 50:
+                logger.warning(f"RE-ID ALERT - Method '{method}': High re-identification risk ({overall_risk:.1f}%) - Level: {risk_level}")
+                if preserved_pairs:
+                    logger.warning(f"RE-ID DETECTED - Preserved combinations: {', '.join(preserved_pairs[:3])}")
+
+        return reidentification_metrics
 
     except Exception as e:
         logger.error(f"Re-identification risk calculation failed: {e}")
         return {}
 
-def calculate_entropy_score(responses: Dict[str, str]) -> Dict[str, float]:
-    """Calculate entropy score based on text diversity"""
+def calculate_bleu_score(responses: Dict[str, str], reference_text: str = None) -> Dict[str, float]:
+    """Calculate BLEU score comparing responses against reference text"""
     try:
-        entropy_scores = {}
+        from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+        bleu_scores = {}
+
+        # Use the first response as reference if not provided
+        if reference_text is None and len(responses) > 1:
+            # Use 'real' response as reference if available, otherwise first response
+            reference_text = responses.get('real', next(iter(responses.values())))
+
+        if not reference_text:
+            return {f"bleu_score_{method}": 0.0 for method in responses.keys()}
+
+        # Tokenize reference
+        reference_tokens = reference_text.lower().split()
+
+        smoothing = SmoothingFunction().method1
+
+        for method, response in responses.items():
+            if method == 'real' and reference_text == responses.get('real'):
+                # Skip BLEU for reference text itself
+                bleu_scores[f"bleu_score_{method}"] = 1.0
+                continue
+
+            candidate_tokens = response.lower().split()
+
+            if len(candidate_tokens) == 0:
+                bleu_scores[f"bleu_score_{method}"] = 0.0
+                continue
+
+            try:
+                # Calculate BLEU score with smoothing
+                bleu = sentence_bleu([reference_tokens], candidate_tokens, smoothing_function=smoothing)
+                bleu_scores[f"bleu_score_{method}"] = bleu
+            except Exception as e:
+                logger.warning(f"BLEU calculation failed for {method}: {e}")
+                bleu_scores[f"bleu_score_{method}"] = 0.0
+
+        return bleu_scores
+
+    except ImportError:
+        logger.warning("NLTK not available for BLEU score calculation")
+        return {f"bleu_score_{method}": 0.0 for method in responses.keys()}
+    except Exception as e:
+        logger.error(f"BLEU score calculation failed: {e}")
+        return {f"bleu_score_{method}": 0.0 for method in responses.keys()}
+
+def calculate_rouge_scores(responses: Dict[str, str], reference_text: str = None) -> Dict[str, Any]:
+    """Calculate ROUGE-1, ROUGE-2, and ROUGE-L scores"""
+    try:
+        from rouge_score import rouge_scorer
+        rouge_metrics = {}
+
+        # Use the first response as reference if not provided
+        if reference_text is None and len(responses) > 1:
+            reference_text = responses.get('real', next(iter(responses.values())))
+
+        if not reference_text:
+            rouge_metrics = {}
+            for method in responses.keys():
+                rouge_metrics.update({
+                    f"rouge1_{method}": 0.0,
+                    f"rouge2_{method}": 0.0,
+                    f"rougel_{method}": 0.0
+                })
+            return rouge_metrics
+
+        scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+
+        for method, response in responses.items():
+            if method == 'real' and reference_text == responses.get('real'):
+                # Perfect scores for reference text itself
+                rouge_metrics.update({
+                    f"rouge1_{method}": 1.0,
+                    f"rouge2_{method}": 1.0,
+                    f"rougel_{method}": 1.0
+                })
+                continue
+
+            try:
+                scores = scorer.score(reference_text, response)
+                rouge_metrics.update({
+                    f"rouge1_{method}": scores['rouge1'].fmeasure,
+                    f"rouge2_{method}": scores['rouge2'].fmeasure,
+                    f"rougel_{method}": scores['rougeL'].fmeasure
+                })
+            except Exception as e:
+                logger.warning(f"ROUGE calculation failed for {method}: {e}")
+                rouge_metrics[f"rouge1_{method}"] = 0.0
+                rouge_metrics[f"rouge2_{method}"] = 0.0
+                rouge_metrics[f"rougel_{method}"] = 0.0
+
+        return rouge_metrics
+
+    except ImportError:
+        logger.warning("rouge-score not available for ROUGE calculation")
+        rouge_metrics = {}
+        for method in responses.keys():
+            rouge_metrics.update({
+                f"rouge1_{method}": 0.0,
+                f"rouge2_{method}": 0.0,
+                f"rougel_{method}": 0.0
+            })
+        return rouge_metrics
+    except Exception as e:
+        logger.error(f"ROUGE score calculation failed: {e}")
+        rouge_metrics = {}
+        for method in responses.keys():
+            rouge_metrics.update({
+                f"rouge1_{method}": 0.0,
+                f"rouge2_{method}": 0.0,
+                f"rougel_{method}": 0.0
+            })
+        return rouge_metrics
+
+def calculate_perplexity_score(responses: Dict[str, str]) -> Dict[str, float]:
+    """Calculate perplexity score using a simple language model heuristic"""
+    try:
+        perplexity_scores = {}
 
         for method, response in responses.items():
             if not response or len(response.strip()) == 0:
-                entropy_scores[f"entropy_score_{method}"] = 0.0
+                perplexity_scores[f"perplexity_{method}"] = float('inf')
                 continue
 
-            # Calculate character-level entropy
+            words = response.lower().split()
+            if len(words) < 2:
+                perplexity_scores[f"perplexity_{method}"] = float('inf')
+                continue
+
+            # Simple perplexity calculation using word frequency
+            word_counts = {}
+            for word in words:
+                word_counts[word] = word_counts.get(word, 0) + 1
+
+            # Calculate perplexity using unigram model
+            total_words = len(words)
+            perplexity = 1.0
+
+            for word in words:
+                probability = word_counts[word] / total_words
+                perplexity *= (1.0 / probability)
+
+            perplexity = perplexity ** (1.0 / total_words)
+
+            # Cap perplexity at reasonable maximum
+            perplexity_scores[f"perplexity_{method}"] = min(perplexity, 10000.0)
+
+        return perplexity_scores
+
+    except Exception as e:
+        logger.error(f"Perplexity calculation failed: {e}")
+        return {f"perplexity_{method}": float('inf') for method in responses.keys()}
+
+def calculate_coherence_score(responses: Dict[str, str]) -> Dict[str, Any]:
+    """Calculate coherence score (1-5 scale) using heuristic analysis"""
+    try:
+        coherence_metrics = {}
+
+        for method, response in responses.items():
+            if not response or len(response.strip()) == 0:
+                coherence_metrics.update({
+                    f"coherence_score_{method}": 1.0,
+                    f"coherence_level_{method}": "VERY_LOW"
+                })
+                continue
+
+            # Heuristic coherence analysis
+            sentences = [s.strip() for s in response.split('.') if s.strip()]
+            words = response.split()
+            score = 3.0  # Base score
+
+            # Length coherence (prefer moderate length responses)
+            word_count = len(words)
+            if 10 <= word_count <= 100:
+                score += 0.5
+            elif word_count < 5:
+                score -= 1.0
+            elif word_count > 200:
+                score -= 0.5
+
+            # Sentence structure coherence
+            if len(sentences) >= 2:
+                score += 0.5  # Multi-sentence responses tend to be more coherent
+            elif len(sentences) == 0:
+                score -= 1.0
+
+            # Vocabulary diversity (avoid repetition)
+            unique_words = len(set(words))
+            diversity_ratio = unique_words / max(1, word_count)
+            if diversity_ratio > 0.6:
+                score += 0.5
+            elif diversity_ratio < 0.3:
+                score -= 0.5
+
+            # Punctuation coherence
+            punctuation_count = sum(1 for char in response if char in '.,!?;:')
+            expected_punctuation = max(1, len(sentences) - 1)  # At least one per sentence
+            punctuation_ratio = punctuation_count / expected_punctuation
+            if 0.5 <= punctuation_ratio <= 2.0:
+                score += 0.3
+            elif punctuation_ratio < 0.2:
+                score -= 0.3
+
+            # Cap score between 1 and 5
+            final_score = max(1.0, min(5.0, score))
+
+            # Determine coherence level
+            if final_score >= 4.5:
+                level = "EXCELLENT"
+            elif final_score >= 3.5:
+                level = "GOOD"
+            elif final_score >= 2.5:
+                level = "FAIR"
+            elif final_score >= 1.5:
+                level = "POOR"
+            else:
+                level = "VERY_POOR"
+
+            coherence_metrics.update({
+                f"coherence_score_{method}": final_score,
+                f"coherence_level_{method}": level
+            })
+
+        return coherence_metrics
+
+    except Exception as e:
+        logger.error(f"Coherence calculation failed: {e}")
+        coherence_metrics = {}
+        for method in responses.keys():
+            coherence_metrics.update({
+                f"coherence_score_{method}": 3.0,
+                f"coherence_level_{method}": "FAIR"
+            })
+        return coherence_metrics
+
+def calculate_entropy_score(responses: Dict[str, str]) -> Dict[str, Any]:
+    """Calculate comprehensive entropy metrics for text diversity and unpredictability"""
+    try:
+        entropy_metrics = {}
+
+        for method, response in responses.items():
+            if not response or len(response.strip()) == 0:
+                entropy_metrics.update({
+                    f"entropy_score_{method}": 0.0,
+                    f"character_entropy_{method}": 0.0,
+                    f"word_entropy_{method}": 0.0,
+                    f"text_diversity_{method}": 0.0,
+                    f"unpredictability_score_{method}": 0.0
+                })
+                continue
+
+            # Character-level entropy
             text = response.lower()
             char_counts = {}
             total_chars = len(text)
@@ -545,18 +970,68 @@ def calculate_entropy_score(responses: Dict[str, str]) -> Dict[str, float]:
             for char in text:
                 char_counts[char] = char_counts.get(char, 0) + 1
 
-            entropy = 0.0
-            for count in char_counts.values():
-                probability = count / total_chars
-                entropy -= probability * math.log2(probability)
+            char_entropy = 0.0
+            if total_chars > 0:
+                for count in char_counts.values():
+                    probability = count / total_chars
+                    char_entropy -= probability * math.log2(probability)
 
-            # Normalize entropy (max entropy for ASCII is ~7 bits, but we'll scale to 0-100)
-            max_entropy = math.log2(256)  # Assuming 256 possible characters
-            normalized_entropy = (entropy / max_entropy) * 100.0
+            # Normalize character entropy (0-100 scale)
+            max_char_entropy = math.log2(256)  # Assuming 256 possible characters
+            normalized_char_entropy = (char_entropy / max_char_entropy) * 100.0
 
-            entropy_scores[f"entropy_score_{method}"] = normalized_entropy
+            # Word-level entropy
+            words = response.split()
+            word_counts = {}
+            total_words = len(words)
 
-        return entropy_scores
+            for word in words:
+                word_counts[word] = word_counts.get(word, 0) + 1
+
+            word_entropy = 0.0
+            if total_words > 0:
+                for count in word_counts.values():
+                    probability = count / total_words
+                    word_entropy -= probability * math.log2(probability)
+
+            # Normalize word entropy (0-100 scale, assuming max ~15 bits for vocabulary)
+            max_word_entropy = math.log2(10000)  # Assuming 10k word vocabulary
+            normalized_word_entropy = (word_entropy / max_word_entropy) * 100.0
+
+            # Text diversity score (unique words / total words)
+            unique_words = len(word_counts)
+            text_diversity = (unique_words / total_words) * 100.0 if total_words > 0 else 0.0
+
+            # Overall unpredictability score (weighted combination)
+            unpredictability = (normalized_char_entropy * 0.4 + normalized_word_entropy * 0.4 + text_diversity * 0.2)
+
+            # Determine entropy level
+            if unpredictability >= 70:
+                entropy_level = "HIGH"
+            elif unpredictability >= 40:
+                entropy_level = "MEDIUM"
+            elif unpredictability >= 10:
+                entropy_level = "LOW"
+            else:
+                entropy_level = "VERY_LOW"
+
+            entropy_metrics.update({
+                f"entropy_score_{method}": unpredictability,  # Overall score for backward compatibility
+                f"character_entropy_{method}": normalized_char_entropy,
+                f"word_entropy_{method}": normalized_word_entropy,
+                f"text_diversity_{method}": text_diversity,
+                f"unpredictability_score_{method}": unpredictability,
+                f"entropy_level_{method}": entropy_level,
+                f"unique_words_{method}": unique_words,
+                f"total_words_{method}": total_words,
+                f"unique_chars_{method}": len(char_counts)
+            })
+
+            # Log low entropy warnings (predictable responses might indicate poor anonymization)
+            if unpredictability < 20:
+                logger.warning(f"ENTROPY ALERT - Method '{method}': Low entropy ({unpredictability:.1f}) - Level: {entropy_level} - Response may be predictable")
+
+        return entropy_metrics
 
     except Exception as e:
         logger.error(f"Entropy score calculation failed: {e}")
@@ -690,8 +1165,13 @@ def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysis
                 deepeval_scores = {}
                 pii_scores = {}
                 pii_leakage_rates = {}
+                detailed_plr_metrics = {}
                 reidentification_scores = {}
                 entropy_scores = {}
+                bleu_scores = {}
+                rouge_scores = {}
+                perplexity_scores = {}
+                coherence_scores = {}
 
                 if responses:
                     try:
@@ -710,6 +1190,7 @@ def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysis
                         try:
                             pii_scores = calculate_pii_leakage(user_prompt, responses, batch_nlp)
                             pii_leakage_rates = calculate_pii_leakage_rate(user_prompt, responses, batch_nlp)
+                            detailed_plr_metrics = calculate_detailed_pii_leakage_rate(user_prompt, responses, batch_nlp)
                             reidentification_scores = calculate_reidentification_risk(user_prompt, responses, batch_nlp)
                         except Exception as e:
                             logger.error(f"PII leakage failed for row {idx + 1}: {e}")
@@ -718,6 +1199,26 @@ def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysis
                         entropy_scores = calculate_entropy_score(responses)
                     except Exception as e:
                         logger.error(f"Entropy score calculation failed for row {idx + 1}: {e}")
+
+                    try:
+                        bleu_scores = calculate_bleu_score(responses, user_prompt)
+                    except Exception as e:
+                        logger.error(f"BLEU score calculation failed for row {idx + 1}: {e}")
+
+                    try:
+                        rouge_scores = calculate_rouge_scores(responses, user_prompt)
+                    except Exception as e:
+                        logger.error(f"ROUGE score calculation failed for row {idx + 1}: {e}")
+
+                    try:
+                        perplexity_scores = calculate_perplexity_score(responses)
+                    except Exception as e:
+                        logger.error(f"Perplexity calculation failed for row {idx + 1}: {e}")
+
+                    try:
+                        coherence_scores = calculate_coherence_score(responses)
+                    except Exception as e:
+                        logger.error(f"Coherence calculation failed for row {idx + 1}: {e}")
 
                 # Prepare analysis data
                 analysis_data = {
@@ -730,8 +1231,13 @@ def process_batch_texts(config: PIIProtectionConfig, excel_exporter: PIIAnalysis
                     **similarities,
                     **pii_scores,
                     **pii_leakage_rates,
+                    **detailed_plr_metrics,
                     **reidentification_scores,
                     **entropy_scores,
+                    **bleu_scores,
+                    **rouge_scores,
+                    **perplexity_scores,
+                    **coherence_scores,
                     **{f'processing_time_{method}': time_val for method, time_val in processing_times.items()},
                     'entities_detected': len([ent for ent in batch_nlp(user_prompt).ents
                                             if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]]) if batch_nlp else 0
@@ -969,18 +1475,25 @@ def main():
             # PII leakage (only if real names are enabled for comparison)
             pii_scores = {}
             pii_leakage_rates = {}
+            detailed_plr_metrics = {}
             reidentification_scores = {}
             entropy_scores = {}
+            bleu_scores = {}
+            rouge_scores = {}
+            perplexity_scores = {}
+            coherence_scores = {}
             if config.enable_real_names and config.enable_pii_leakage_detection:
                 try:
                     pii_scores = calculate_pii_leakage(user_prompt, responses, nlp)
                     pii_leakage_rates = calculate_pii_leakage_rate(user_prompt, responses, nlp)
+                    detailed_plr_metrics = calculate_detailed_pii_leakage_rate(user_prompt, responses, nlp)
                     reidentification_scores = calculate_reidentification_risk(user_prompt, responses, nlp)
                 except Exception as e:
                     st.warning(f"⚠️ PII leakage calculation failed: {str(e)}")
                     logger.error(f"PII leakage failed: {e}")
                     pii_scores = {}
                     pii_leakage_rates = {}
+                    detailed_plr_metrics = {}
                     reidentification_scores = {}
 
             try:
@@ -989,6 +1502,34 @@ def main():
                 st.warning(f"⚠️ Entropy score calculation failed: {str(e)}")
                 logger.error(f"Entropy score failed: {e}")
                 entropy_scores = {}
+
+            try:
+                bleu_scores = calculate_bleu_score(responses, user_prompt)
+            except Exception as e:
+                st.warning(f"⚠️ BLEU score calculation failed: {str(e)}")
+                logger.error(f"BLEU score failed: {e}")
+                bleu_scores = {}
+
+            try:
+                rouge_scores = calculate_rouge_scores(responses, user_prompt)
+            except Exception as e:
+                st.warning(f"⚠️ ROUGE score calculation failed: {str(e)}")
+                logger.error(f"ROUGE score failed: {e}")
+                rouge_scores = {}
+
+            try:
+                perplexity_scores = calculate_perplexity_score(responses)
+            except Exception as e:
+                st.warning(f"⚠️ Perplexity calculation failed: {str(e)}")
+                logger.error(f"Perplexity failed: {e}")
+                perplexity_scores = {}
+
+            try:
+                coherence_scores = calculate_coherence_score(responses)
+            except Exception as e:
+                st.warning(f"⚠️ Coherence calculation failed: {str(e)}")
+                logger.error(f"Coherence failed: {e}")
+                coherence_scores = {}
 
             # Display metrics
             col1, col2 = st.columns(2)
@@ -1015,22 +1556,90 @@ def main():
                         st.write(f"• {method.title()}: {leakage} leaked, F1: {f1}")
 
                 if pii_leakage_rates:
-                    st.markdown("**📊 PII Leakage Rate (%):**")
+                    st.markdown("**📊 PII Leakage Rate (PLR) (%):**")
                     for method in responses.keys():
                         rate = pii_leakage_rates.get(f"pii_leakage_rate_{method}", 0.0)
-                        st.write(f"• {method.title()}: {rate:.1f}%")
+                        severity = detailed_plr_metrics.get(f"pii_leakage_severity_{method}", "UNKNOWN")
+                        severity_icon = {"NONE": "✅", "LOW": "🟡", "MEDIUM": "🟠", "HIGH": "🔴", "CRITICAL": "🚨"}.get(severity, "❓")
+                        st.write(f"• {method.title()}: {rate:.1f}% {severity_icon} ({severity})")
+
+                if detailed_plr_metrics:
+                    # Show per-entity-type leakage if available
+                    entity_types = ["person", "org", "gpe", "email", "phone"]
+                    entity_type_names = {"person": "Names", "org": "Orgs", "gpe": "Locations", "email": "Emails", "phone": "Phones"}
+
+                    for entity_type in entity_types:
+                        rates = []
+                        for method in responses.keys():
+                            rate_key = f"{entity_type}_leakage_rate_{method}"
+                            if rate_key in detailed_plr_metrics:
+                                rates.append((method, detailed_plr_metrics[rate_key]))
+
+                        if rates and any(rate > 0 for _, rate in rates):
+                            st.markdown(f"**{entity_type_names[entity_type]} PLR:**")
+                            for method, rate in rates:
+                                if rate > 0:
+                                    st.write(f"• {method.title()}: {rate:.1f}%")
+                            break  # Only show first entity type with leakage
 
                 if reidentification_scores:
                     st.markdown("**🎯 Re-identification Risk (%):**")
                     for method in responses.keys():
                         risk = reidentification_scores.get(f"reidentification_risk_{method}", 0.0)
-                        st.write(f"• {method.title()}: {risk:.1f}%")
+                        risk_level = reidentification_scores.get(f"reidentification_risk_level_{method}", "UNKNOWN")
+                        risk_icon = {"NONE": "✅", "LOW": "🟡", "MEDIUM": "🟠", "HIGH": "🔴", "CRITICAL": "🚨"}.get(risk_level, "❓")
+                        st.write(f"• {method.title()}: {risk:.1f}% {risk_icon} ({risk_level})")
 
                 if entropy_scores:
-                    st.markdown("**🧬 Entropy Score:**")
+                    st.markdown("**🧬 Entropy Score (Unpredictability):**")
                     for method in responses.keys():
                         entropy = entropy_scores.get(f"entropy_score_{method}", 0.0)
-                        st.write(f"• {method.title()}: {entropy:.1f}")
+                        entropy_level = entropy_scores.get(f"entropy_level_{method}", "UNKNOWN")
+                        entropy_icon = {"VERY_LOW": "🔴", "LOW": "🟠", "MEDIUM": "🟡", "HIGH": "🟢"}.get(entropy_level, "❓")
+                        st.write(f"• {method.title()}: {entropy:.1f} {entropy_icon} ({entropy_level})")
+
+                        # Show detailed entropy breakdown if available
+                        char_entropy = entropy_scores.get(f"character_entropy_{method}", 0.0)
+                        word_entropy = entropy_scores.get(f"word_entropy_{method}", 0.0)
+                        diversity = entropy_scores.get(f"text_diversity_{method}", 0.0)
+                        if char_entropy > 0 or word_entropy > 0:
+                            with st.expander(f"Detailed Entropy for {method.title()}", expanded=False):
+                                st.write(f"• Character Entropy: {char_entropy:.1f}")
+                                st.write(f"• Word Entropy: {word_entropy:.1f}")
+                                st.write(f"• Text Diversity: {diversity:.1f}%")
+
+                # NLP Quality Metrics
+                if bleu_scores or rouge_scores or perplexity_scores or coherence_scores:
+                    st.markdown("**📝 NLP Quality Metrics:**")
+
+                    if bleu_scores:
+                        st.markdown("**BLEU Score:**")
+                        for method in responses.keys():
+                            bleu = bleu_scores.get(f"bleu_score_{method}", 0.0)
+                            st.write(f"• {method.title()}: {bleu:.3f}")
+
+                    if rouge_scores:
+                        st.markdown("**ROUGE Scores:**")
+                        for method in responses.keys():
+                            rouge1 = rouge_scores.get(f"rouge1_{method}", 0.0)
+                            rouge2 = rouge_scores.get(f"rouge2_{method}", 0.0)
+                            rougel = rouge_scores.get(f"rougel_{method}", 0.0)
+                            st.write(f"• {method.title()}: R1={rouge1:.3f}, R2={rouge2:.3f}, RL={rougel:.3f}")
+
+                    if perplexity_scores:
+                        st.markdown("**Perplexity:**")
+                        for method in responses.keys():
+                            perplexity = perplexity_scores.get(f"perplexity_{method}", float('inf'))
+                            perplexity_display = ".1f" if perplexity != float('inf') else "∞"
+                            st.write(f"• {method.title()}: {perplexity_display}")
+
+                    if coherence_scores:
+                        st.markdown("**Coherence (1-5):**")
+                        for method in responses.keys():
+                            coherence = coherence_scores.get(f"coherence_score_{method}", 3.0)
+                            coherence_level = coherence_scores.get(f"coherence_level_{method}", "FAIR")
+                            coherence_icon = {"VERY_POOR": "🔴", "POOR": "🟠", "FAIR": "🟡", "GOOD": "🟢", "EXCELLENT": "🟢"}.get(coherence_level, "❓")
+                            st.write(f"• {method.title()}: {coherence:.1f}/5 {coherence_icon} ({coherence_level})")
 
                 if processing_times and config.show_processing_times:
                     st.markdown("**⏱️ Processing Times:**")
@@ -1052,8 +1661,13 @@ def main():
                     **similarities,
                     **pii_scores,
                     **pii_leakage_rates,
+                    **detailed_plr_metrics,
                     **reidentification_scores,
                     **entropy_scores,
+                    **bleu_scores,
+                    **rouge_scores,
+                    **perplexity_scores,
+                    **coherence_scores,
                     **{f'processing_time_{method}': time_val for method, time_val in processing_times.items()},
                     'entities_detected': len([ent for ent in nlp(user_prompt).ents
                                             if ent.label_ in ["PERSON", "ORG", "GPE", "DATE", "EMAIL", "PHONE"]]) if nlp else 0
@@ -1101,11 +1715,23 @@ def main():
                                 st.write(f"• Real vs LLM: {stats.get('avg_similarity_real_llm', 0):.3f}")
 
                             with col_stats2:
-                                st.markdown("**🔒 Average PII Leakage Rate (%):**")
+                                st.markdown("**🔒 Average PII Leakage Rate (PLR) (%):**")
                                 st.write(f"• Real Names: {stats.get('avg_pii_leakage_rate_real', 0):.1f}%")
                                 st.write(f"• Fake Names: {stats.get('avg_pii_leakage_rate_fake', 0):.1f}%")
                                 st.write(f"• XXXX Masking: {stats.get('avg_pii_leakage_rate_masked', 0):.1f}%")
                                 st.write(f"• LLM-based PII Removal: {stats.get('avg_pii_leakage_rate_llm', 0):.1f}%")
+
+                                # Show PLR severity summary
+                                plr_severities = []
+                                for method in ['real', 'fake', 'masked', 'llm']:
+                                    severity_key = f'most_common_plr_severity_{method}'
+                                    if severity_key in stats:
+                                        plr_severities.append(f"{method.title()}: {stats[severity_key]}")
+
+                                if plr_severities:
+                                    st.markdown("**🚨 PLR Severity Summary:**")
+                                    for severity_info in plr_severities:
+                                        st.write(f"• {severity_info}")
 
                                 st.markdown("**🎯 Average Re-identification Risk (%):**")
                                 st.write(f"• Real Names: {stats.get('avg_reidentification_risk_real', 0):.1f}%")
@@ -1113,12 +1739,36 @@ def main():
                                 st.write(f"• XXXX Masking: {stats.get('avg_reidentification_risk_masked', 0):.1f}%")
                                 st.write(f"• LLM-based PII Removal: {stats.get('avg_reidentification_risk_llm', 0):.1f}%")
 
+                                # Show Re-ID risk level summary
+                                reid_levels = []
+                                for method in ['real', 'fake', 'masked', 'llm']:
+                                    level_key = f'most_common_reid_risk_level_{method}'
+                                    if level_key in stats:
+                                        reid_levels.append(f"{method.title()}: {stats[level_key]}")
+
+                                if reid_levels:
+                                    st.markdown("**🚨 Re-ID Risk Level Summary:**")
+                                    for level_info in reid_levels:
+                                        st.write(f"• {level_info}")
+
                             with col_stats3:
-                                st.markdown("**🧬 Average Entropy Score:**")
+                                st.markdown("**🧬 Average Entropy Score (Unpredictability):**")
                                 st.write(f"• Real Names: {stats.get('avg_entropy_score_real', 0):.1f}")
                                 st.write(f"• Fake Names: {stats.get('avg_entropy_score_fake', 0):.1f}")
                                 st.write(f"• XXXX Masking: {stats.get('avg_entropy_score_masked', 0):.1f}")
                                 st.write(f"• LLM-based PII Removal: {stats.get('avg_entropy_score_llm', 0):.1f}")
+
+                                # Show Entropy level summary
+                                entropy_levels = []
+                                for method in ['real', 'fake', 'masked', 'llm']:
+                                    level_key = f'most_common_entropy_level_{method}'
+                                    if level_key in stats:
+                                        entropy_levels.append(f"{method.title()}: {stats[level_key]}")
+
+                                if entropy_levels:
+                                    st.markdown("**🧬 Entropy Level Summary:**")
+                                    for level_info in entropy_levels:
+                                        st.write(f"• {level_info}")
 
                                 st.markdown("**⏱️ Average Processing Times (seconds):**")
                                 st.write(f"• Real Names: {stats.get('avg_processing_time_real', 0):.3f}")

@@ -24,7 +24,8 @@ The modular PII Protection Chatbot system allows you to **enable/disable individ
 #### **📊 Evaluation Features**
 - `enable_deepeval` - DeepEval relevancy metrics
 - `enable_semantic_similarity` - SentenceTransformer similarity
-- `enable_pii_leakage_detection` - PII leakage scoring
+- `enable_pii_leakage_detection` - PII leakage scoring (PLR - PII Leakage Rate, Re-identification Risk, Entropy Score)
+- `enable_nlp_quality_metrics` - NLP quality metrics (BLEU, ROUGE-1/2/L, Perplexity, Coherence)
 - `enable_performance_timing` - Processing time measurement
 
 #### **⚙️ Advanced Features**
@@ -74,7 +75,7 @@ enable_excel_export=True
 enable_fake_names=True
 enable_xxxx_masking=True
 enable_llm_pii_removal=True
-enable_pii_leakage_detection=True
+enable_pii_leakage_detection=True  # Includes PLR (PII Leakage Rate) metrics
 enable_excel_export=True
 ```
 
@@ -347,8 +348,14 @@ if config.show_debug_info:
 - **Plugin System**: Load custom PII methods
 - **Configuration Profiles**: Save/load named configurations
 - **Batch Processing**: Process multiple queries simultaneously
-- **Real-time Metrics**: Live performance monitoring
-- **A/B Testing Framework**: Automated comparison testing
+- **Real-time Metrics**: Live performance monitoring including PLR trends
+- **A/B Testing Framework**: Automated comparison testing with PLR analysis
+
+### **PLR Enhancements**
+- **Advanced PLR Analytics**: Trend analysis and predictive modeling
+- **PLR Alerting System**: Automated notifications for high PLR events
+- **PLR Benchmarking**: Industry-standard PLR comparison tools
+- **PLR Visualization**: Interactive dashboards for PLR monitoring
 
 ### **Extensibility**
 ```python

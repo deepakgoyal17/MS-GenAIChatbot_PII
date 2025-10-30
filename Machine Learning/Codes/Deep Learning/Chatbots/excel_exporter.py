@@ -44,7 +44,39 @@ class PIIAnalysisExporter:
             'avg_processing_time_real': 0.0,
             'avg_processing_time_fake': 0.0,
             'avg_processing_time_masked': 0.0,
-            'avg_processing_time_llm': 0.0
+            'avg_processing_time_llm': 0.0,
+            'avg_pii_leakage_rate_real': 0.0,
+            'avg_pii_leakage_rate_fake': 0.0,
+            'avg_pii_leakage_rate_masked': 0.0,
+            'avg_pii_leakage_rate_llm': 0.0,
+            'avg_reidentification_risk_real': 0.0,
+            'avg_reidentification_risk_fake': 0.0,
+            'avg_reidentification_risk_masked': 0.0,
+            'avg_reidentification_risk_llm': 0.0,
+            'avg_entropy_score_real': 0.0,
+            'avg_entropy_score_fake': 0.0,
+            'avg_entropy_score_masked': 0.0,
+            'avg_entropy_score_llm': 0.0,
+            'avg_bleu_score_real': 0.0,
+            'avg_bleu_score_fake': 0.0,
+            'avg_bleu_score_masked': 0.0,
+            'avg_bleu_score_llm': 0.0,
+            'avg_rouge1_real': 0.0,
+            'avg_rouge1_fake': 0.0,
+            'avg_rouge1_masked': 0.0,
+            'avg_rouge1_llm': 0.0,
+            'avg_rouge2_real': 0.0,
+            'avg_rouge2_fake': 0.0,
+            'avg_rouge2_masked': 0.0,
+            'avg_rouge2_llm': 0.0,
+            'avg_rougel_real': 0.0,
+            'avg_rougel_fake': 0.0,
+            'avg_rougel_masked': 0.0,
+            'avg_rougel_llm': 0.0,
+            'avg_coherence_score_real': 0.0,
+            'avg_coherence_score_fake': 0.0,
+            'avg_coherence_score_masked': 0.0,
+            'avg_coherence_score_llm': 0.0
         }
         
         self.logger.info(f"PIIAnalysisExporter initialized with output directory: {output_dir}")
@@ -81,7 +113,15 @@ class PIIAnalysisExporter:
             metrics_to_update = [
                 'relevancy_real', 'relevancy_fake', 'relevancy_masked', 'relevancy_llm',
                 'similarity_real_fake', 'similarity_real_masked', 'similarity_real_llm',
-                'processing_time_real', 'processing_time_fake', 'processing_time_masked', 'processing_time_llm'
+                'processing_time_real', 'processing_time_fake', 'processing_time_masked', 'processing_time_llm',
+                'pii_leakage_rate_real', 'pii_leakage_rate_fake', 'pii_leakage_rate_masked', 'pii_leakage_rate_llm',
+                'reidentification_risk_real', 'reidentification_risk_fake', 'reidentification_risk_masked', 'reidentification_risk_llm',
+                'entropy_score_real', 'entropy_score_fake', 'entropy_score_masked', 'entropy_score_llm',
+                'bleu_score_real', 'bleu_score_fake', 'bleu_score_masked', 'bleu_score_llm',
+                'rouge1_real', 'rouge1_fake', 'rouge1_masked', 'rouge1_llm',
+                'rouge2_real', 'rouge2_fake', 'rouge2_masked', 'rouge2_llm',
+                'rougel_real', 'rougel_fake', 'rougel_masked', 'rougel_llm',
+                'coherence_score_real', 'coherence_score_fake', 'coherence_score_masked', 'coherence_score_llm'
             ]
             
             for metric in metrics_to_update:
@@ -210,7 +250,19 @@ class PIIAnalysisExporter:
                     'PII_Leakage_Fake': record.get('pii_leakage_fake', 0),
                     'PII_Leakage_Masked': record.get('pii_leakage_masked', 0),
                     'PII_Leakage_LLM': record.get('pii_leakage_llm', 0),
-                    
+
+                    # PII Leakage Rates (PLR)
+                    'PII_Leakage_Rate_Real': record.get('pii_leakage_rate_real', 0.0),
+                    'PII_Leakage_Rate_Fake': record.get('pii_leakage_rate_fake', 0.0),
+                    'PII_Leakage_Rate_Masked': record.get('pii_leakage_rate_masked', 0.0),
+                    'PII_Leakage_Rate_LLM': record.get('pii_leakage_rate_llm', 0.0),
+
+                    # PLR Severity Levels
+                    'PLR_Severity_Real': record.get('pii_leakage_severity_real', 'UNKNOWN'),
+                    'PLR_Severity_Fake': record.get('pii_leakage_severity_fake', 'UNKNOWN'),
+                    'PLR_Severity_Masked': record.get('pii_leakage_severity_masked', 'UNKNOWN'),
+                    'PLR_Severity_LLM': record.get('pii_leakage_severity_llm', 'UNKNOWN'),
+
                     # F1 Scores
                     'F1_Score_Real': record.get('f1_real', 0),
                     'F1_Score_Fake': record.get('f1_fake', 0),
@@ -221,7 +273,65 @@ class PIIAnalysisExporter:
                     'Processing_Time_Real': record.get('processing_time_real', 0.0),
                     'Processing_Time_Fake': record.get('processing_time_fake', 0.0),
                     'Processing_Time_Masked': record.get('processing_time_masked', 0.0),
-                    'Processing_Time_LLM': record.get('processing_time_llm', 0.0)
+                    'Processing_Time_LLM': record.get('processing_time_llm', 0.0),
+
+                    # Re-identification Risk
+                    'ReID_Risk_Real': record.get('reidentification_risk_real', 0.0),
+                    'ReID_Risk_Fake': record.get('reidentification_risk_fake', 0.0),
+                    'ReID_Risk_Masked': record.get('reidentification_risk_masked', 0.0),
+                    'ReID_Risk_LLM': record.get('reidentification_risk_llm', 0.0),
+
+                    'ReID_Risk_Level_Real': record.get('reidentification_risk_level_real', 'UNKNOWN'),
+                    'ReID_Risk_Level_Fake': record.get('reidentification_risk_level_fake', 'UNKNOWN'),
+                    'ReID_Risk_Level_Masked': record.get('reidentification_risk_level_masked', 'UNKNOWN'),
+                    'ReID_Risk_Level_LLM': record.get('reidentification_risk_level_llm', 'UNKNOWN'),
+
+                    # Entropy Scores
+                    'Entropy_Score_Real': record.get('entropy_score_real', 0.0),
+                    'Entropy_Score_Fake': record.get('entropy_score_fake', 0.0),
+                    'Entropy_Score_Masked': record.get('entropy_score_masked', 0.0),
+                    'Entropy_Score_LLM': record.get('entropy_score_llm', 0.0),
+
+                    'Entropy_Level_Real': record.get('entropy_level_real', 'UNKNOWN'),
+                    'Entropy_Level_Fake': record.get('entropy_level_fake', 'UNKNOWN'),
+                    'Entropy_Level_Masked': record.get('entropy_level_masked', 'UNKNOWN'),
+                    'Entropy_Level_LLM': record.get('entropy_level_llm', 'UNKNOWN'),
+
+                    # NLP Quality Metrics
+                    'BLEU_Score_Real': record.get('bleu_score_real', 0.0),
+                    'BLEU_Score_Fake': record.get('bleu_score_fake', 0.0),
+                    'BLEU_Score_Masked': record.get('bleu_score_masked', 0.0),
+                    'BLEU_Score_LLM': record.get('bleu_score_llm', 0.0),
+
+                    'ROUGE1_Score_Real': record.get('rouge1_real', 0.0),
+                    'ROUGE1_Score_Fake': record.get('rouge1_fake', 0.0),
+                    'ROUGE1_Score_Masked': record.get('rouge1_masked', 0.0),
+                    'ROUGE1_Score_LLM': record.get('rouge1_llm', 0.0),
+
+                    'ROUGE2_Score_Real': record.get('rouge2_real', 0.0),
+                    'ROUGE2_Score_Fake': record.get('rouge2_fake', 0.0),
+                    'ROUGE2_Score_Masked': record.get('rouge2_masked', 0.0),
+                    'ROUGE2_Score_LLM': record.get('rouge2_llm', 0.0),
+
+                    'ROUGEL_Score_Real': record.get('rougel_real', 0.0),
+                    'ROUGEL_Score_Fake': record.get('rougel_fake', 0.0),
+                    'ROUGEL_Score_Masked': record.get('rougel_masked', 0.0),
+                    'ROUGEL_Score_LLM': record.get('rougel_llm', 0.0),
+
+                    'Perplexity_Real': record.get('perplexity_real', float('inf')),
+                    'Perplexity_Fake': record.get('perplexity_fake', float('inf')),
+                    'Perplexity_Masked': record.get('perplexity_masked', float('inf')),
+                    'Perplexity_LLM': record.get('perplexity_llm', float('inf')),
+
+                    'Coherence_Score_Real': record.get('coherence_score_real', 3.0),
+                    'Coherence_Score_Fake': record.get('coherence_score_fake', 3.0),
+                    'Coherence_Score_Masked': record.get('coherence_score_masked', 3.0),
+                    'Coherence_Score_LLM': record.get('coherence_score_llm', 3.0),
+
+                    'Coherence_Level_Real': record.get('coherence_level_real', 'FAIR'),
+                    'Coherence_Level_Fake': record.get('coherence_level_fake', 'FAIR'),
+                    'Coherence_Level_Masked': record.get('coherence_level_masked', 'FAIR'),
+                    'Coherence_Level_LLM': record.get('coherence_level_llm', 'FAIR')
                 })
             
             df_metrics = pd.DataFrame(metrics_data)
@@ -318,6 +428,42 @@ class PIIAnalysisExporter:
                 ['XXXX Masking', f"{self.summary_stats['avg_processing_time_masked']:.3f}"],
                 ['LLM-based PII Removal', f"{self.summary_stats['avg_processing_time_llm']:.3f}"],
                 ['', ''],
+                ['Average PII Leakage Rate (PLR) (%)', ''],
+                ['Real Names', f"{self.summary_stats['avg_pii_leakage_rate_real']:.1f}%"],
+                ['Fake Names', f"{self.summary_stats['avg_pii_leakage_rate_fake']:.1f}%"],
+                ['XXXX Masking', f"{self.summary_stats['avg_pii_leakage_rate_masked']:.1f}%"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_pii_leakage_rate_llm']:.1f}%"],
+                ['', ''],
+                ['Average Re-identification Risk (%)', ''],
+                ['Real Names', f"{self.summary_stats['avg_reidentification_risk_real']:.1f}%"],
+                ['Fake Names', f"{self.summary_stats['avg_reidentification_risk_fake']:.1f}%"],
+                ['XXXX Masking', f"{self.summary_stats['avg_reidentification_risk_masked']:.1f}%"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_reidentification_risk_llm']:.1f}%"],
+                ['', ''],
+                ['Average Entropy Score (Unpredictability)', ''],
+                ['Real Names', f"{self.summary_stats['avg_entropy_score_real']:.1f}"],
+                ['Fake Names', f"{self.summary_stats['avg_entropy_score_fake']:.1f}"],
+                ['XXXX Masking', f"{self.summary_stats['avg_entropy_score_masked']:.1f}"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_entropy_score_llm']:.1f}"],
+                ['', ''],
+                ['Average BLEU Score', ''],
+                ['Real Names', f"{self.summary_stats['avg_bleu_score_real']:.3f}"],
+                ['Fake Names', f"{self.summary_stats['avg_bleu_score_fake']:.3f}"],
+                ['XXXX Masking', f"{self.summary_stats['avg_bleu_score_masked']:.3f}"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_bleu_score_llm']:.3f}"],
+                ['', ''],
+                ['Average ROUGE-1 Score', ''],
+                ['Real Names', f"{self.summary_stats['avg_rouge1_real']:.3f}"],
+                ['Fake Names', f"{self.summary_stats['avg_rouge1_fake']:.3f}"],
+                ['XXXX Masking', f"{self.summary_stats['avg_rouge1_masked']:.3f}"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_rouge1_llm']:.3f}"],
+                ['', ''],
+                ['Average Coherence Score (1-5)', ''],
+                ['Real Names', f"{self.summary_stats['avg_coherence_score_real']:.1f}"],
+                ['Fake Names', f"{self.summary_stats['avg_coherence_score_fake']:.1f}"],
+                ['XXXX Masking', f"{self.summary_stats['avg_coherence_score_masked']:.1f}"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_coherence_score_llm']:.1f}"],
+                ['', ''],
                 ['Export Information', ''],
                 ['Export Date', datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
                 ['Total Records', len(self.session_data)]
@@ -384,7 +530,52 @@ class PIIAnalysisExporter:
     def clear_data(self) -> None:
         """Clear all stored data"""
         self.session_data.clear()
-        self.summary_stats = {key: 0.0 if 'avg_' in key else 0 for key in self.summary_stats.keys()}
+        self.summary_stats = {
+            'total_queries': 0,
+            'avg_relevancy_real': 0.0,
+            'avg_relevancy_fake': 0.0,
+            'avg_relevancy_masked': 0.0,
+            'avg_relevancy_llm': 0.0,
+            'avg_similarity_real_fake': 0.0,
+            'avg_similarity_real_masked': 0.0,
+            'avg_similarity_real_llm': 0.0,
+            'avg_processing_time_real': 0.0,
+            'avg_processing_time_fake': 0.0,
+            'avg_processing_time_masked': 0.0,
+            'avg_processing_time_llm': 0.0,
+            'avg_pii_leakage_rate_real': 0.0,
+            'avg_pii_leakage_rate_fake': 0.0,
+            'avg_pii_leakage_rate_masked': 0.0,
+            'avg_pii_leakage_rate_llm': 0.0,
+            'avg_reidentification_risk_real': 0.0,
+            'avg_reidentification_risk_fake': 0.0,
+            'avg_reidentification_risk_masked': 0.0,
+            'avg_reidentification_risk_llm': 0.0,
+            'avg_entropy_score_real': 0.0,
+            'avg_entropy_score_fake': 0.0,
+            'avg_entropy_score_masked': 0.0,
+            'avg_entropy_score_llm': 0.0,
+            'avg_bleu_score_real': 0.0,
+            'avg_bleu_score_fake': 0.0,
+            'avg_bleu_score_masked': 0.0,
+            'avg_bleu_score_llm': 0.0,
+            'avg_rouge1_real': 0.0,
+            'avg_rouge1_fake': 0.0,
+            'avg_rouge1_masked': 0.0,
+            'avg_rouge1_llm': 0.0,
+            'avg_rouge2_real': 0.0,
+            'avg_rouge2_fake': 0.0,
+            'avg_rouge2_masked': 0.0,
+            'avg_rouge2_llm': 0.0,
+            'avg_rougel_real': 0.0,
+            'avg_rougel_fake': 0.0,
+            'avg_rougel_masked': 0.0,
+            'avg_rougel_llm': 0.0,
+            'avg_coherence_score_real': 0.0,
+            'avg_coherence_score_fake': 0.0,
+            'avg_coherence_score_masked': 0.0,
+            'avg_coherence_score_llm': 0.0
+        }
         self.logger.info("All data cleared")
 
 # Example usage and testing

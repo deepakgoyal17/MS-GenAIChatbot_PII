@@ -1711,3 +1711,57 @@ Please retry in 11.566914062s. [violations {
 2025-10-15 00:12:01,834 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.9318181818181818
 2025-10-15 00:12:25,463 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.0
 2025-10-15 00:12:25,587 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-30 22:52:35,049 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 22:52:35,052 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 22:52:38,314 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 22:52:38,318 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 22:52:44,266 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 22:52:46,965 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 22:52:53,247 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 22:52:56,288 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 22:52:56,288 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-30 22:52:57,342 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-30 22:52:57,734 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 22:52:57,735 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 22:52:57,735 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 22:52:57,735 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 22:52:57,735 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 22:52:57,735 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 22:52:57,735 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 22:52:59,004 - chatbot_app_modular - ERROR - [smart_org_replacement]- Smart org replacement failed: 'charmap' codec can't encode character '\U0001f680' in position 0: character maps to <undefined>
+2025-10-30 22:55:41,942 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 22:55:41,943 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 22:55:42,477 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 22:55:42,478 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 22:55:44,199 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 22:55:46,190 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 22:55:50,026 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 22:55:53,938 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 22:55:53,939 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-30 22:55:54,643 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-30 22:55:55,001 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 22:55:55,002 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 22:55:55,002 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 22:55:55,002 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 22:55:55,002 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 22:55:55,002 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 22:55:55,002 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 22:55:56,165 - chatbot_app_modular - ERROR - [smart_org_replacement]- Smart org replacement failed: 'charmap' codec can't encode character '\U0001f680' in position 0: character maps to <undefined>
+2025-10-30 23:01:55,876 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:01:55,876 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:01:56,492 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:01:56,494 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:01:58,205 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:02:00,808 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:02:05,906 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:02:11,729 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:02:11,731 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-30 23:02:14,535 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-30 23:02:15,899 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:02:15,903 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:02:15,903 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:02:15,903 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:02:15,903 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:02:15,904 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:02:15,904 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:02:19,206 - chatbot_app_modular - ERROR - [smart_org_replacement]- Smart org replacement failed: 'charmap' codec can't encode character '\U0001f680' in position 0: character maps to <undefined>

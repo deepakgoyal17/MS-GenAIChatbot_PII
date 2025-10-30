@@ -23,6 +23,7 @@ class PIIProtectionConfig:
     enable_deepeval: bool = True            # DeepEval relevancy metrics
     enable_semantic_similarity: bool = True # Semantic similarity analysis
     enable_pii_leakage_detection: bool = True # PII leakage scoring
+    enable_nlp_quality_metrics: bool = True # NLP quality metrics (BLEU, ROUGE, etc.)
     enable_performance_timing: bool = True  # Processing time measurement
     
     # Export Features
@@ -129,9 +130,15 @@ def create_config_sidebar() -> PIIProtectionConfig:
     )
     
     config.enable_pii_leakage_detection = st.sidebar.checkbox(
-        "PII Leakage Detection", 
+        "PII Leakage Detection",
         value=config.enable_pii_leakage_detection,
-        help="Detect if original PII appears in responses"
+        help="Detect if original PII appears in responses (PLR, Re-ID Risk, Entropy)"
+    )
+
+    config.enable_nlp_quality_metrics = st.sidebar.checkbox(
+        "NLP Quality Metrics",
+        value=config.enable_nlp_quality_metrics,
+        help="Calculate BLEU, ROUGE, Perplexity, and Coherence scores"
     )
     
     config.enable_performance_timing = st.sidebar.checkbox(
@@ -294,6 +301,7 @@ PRESET_CONFIGS = {
         enable_deepeval=True,
         enable_semantic_similarity=True,
         enable_pii_leakage_detection=True,
+        enable_nlp_quality_metrics=True,
         enable_performance_timing=True,
         enable_excel_export=True,
         show_mappings=True,
