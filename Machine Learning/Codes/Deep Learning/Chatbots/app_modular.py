@@ -946,6 +946,90 @@ def calculate_coherence_score(responses: Dict[str, str]) -> Dict[str, Any]:
             })
         return coherence_metrics
 
+def extract_token_usage(response_obj) -> Dict[str, int]:
+    """Extract token usage from Google Gemini response object"""
+    try:
+        if hasattr(response_obj, 'usage_metadata') and response_obj.usage_metadata:
+            usage = response_obj.usage_metadata
+            return {
+                'prompt_token_count': getattr(usage, 'prompt_token_count', 0),
+                'candidates_token_count': getattr(usage, 'candidates_token_count', 0),
+                'total_token_count': getattr(usage, 'total_token_count', 0)
+            }
+        else:
+            # Fallback for older API versions
+            return {
+                'prompt_token_count': 0,
+                'candidates_token_count': 0,
+                'total_token_count': 0
+            }
+    except Exception as e:
+        logger.warning(f"Failed to extract token usage: {e}")
+        return {
+            'prompt_token_count': 0,
+            'candidates_token_count': 0,
+            'total_token_count': 0
+        }
+
+def calculate_token_overhead(token_usages: Dict[str, Dict[str, int]], baseline_method: str = 'real') -> Dict[str, Any]:
+    """Calculate token overhead compared to baseline method"""
+    if baseline_method not in token_usages:
+        return {}
+
+    baseline_usage = token_usages[baseline_method]
+    overhead_metrics = {}
+
+    for method, usage in token_usages.items():
+        if method == baseline_method:
+            continue
+
+        overhead_metrics.update({
+            f"token_overhead_prompt_{method}": usage['prompt_token_count'] - baseline_usage['prompt_token_count'],
+            f"token_overhead_response_{method}": usage['candidates_token_count'] - baseline_usage['candidates_token_count'],
+            f"token_overhead_total_{method}": usage['total_token_count'] - baseline_usage['total_token_count'],
+            f"token_overhead_percentage_{method}": ((usage['total_token_count'] - baseline_usage['total_token_count']) / max(1, baseline_usage['total_token_count'])) * 100.0
+        })
+
+    return overhead_metrics
+
+def calculate_api_efficiency_metrics(token_usages: Dict[str, Dict[str, int]], processing_times: Dict[str, float], responses: Dict[str, str]) -> Dict[str, Any]:
+    """Calculate API call efficiency metrics including cost estimation"""
+    efficiency_metrics = {}
+
+    # Gemini pricing (approximate as of 2024, per 1K tokens)
+    # Input: $0.00025 per 1K tokens, Output: $0.0005 per 1K tokens
+    INPUT_COST_PER_1K = 0.00025
+    OUTPUT_COST_PER_1K = 0.0005
+
+    for method, usage in token_usages.items():
+        prompt_tokens = usage['prompt_token_count']
+        response_tokens = usage['candidates_token_count']
+        total_tokens = usage['total_token_count']
+
+        # Cost calculation
+        input_cost = (prompt_tokens / 1000) * INPUT_COST_PER_1K
+        output_cost = (response_tokens / 1000) * OUTPUT_COST_PER_1K
+        total_cost = input_cost + output_cost
+
+        # Efficiency metrics
+        processing_time = processing_times.get(method, 0.0)
+        response_length = len(responses.get(method, '').split())
+
+        efficiency_metrics.update({
+            f"input_tokens_{method}": prompt_tokens,
+            f"output_tokens_{method}": response_tokens,
+            f"total_tokens_{method}": total_tokens,
+            f"input_cost_{method}": input_cost,
+            f"output_cost_{method}": output_cost,
+            f"total_cost_{method}": total_cost,
+            f"tokens_per_second_{method}": total_tokens / max(0.001, processing_time),
+            f"cost_per_token_{method}": total_cost / max(1, total_tokens) * 1000,  # Cost per 1K tokens
+            f"response_length_{method}": response_length,
+            f"tokens_per_word_{method}": total_tokens / max(1, response_length)
+        })
+
+    return efficiency_metrics
+
 def calculate_entropy_score(responses: Dict[str, str]) -> Dict[str, Any]:
     """Calculate comprehensive entropy metrics for text diversity and unpredictability"""
     try:
@@ -1339,6 +1423,7 @@ def main():
         
         # Process real names (baseline) if enabled
         response_real = None
+        token_usages = {}
         if config.enable_real_names:
             st.subheader("🔴 LLM Response with Real Names (Baseline)")
             st.chat_message("user").markdown(user_prompt)
@@ -1352,6 +1437,9 @@ def main():
                 if config.enable_performance_timing:
                     processing_times['real'] = time.time() - start_time
 
+                # Extract token usage
+                token_usages['real'] = extract_token_usage(response_real)
+
                 st.chat_message("assistant").markdown(response_real.text)
                 responses['real'] = response_real.text
                 prompts['real'] = user_prompt
@@ -1360,6 +1448,7 @@ def main():
                 logger.error(f"Real names processing failed: {e}")
                 responses['real'] = f"Error: {str(e)}"
                 prompts['real'] = user_prompt
+                token_usages['real'] = {'prompt_token_count': 0, 'candidates_token_count': 0, 'total_token_count': 0}
         
         # Process fake names if enabled
         if config.enable_fake_names:
@@ -1383,6 +1472,9 @@ def main():
 
                 if config.enable_performance_timing:
                     processing_times['fake'] = time.time() - start_time
+
+                # Extract token usage
+                token_usages['fake'] = extract_token_usage(response_fake)
 
                 st.chat_message("assistant").markdown(bot_reply_fake)
                 responses['fake'] = bot_reply_fake
@@ -1415,6 +1507,9 @@ def main():
                 if config.enable_performance_timing:
                     processing_times['masked'] = time.time() - start_time
 
+                # Extract token usage
+                token_usages['masked'] = extract_token_usage(response_mask)
+
                 st.chat_message("assistant").markdown(bot_reply_mask)
                 responses['masked'] = bot_reply_mask
             except Exception as e:
@@ -1441,6 +1536,9 @@ def main():
                 if config.enable_performance_timing:
                     processing_times['llm'] = time.time() - start_time
 
+                # Extract token usage
+                token_usages['llm'] = extract_token_usage(response_llm)
+
                 st.chat_message("assistant").markdown(response_llm.text)
                 responses['llm'] = response_llm.text
             except Exception as e:
@@ -1453,6 +1551,17 @@ def main():
         if responses:
             st.markdown("---")
             st.subheader("📊 Analysis Results")
+
+            # Calculate token overhead and efficiency metrics
+            token_overhead_metrics = {}
+            api_efficiency_metrics = {}
+            try:
+                if token_usages:
+                    token_overhead_metrics = calculate_token_overhead(token_usages, baseline_method='real')
+                    api_efficiency_metrics = calculate_api_efficiency_metrics(token_usages, processing_times, responses)
+            except Exception as e:
+                st.warning(f"⚠️ Token metrics calculation failed: {str(e)}")
+                logger.error(f"Token metrics failed: {e}")
 
             # Semantic similarity
             try:
@@ -1535,6 +1644,21 @@ def main():
             col1, col2 = st.columns(2)
 
             with col1:
+                if token_usages and api_efficiency_metrics:
+                    st.markdown("**💰 API Cost & Efficiency:**")
+                    for method in responses.keys():
+                        total_cost = api_efficiency_metrics.get(f"total_cost_{method}", 0.0)
+                        tokens_per_sec = api_efficiency_metrics.get(f"tokens_per_second_{method}", 0.0)
+                        st.write(f"• {method.title()}: ${total_cost:.4f}, {tokens_per_sec:.1f} tokens/sec")
+
+                if token_overhead_metrics:
+                    st.markdown("**📈 Token Overhead (vs Real Names):**")
+                    for method in responses.keys():
+                        if method != 'real':
+                            overhead_pct = token_overhead_metrics.get(f"token_overhead_percentage_{method}", 0.0)
+                            overhead_icon = "📈" if overhead_pct > 0 else "📉"
+                            st.write(f"• {method.title()}: {overhead_pct:+.1f}% {overhead_icon}")
+
                 if deepeval_scores:
                     st.markdown("**🎯 DeepEval Answer Relevancy:**")
                     for method in responses.keys():
@@ -1657,6 +1781,9 @@ def main():
                     **{f'{method}_prompt': prompts.get(method, user_prompt) for method in responses.keys()},
                     **{f'{method}_response': response for method, response in responses.items()},
                     **mappings,
+                    **token_usages,
+                    **token_overhead_metrics,
+                    **api_efficiency_metrics,
                     **deepeval_scores,
                     **similarities,
                     **pii_scores,

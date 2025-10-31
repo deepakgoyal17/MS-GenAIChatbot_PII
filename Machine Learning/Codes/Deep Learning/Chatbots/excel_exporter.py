@@ -76,7 +76,30 @@ class PIIAnalysisExporter:
             'avg_coherence_score_real': 0.0,
             'avg_coherence_score_fake': 0.0,
             'avg_coherence_score_masked': 0.0,
-            'avg_coherence_score_llm': 0.0
+            'avg_coherence_score_llm': 0.0,
+            'avg_input_tokens_real': 0.0,
+            'avg_input_tokens_fake': 0.0,
+            'avg_input_tokens_masked': 0.0,
+            'avg_input_tokens_llm': 0.0,
+            'avg_output_tokens_real': 0.0,
+            'avg_output_tokens_fake': 0.0,
+            'avg_output_tokens_masked': 0.0,
+            'avg_output_tokens_llm': 0.0,
+            'avg_total_tokens_real': 0.0,
+            'avg_total_tokens_fake': 0.0,
+            'avg_total_tokens_masked': 0.0,
+            'avg_total_tokens_llm': 0.0,
+            'avg_total_cost_real': 0.0,
+            'avg_total_cost_fake': 0.0,
+            'avg_total_cost_masked': 0.0,
+            'avg_total_cost_llm': 0.0,
+            'avg_tokens_per_second_real': 0.0,
+            'avg_tokens_per_second_fake': 0.0,
+            'avg_tokens_per_second_masked': 0.0,
+            'avg_tokens_per_second_llm': 0.0,
+            'avg_token_overhead_percentage_fake': 0.0,
+            'avg_token_overhead_percentage_masked': 0.0,
+            'avg_token_overhead_percentage_llm': 0.0
         }
         
         self.logger.info(f"PIIAnalysisExporter initialized with output directory: {output_dir}")
@@ -121,7 +144,13 @@ class PIIAnalysisExporter:
                 'rouge1_real', 'rouge1_fake', 'rouge1_masked', 'rouge1_llm',
                 'rouge2_real', 'rouge2_fake', 'rouge2_masked', 'rouge2_llm',
                 'rougel_real', 'rougel_fake', 'rougel_masked', 'rougel_llm',
-                'coherence_score_real', 'coherence_score_fake', 'coherence_score_masked', 'coherence_score_llm'
+                'coherence_score_real', 'coherence_score_fake', 'coherence_score_masked', 'coherence_score_llm',
+                'input_tokens_real', 'input_tokens_fake', 'input_tokens_masked', 'input_tokens_llm',
+                'output_tokens_real', 'output_tokens_fake', 'output_tokens_masked', 'output_tokens_llm',
+                'total_tokens_real', 'total_tokens_fake', 'total_tokens_masked', 'total_tokens_llm',
+                'total_cost_real', 'total_cost_fake', 'total_cost_masked', 'total_cost_llm',
+                'tokens_per_second_real', 'tokens_per_second_fake', 'tokens_per_second_masked', 'tokens_per_second_llm',
+                'token_overhead_percentage_fake', 'token_overhead_percentage_masked', 'token_overhead_percentage_llm'
             ]
             
             for metric in metrics_to_update:
@@ -331,7 +360,40 @@ class PIIAnalysisExporter:
                     'Coherence_Level_Real': record.get('coherence_level_real', 'FAIR'),
                     'Coherence_Level_Fake': record.get('coherence_level_fake', 'FAIR'),
                     'Coherence_Level_Masked': record.get('coherence_level_masked', 'FAIR'),
-                    'Coherence_Level_LLM': record.get('coherence_level_llm', 'FAIR')
+                    'Coherence_Level_LLM': record.get('coherence_level_llm', 'FAIR'),
+
+                    # Token Usage Metrics
+                    'Input_Tokens_Real': record.get('input_tokens_real', 0),
+                    'Input_Tokens_Fake': record.get('input_tokens_fake', 0),
+                    'Input_Tokens_Masked': record.get('input_tokens_masked', 0),
+                    'Input_Tokens_LLM': record.get('input_tokens_llm', 0),
+
+                    'Output_Tokens_Real': record.get('output_tokens_real', 0),
+                    'Output_Tokens_Fake': record.get('output_tokens_fake', 0),
+                    'Output_Tokens_Masked': record.get('output_tokens_masked', 0),
+                    'Output_Tokens_LLM': record.get('output_tokens_llm', 0),
+
+                    'Total_Tokens_Real': record.get('total_tokens_real', 0),
+                    'Total_Tokens_Fake': record.get('total_tokens_fake', 0),
+                    'Total_Tokens_Masked': record.get('total_tokens_masked', 0),
+                    'Total_Tokens_LLM': record.get('total_tokens_llm', 0),
+
+                    # Cost Metrics
+                    'Total_Cost_Real': record.get('total_cost_real', 0.0),
+                    'Total_Cost_Fake': record.get('total_cost_fake', 0.0),
+                    'Total_Cost_Masked': record.get('total_cost_masked', 0.0),
+                    'Total_Cost_LLM': record.get('total_cost_llm', 0.0),
+
+                    # Efficiency Metrics
+                    'Tokens_per_Second_Real': record.get('tokens_per_second_real', 0.0),
+                    'Tokens_per_Second_Fake': record.get('tokens_per_second_fake', 0.0),
+                    'Tokens_per_Second_Masked': record.get('tokens_per_second_masked', 0.0),
+                    'Tokens_per_Second_LLM': record.get('tokens_per_second_llm', 0.0),
+
+                    # Token Overhead
+                    'Token_Overhead_Percentage_Fake': record.get('token_overhead_percentage_fake', 0.0),
+                    'Token_Overhead_Percentage_Masked': record.get('token_overhead_percentage_masked', 0.0),
+                    'Token_Overhead_Percentage_LLM': record.get('token_overhead_percentage_llm', 0.0)
                 })
             
             df_metrics = pd.DataFrame(metrics_data)
@@ -464,6 +526,39 @@ class PIIAnalysisExporter:
                 ['XXXX Masking', f"{self.summary_stats['avg_coherence_score_masked']:.1f}"],
                 ['LLM-based PII Removal', f"{self.summary_stats['avg_coherence_score_llm']:.1f}"],
                 ['', ''],
+                ['Average Token Usage', ''],
+                ['Input Tokens - Real Names', f"{self.summary_stats['avg_input_tokens_real']:.1f}"],
+                ['Input Tokens - Fake Names', f"{self.summary_stats['avg_input_tokens_fake']:.1f}"],
+                ['Input Tokens - XXXX Masking', f"{self.summary_stats['avg_input_tokens_masked']:.1f}"],
+                ['Input Tokens - LLM-based PII Removal', f"{self.summary_stats['avg_input_tokens_llm']:.1f}"],
+                ['', ''],
+                ['Output Tokens - Real Names', f"{self.summary_stats['avg_output_tokens_real']:.1f}"],
+                ['Output Tokens - Fake Names', f"{self.summary_stats['avg_output_tokens_fake']:.1f}"],
+                ['Output Tokens - XXXX Masking', f"{self.summary_stats['avg_output_tokens_masked']:.1f}"],
+                ['Output Tokens - LLM-based PII Removal', f"{self.summary_stats['avg_output_tokens_llm']:.1f}"],
+                ['', ''],
+                ['Total Tokens - Real Names', f"{self.summary_stats['avg_total_tokens_real']:.1f}"],
+                ['Total Tokens - Fake Names', f"{self.summary_stats['avg_total_tokens_fake']:.1f}"],
+                ['Total Tokens - XXXX Masking', f"{self.summary_stats['avg_total_tokens_masked']:.1f}"],
+                ['Total Tokens - LLM-based PII Removal', f"{self.summary_stats['avg_total_tokens_llm']:.1f}"],
+                ['', ''],
+                ['Average API Cost ($)', ''],
+                ['Real Names', f"${self.summary_stats['avg_total_cost_real']:.4f}"],
+                ['Fake Names', f"${self.summary_stats['avg_total_cost_fake']:.4f}"],
+                ['XXXX Masking', f"${self.summary_stats['avg_total_cost_masked']:.4f}"],
+                ['LLM-based PII Removal', f"${self.summary_stats['avg_total_cost_llm']:.4f}"],
+                ['', ''],
+                ['Average Processing Speed (tokens/sec)', ''],
+                ['Real Names', f"{self.summary_stats['avg_tokens_per_second_real']:.1f}"],
+                ['Fake Names', f"{self.summary_stats['avg_tokens_per_second_fake']:.1f}"],
+                ['XXXX Masking', f"{self.summary_stats['avg_tokens_per_second_masked']:.1f}"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_tokens_per_second_llm']:.1f}"],
+                ['', ''],
+                ['Average Token Overhead vs Real Names (%)', ''],
+                ['Fake Names', f"{self.summary_stats['avg_token_overhead_percentage_fake']:+.1f}%"],
+                ['XXXX Masking', f"{self.summary_stats['avg_token_overhead_percentage_masked']:+.1f}%"],
+                ['LLM-based PII Removal', f"{self.summary_stats['avg_token_overhead_percentage_llm']:+.1f}%"],
+                ['', ''],
                 ['Export Information', ''],
                 ['Export Date', datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
                 ['Total Records', len(self.session_data)]
@@ -574,7 +669,30 @@ class PIIAnalysisExporter:
             'avg_coherence_score_real': 0.0,
             'avg_coherence_score_fake': 0.0,
             'avg_coherence_score_masked': 0.0,
-            'avg_coherence_score_llm': 0.0
+            'avg_coherence_score_llm': 0.0,
+            'avg_input_tokens_real': 0.0,
+            'avg_input_tokens_fake': 0.0,
+            'avg_input_tokens_masked': 0.0,
+            'avg_input_tokens_llm': 0.0,
+            'avg_output_tokens_real': 0.0,
+            'avg_output_tokens_fake': 0.0,
+            'avg_output_tokens_masked': 0.0,
+            'avg_output_tokens_llm': 0.0,
+            'avg_total_tokens_real': 0.0,
+            'avg_total_tokens_fake': 0.0,
+            'avg_total_tokens_masked': 0.0,
+            'avg_total_tokens_llm': 0.0,
+            'avg_total_cost_real': 0.0,
+            'avg_total_cost_fake': 0.0,
+            'avg_total_cost_masked': 0.0,
+            'avg_total_cost_llm': 0.0,
+            'avg_tokens_per_second_real': 0.0,
+            'avg_tokens_per_second_fake': 0.0,
+            'avg_tokens_per_second_masked': 0.0,
+            'avg_tokens_per_second_llm': 0.0,
+            'avg_token_overhead_percentage_fake': 0.0,
+            'avg_token_overhead_percentage_masked': 0.0,
+            'avg_token_overhead_percentage_llm': 0.0
         }
         self.logger.info("All data cleared")
 

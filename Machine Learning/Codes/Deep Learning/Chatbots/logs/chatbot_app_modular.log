@@ -1765,3 +1765,150 @@ Please retry in 11.566914062s. [violations {
 2025-10-30 23:02:15,904 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
 2025-10-30 23:02:15,904 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
 2025-10-30 23:02:19,206 - chatbot_app_modular - ERROR - [smart_org_replacement]- Smart org replacement failed: 'charmap' codec can't encode character '\U0001f680' in position 0: character maps to <undefined>
+2025-10-30 23:03:00,643 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:03:00,644 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:03:02,174 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:03:02,177 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:03:04,379 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:03:06,570 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:03:10,794 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:03:14,861 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:03:14,863 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-30 23:03:16,676 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-30 23:03:17,568 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:04:05,907 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:04:05,911 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:04:05,945 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:04:05,945 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:04:05,945 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:04:05,945 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:04:05,946 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:04:05,946 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:04:05,949 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:06:21,753 - chatbot_app_modular - ERROR - [main]- LLM PII removal processing failed: model requires more system memory (5.6 GiB) than is available (3.6 GiB) (status code: 500)
+2025-10-30 23:07:44,108 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for real: 1.0
+2025-10-30 23:08:44,120 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:08:44,122 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:08:44,137 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:08:44,137 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:08:44,137 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:08:44,137 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:08:44,137 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:08:44,138 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:08:44,141 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:10:02,091 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.9230769230769231
+2025-10-30 23:13:45,565 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:13:45,567 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:13:47,436 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:13:47,439 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:13:50,360 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:13:52,601 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:13:56,947 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:14:01,063 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:14:01,064 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-30 23:14:02,984 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-30 23:14:03,778 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:14:47,789 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:14:47,792 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:14:47,819 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:14:47,820 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:14:47,820 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:14:47,820 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:14:47,820 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:14:47,820 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:14:47,824 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:15:10,367 - chatbot_app_modular - ERROR - [main]- LLM PII removal processing failed: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-10-30 23:16:18,540 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for real: 0.8333333333333334
+2025-10-30 23:16:47,593 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-10-30 23:17:48,150 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-10-30 23:18:00,456 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.0
+2025-10-30 23:18:00,496 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'real': 2/2 entities leaked (100.0%) - Severity: CRITICAL
+2025-10-30 23:18:00,496 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - PERSON: 'Asif' found in real response
+2025-10-30 23:18:00,496 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in real response
+2025-10-30 23:18:00,496 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'fake': 1/2 entities leaked (50.0%) - Severity: MEDIUM
+2025-10-30 23:18:00,496 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in fake response
+2025-10-30 23:18:00,496 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'masked': 1/2 entities leaked (50.0%) - Severity: MEDIUM
+2025-10-30 23:18:00,497 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in masked response
+2025-10-30 23:18:00,736 - chatbot_app_modular - WARNING - [calculate_rouge_scores]- rouge-score not available for ROUGE calculation
+2025-10-30 23:18:00,784 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-30 23:30:01,291 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:30:01,293 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:30:02,849 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:30:02,853 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:30:05,102 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:30:07,195 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:30:11,531 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:30:15,478 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:30:15,480 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-30 23:30:17,349 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-30 23:30:18,166 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:30:30,618 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-30 23:30:30,619 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-30 23:30:30,648 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-30 23:30:30,648 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-30 23:30:30,648 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-30 23:30:30,649 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-30 23:30:30,649 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-30 23:30:30,649 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-30 23:30:30,651 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-30 23:32:13,471 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for real: 1.0
+2025-10-30 23:32:41,199 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 0.8461538461538461
+2025-10-30 23:33:03,581 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 0.9230769230769231
+2025-10-30 23:33:28,411 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.75
+2025-10-30 23:33:28,470 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'real': 2/2 entities leaked (100.0%) - Severity: CRITICAL
+2025-10-30 23:33:28,471 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - PERSON: 'Asif' found in real response
+2025-10-30 23:33:28,471 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in real response
+2025-10-30 23:33:28,471 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'fake': 1/2 entities leaked (50.0%) - Severity: MEDIUM
+2025-10-30 23:33:28,471 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in fake response
+2025-10-30 23:33:28,471 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'masked': 1/2 entities leaked (50.0%) - Severity: MEDIUM
+2025-10-30 23:33:28,471 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in masked response
+2025-10-30 23:33:28,472 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'llm': 1/2 entities leaked (50.0%) - Severity: MEDIUM
+2025-10-30 23:33:28,472 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in llm response
+2025-10-30 23:33:28,789 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
+2025-10-31 15:59:37,117 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-31 15:59:37,118 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-31 15:59:38,398 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-31 15:59:38,400 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-31 15:59:40,062 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-31 15:59:41,306 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-31 15:59:43,999 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-31 15:59:46,623 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-31 15:59:46,623 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Attempting to load SentenceTransformer model: all-MiniLM-L6-v2
+2025-10-31 15:59:47,916 - chatbot_app_modular - INFO - [get_sentence_transformer_model]- Successfully loaded model: all-MiniLM-L6-v2
+2025-10-31 15:59:48,386 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-31 22:20:43,445 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-31 22:20:43,455 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-31 22:20:43,511 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-31 22:20:43,512 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-31 22:20:43,513 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-31 22:20:43,513 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-31 22:20:43,514 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-31 22:20:43,516 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-31 22:20:43,528 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-31 22:22:28,752 - chatbot_app_modular - INFO - [<module>]- Modular chatbot application started
+2025-10-31 22:22:28,753 - chatbot_app_modular - INFO - [<module>]- Gemini AI configured successfully
+2025-10-31 22:22:28,784 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded spaCy and Faker for NER processing
+2025-10-31 22:22:28,784 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded smart organization replacer
+2025-10-31 22:22:28,784 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded name capitalizer
+2025-10-31 22:22:28,784 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded LLM PII remover
+2025-10-31 22:22:28,785 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded SentenceTransformers
+2025-10-31 22:22:28,785 - chatbot_app_modular - INFO - [load_conditional_imports]- Loaded DeepEval
+2025-10-31 22:22:28,787 - chatbot_app_modular - INFO - [__init__]- PIIAnalysisExporter initialized with output directory: analysis_results
+2025-10-31 22:24:18,954 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for real: 1.0
+2025-10-31 22:24:42,504 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for fake: 1.0
+2025-10-31 22:25:02,482 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for masked: 1.0
+2025-10-31 22:25:26,600 - chatbot_app_modular - INFO - [calculate_deepeval_scores]- DeepEval score for llm: 0.8823529411764706
+2025-10-31 22:25:26,668 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'real': 2/2 entities leaked (100.0%) - Severity: CRITICAL
+2025-10-31 22:25:26,668 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - PERSON: 'Asif' found in real response
+2025-10-31 22:25:26,668 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in real response
+2025-10-31 22:25:26,668 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'fake': 1/2 entities leaked (50.0%) - Severity: MEDIUM
+2025-10-31 22:25:26,668 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in fake response
+2025-10-31 22:25:26,668 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'masked': 2/2 entities leaked (100.0%) - Severity: CRITICAL
+2025-10-31 22:25:26,669 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - PERSON: 'Asif' found in masked response
+2025-10-31 22:25:26,669 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in masked response
+2025-10-31 22:25:26,669 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR ALERT - Method 'llm': 2/2 entities leaked (100.0%) - Severity: CRITICAL
+2025-10-31 22:25:26,669 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - PERSON: 'Asif' found in llm response
+2025-10-31 22:25:26,669 - chatbot_app_modular - WARNING - [calculate_detailed_pii_leakage_rate]- PLR DETECTED - ORG: 'Google' found in llm response
+2025-10-31 22:25:27,001 - chatbot_app_modular - WARNING - [calculate_reidentification_risk]- RE-ID ALERT - Method 'llm': High re-identification risk (85.0%) - Level: CRITICAL
+2025-10-31 22:25:27,001 - chatbot_app_modular - WARNING - [calculate_reidentification_risk]- RE-ID DETECTED - Preserved combinations: Asif(PERSON)-Google(ORG)
+2025-10-31 22:25:27,075 - chatbot_app_modular - INFO - [add_analysis_record]- Added analysis record #1
