@@ -1,0 +1,49 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.7 Chrome/138.0.7204.251 Electron/37.7.1 Safari/537.36" version="28.2.7">
+  <diagram name="Page-1" id="BO7TJj-nAS_Ro-rcpYRU">
+    <mxGraphModel dx="1426" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z1J21YKgv-u8cchVxtOu-1" target="Z1J21YKgv-u8cchVxtOu-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z1J21YKgv-u8cchVxtOu-1" target="Z1J21YKgv-u8cchVxtOu-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-1" value="Application Context&lt;div&gt;(Privacy &amp;amp; Utility Needs)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="320" y="140" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-2" value="XXXX Masking&lt;div&gt;(Max Privacy, Low Utility, Low Cost)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="160" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-3" value="Fake Names Replacement&lt;div&gt;(High Utility, Moderate Privacy)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="365" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-4" value="LLM Based PII Removal&lt;div&gt;(Balanced Trade-off, Context Aware)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="582" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-5" value="Best For:&lt;div&gt;&lt;ul&gt;&lt;li&gt;High-security data&lt;/li&gt;&lt;li&gt;Regulatory systems&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="154" y="410" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-6" value="Best For:&lt;div&gt;&lt;ul&gt;&lt;li&gt;Customer Support&lt;/li&gt;&lt;li&gt;General Chatbots&lt;/li&gt;&lt;li&gt;Low-risk contexts&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="410" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-7" value="Best For:&lt;div&gt;&lt;ul&gt;&lt;li&gt;Healthcase&lt;/li&gt;&lt;li&gt;Legal&lt;/li&gt;&lt;li&gt;Financial Domains&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="567" y="410" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z1J21YKgv-u8cchVxtOu-1" target="Z1J21YKgv-u8cchVxtOu-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.44;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Z1J21YKgv-u8cchVxtOu-2" target="Z1J21YKgv-u8cchVxtOu-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.467;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Z1J21YKgv-u8cchVxtOu-3" target="Z1J21YKgv-u8cchVxtOu-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z1J21YKgv-u8cchVxtOu-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=-0.011;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Z1J21YKgv-u8cchVxtOu-4" target="Z1J21YKgv-u8cchVxtOu-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
